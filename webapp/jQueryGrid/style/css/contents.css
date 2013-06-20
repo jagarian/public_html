@@ -1,0 +1,106 @@
+@charset	"utf-8";
+body {margin:0;padding:0;font-size:12px;color:#333;font-family:Gulim,Dotum,굴림,돋움;}
+img     {padding:0;margin:0; border:0}
+form    {padding:0;margin:0}
+
+body, div, table, textarea {scrollbar-face-color: #E7E7E7;scrollbar-shadow-color: #6C6C6C;scrollbar-highlight-color: #FFFFFF;scrollbar-3dlight-color: #C9C9C9;scrollbar-darkshadow-color: #FFFFFF;scrollbar-track-color: #ECECEC;scrollbar-arrow-color: #4F8BAD;
+}
+
+.space10 { height:10px;width:10px;margin:0;padding:0;font-size:0;}
+.space5 { height:5px;width:5px;margin:0;padding:0;font-size:0;}
+
+/****************** 전체 테이블 설정 *************************/
+table {font-size:12px;color:#333;font-family:Gulim,Dotum,굴림,돋움;padding:0;margin:0;empty-cells:show;border-collapse:collapse;}
+
+
+
+/****************** 타이틀 설정 *************************/
+/*문서타이틀*/
+table.tbl_tit01     {table-layout:fixed;border:0px;border-bottom: #086184 solid 2px;width:100%;color:#9B9B9B;font-size:12px;font-family:Gulim,굴림,Dotum,돋움,arial,verana;font-weight:normal;}
+table.tbl_tit01 td  { white-space:nowrap; }
+
+/* 타이틀 */
+table.tbl_tit01 td.title        { height:34px; background:transparent url(../img/tit_bullet_00.gif) 0 50% no-repeat;  margin:0;   padding:2px 0 0;}
+table.tbl_tit01 td.title strong { padding-left:36px;color:#010103; font-size:14px; font-family:Dotum; font-weight:bold;letter-spacing:-1;}
+
+/*메뉴뎁쓰*/
+table.tbl_tit01 td.depth    {vertical-align:middle;	text-align:right;letter-spacing:0;}
+table.tbl_tit01 td.close    {text-align:right;}
+
+/*소타이틀01*/
+.tbl_tit02 td {color:#545F69;font:bold 12px  Gulim,굴림,Dotum,돋움,arial;letter-spacing:-1;height:22px;background:url(../img/tit_bullet_01.gif) 2px 50% no-repeat;padding-left:15px;}
+
+
+
+
+
+/************************ 컨텐츠 테이블 기본속성 ******************/
+/*테이블1*/
+.tbl_cnt01 {background-color:#BAC1CB; ;table-layout:fixed; border-spacing:1px;}
+.tbl_cnt01 th {padding:0 2px; margin:0;background-color:#D5D8DF;text-align:center;color:#000;font-weight:normal;border-top:#FFF solid 1px;border-left:#FFF solid 1px;line-height: 160%;}
+.tbl_cnt01 td {padding:0 2px; margin:0;height:24px; background-color:#FFF;text-align:left;color:#545F69;border-top:#FFF solid 1px;border-left:#FFF sold 1px;line-height: 160%;}}
+.tbl_cnt01 td *{vertical-align:top}
+.tbl_cnt01 table {border:0;margin:0;padding:0;}
+.tbl_cnt01 table tr, .tbl_cnt01 table tr td {border:0;margin:0;padding:0}
+
+
+
+
+/******************************그리드 ***********************************/
+
+/*그리드 홀수,짝수 색깔 */
+.odd { background-color:#F5F5F5 !important}
+.over {background-color:#EFEFEF !important;	border-top:#FFF solid 1px;border-left:#FFF solid 1px;}
+
+/*그리드1*/
+.tbl_grid01 {background-color:#C9C9C9;table-layout:fixed;border:#ccc solid 1px;}
+.tbl_grid02 {background-color:#C9C9C9;table-layout:fixed;border:#ccc solid 1px;}
+.grdhead {text-align:center;color:#FFF;border-top:#FFF solid 1px;border-left:#FFF solid 1px;line-height: 160%;font-weight:normal}
+.grdhead1 {text-align:center;color:#FFF;border-top:#FFF solid 1px;border-left:#FFF solid 1px;line-height: 160%;font-weight:normal}
+.grdbottom {background-color:#E6E8EC;text-align:center;color:#545F69;line-height: 160%;padding-left:2px;padding-right:2px;border-top:#FFF solid 1px;border-left:#FFF solid 1px;}
+.grdrow {background-color:#FFF;color:#545F69;line-height: 160%;border-top:#FFF solid 1px;border-left:#FFF solid 1px;padding-left:2px;padding-right:2px;height:23px;}
+
+
+.tbl_grid01 .grdhead {background-color:#99B5C4;}
+.tbl_grid02 .grdhead {background-color:#7BB59C;}
+.tbl_grid01 .grdhead1 {background-color:#BBCDD7;}
+.tbl_grid02 .grdhead1 {background-color:#A9D2C0;}
+
+/****************** 페이징 *************************/
+.tbl_page1 {background-color:#EFEFEF;border-bottom:#D1D0CE solid 1px;height:25px;vertical-align:middle;text-align:center;}
+
+
+table.tbl_pageNo { border-collapse:collapse; height:25px;margin:0;padding:0;}
+table.tbl_pageNo td{vertical-align:middle;font: 11px tahoma,verdana;width:18px;text-align:center;}
+td.page_no {color:#666;font-weight:normal !important;}
+td.page_cur {color:#F37421;font-weight:bold !important;}
+table.tbl_pageMove {position:absolute;right:10px;margin-top:-24px;border:0;border-spacing:0;font:11px tahoma,verdana;color:#666;}
+table.tbl_pageMove input.page_where {width:40px;height:18px;line-height:120%;font: 11px tahoma,verdan,arial;padding:0; margin:0;border:#E1E1E1 solid 1px;padding: 1px 3px;text-align:center;}
+
+
+
+/****************** 폼태그설정 *************************/
+.noblank { background-color:#F5EDD0 !important}
+input   {font:normal 12px 굴림,돋움,arial;padding:0;margin:0;}
+input[type="text"] { width:100%; }
+input {width:expression((this.type=='text')? '100%':'' );} 
+input {height:expression((this.type=='button')? '21px':'' );}
+input.fmtxt      {padding:3px; margin:0; height:19px;line-height:160%;font: 12px 굴림,Arial;border:#989DA2 solid 1px;color:#333;}
+input.fmnotxt    {padding:3px; margin:0; height:19px;line-height:160%;font: 12px 굴림,Arial;border:#E1E1E1 solid 1px;color:#333;}
+input.fmtranstxt {padding:3px; margin:0; height:19px;line-height:160%;font: 12px 굴림,Arial;border:0;color:#333;}
+
+
+
+
+
+/****************** 탭처리 *************************/
+.cgroup_body { padding:5px; border-top: 1px #CCCCCC solid; border-bottom: 1px #CCCCCC solid; }
+A:link, A:visited {font: 12px Gulim,Arial; color:#343434; text-decoration:none;}
+A:active, A:hover {font: 12px Gulim,Arial; color:#F55A09; text-decoration:none;}
+
+A.techbugTab:link,
+A.techbugTab:visited,
+A.techbugTab:active,
+A.techbugTab:hover  {font: bold 12px 굴림,Arial;color:#FFF;vertical-align:bottom;text-decoration:none;}
+.techbugTab         {font: bold 12px 굴림,Arial;color:#FFF;vertical-align:middle;padding-top:5px;}
+.techbugTab2        {font: normal 12px 굴림,Arial;color:#AAA;;padding-top:5px;}

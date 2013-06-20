@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="ComMultiCombo">
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="egovMapNoCamel" type="egovframework.rte.psl.dataaccess.util.EgovMapNoCamel"/>
+	
+	<select id="getComMultiComboData" resultClass="egovMapNoCamel">
+		<isEqual property="cdid" compareValue="a" prepend="">
+			SELECT NM_CD AS CODE
+				  ,NM_REP AS CODENM
+			FROM RESTCM_CODMST_MST
+			WHERE 1 = 1
+			AND NM_GB = '000'
+			AND NM_CD != '000'
+			AND USE_YN = 'Y'
+		</isEqual>
+		<isEqual property="cdid" compareValue="b" prepend="">
+			SELECT NM_CD AS CODE
+				  ,NM_REP AS CODENM
+			FROM RESTCM_CODMST_MST
+			WHERE 1 = 1
+			<isNotEmpty property="search" prepend="">
+				AND NM_REP LIKE '%'|| #search# ||'%'
+			</isNotEmpty>
+			<isNotEmpty property="condition" prepend=""> 
+				AND NM_GB = #condition#
+			</isNotEmpty>
+			<isEmpty property="condition" prepend="">
+				AND NM_GB = '000'
+			</isEmpty>
+			AND USE_YN = 'Y'
+		</isEqual>
+		<isEqual property="cdid" compareValue="ctrlmenud" prepend="">
+			SELECT MN_MENU_ID AS CODE
+			      ,MN_MENU_NM AS CODENM
+			  FROM RESTME_MENUMA_MST
+			 ORDER BY CODE
+		</isEqual>
+		<isEqual property="cdid" compareValue="ctrlmenuj" prepend="">
+			SELECT GR_MENU_ID AS CODE
+			      ,GR_MENU_NM AS CODENM
+			  FROM RESTME_MENUGR_MST
+			 WHERE 1 = 1
+			   AND MN_MENU_ID LIKE #condition# || '%'
+			 ORDER BY CODE
+		</isEqual>
+		<isEqual property="cdid" compareValue="ctrlassign" prepend="">
+			SELECT NM_CD  AS CODE
+			      ,NM_REP AS CODENM
+			  FROM RESTCM_CODMST_MST
+			 WHERE NM_GB = '001'
+		</isEqual>
+		<isEqual property="cdid" compareValue="codelist" prepend="">
+		    SELECT NM_CD  AS CODE
+		          ,NM_REP AS CODENM
+		      FROM RESTCM_CODMST_MST
+		     WHERE 1 = 1
+		       AND NM_GB = '000'
+		       AND USE_YN = 'Y'
+		     ORDER BY NM_CD
+		</isEqual>
+		<isEqual property="cdid" compareValue="ctrlrolegb" prepend="">
+			SELECT ROLE_CD AS CODE
+			      ,ROLE_NM AS CODENM
+			  FROM RESTCM_ROLEMS_MST
+			 WHERE USE_YN = '1'
+			   AND ASSIGN_GB = #condition#
+			 ORDER BY ROLE_CD
+		</isEqual>
+	</select>
+	
+</sqlMap>

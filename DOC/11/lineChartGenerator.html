@@ -1,0 +1,360 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>LineChart Generator</title>       
+         <script type="text/javascript" src="./js/ajit.js"></script>
+    </head>
+    <style>
+        body{
+            font-size:12px;
+        }
+        ul{
+            margin:0px;
+            padding:0px;
+            width:920px;
+            list-style-type:none;
+        }
+        li{
+            display:inline;
+            float:left;
+        }
+        select{
+            font-size:12px;
+        }
+        td{
+            font-size:12px;
+            padding:5px;
+        }    
+        
+        #preview{
+            margin-left:10px;
+        }
+        
+        .width50{
+            width:50px;
+            height:17px;
+            font-size:12px;
+            border:1px solid #ccc;
+        }
+        
+        .width180{
+            width:180px;
+            height:17px;
+            font-size:12px;
+            border:1px solid #ccc;
+        }
+        
+        .margin5{
+            margin-top : 5px;
+            margin-bottom : 5px;
+        }
+        
+        .bottomLine{
+            padding-bottom:5px;
+            margin-bottom:10px;
+            border-bottom:3px solid #ccc;
+        }
+        
+        .guidement{
+            font-family:돋움,Dotum,Gulim,Arial;
+            font-size:11px;
+            color:#4fae00;
+        }
+        
+        
+    </style>
+    <script type="text/javascript">
+    
+    var LineChart = {
+        API_URL : "http://chart.apis.google.com/chart?",
+        private_cht : "lc",
+        private_chls : "3,0,0",
+        private_chxt : "x,y",
+        private_chma : "10,10,10,10",
+        private_showData : false,
+        private_chf : "",
+        private_chtt : "",
+        private_chs : "",
+        private_chd : "",
+        private_chds : "",
+        private_chco : "",
+        private_chxl : "",
+        private_chdl : "",
+        private_chdlp : "t",
+        private_chm : "",
+        //차트 라인 색상 설정
+        setChartColor : function(color){
+            var tmp = [];
+            for(var i =0; i< color.length;i++){
+                tmp.push("o,"+color[i]+","+i+",-1,10,1");
+            }
+            this.private_chm = tmp.join("|");
+            this.private_chco = color.join(",");
+        },
+        //차트 배경 색상 지정
+        setChartBgColor : function(color){
+            this.private_chf = "bg,s," + color;
+        },
+        //차트 데이터 범위  설정
+        setChartDataRange : function(datarange){
+            this.private_chds = datarange;
+        },
+        //차트 제목 설정
+        setChartTitle : function(title){
+            this.private_chtt = title;
+        },
+        //차트 범례 설정
+        setChartLegend : function(legend){
+            this.private_chdl = legend.replaceAll(",","|");
+        },
+        //차트 범례 위치 설정
+        setChartLegendPosition : function(position){
+            this.private_chdlp = position;
+        },
+        //차트 사이즈 설정
+        setChartSize : function(w,h){
+            this.private_chs = w+"x"+h;
+        },
+        //차트 데이터 설정
+        setChartData : function(data){            
+		   if(!this.private_showData) return;
+            //차트 데이터를 인코딩한다.
+            var textMarker_data = [];
+            for(var i = 0; i < data.length; i++ ){
+                var markerData = data[i].split(",");
+                for(var j = 0; j < markerData.length; j++){
+                    textMarker_data.push('t'+markerData[j]+',000000,'+i+','+j+',11');
+                }
+            }
+            if (this.private_chm != "") this.private_chm += "|";
+			this.private_chm += textMarker_data.join("|");			
+            this.private_chd = this.encoding(data.join(",|,"));
+        },
+        //차트 라인 스타일 설정
+        setLineStyle : function(linestyle){
+            this.private_chls = linestyle;
+        },
+        //차트축 라벨 설정
+        setChartAxisLable : function(xaxis,yaxis){
+            this.private_chxl = "0:|" + xaxis.replaceAll(",","|") +"|1:|"+ yaxis.replaceAll(",","|");
+        },
+        //차트 데이터 보여주기(텍스트 마커)
+        showChartData : function(flag){
+            this.private_showData = flag;
+        },
+        //차트 데이터 인코딩
+        encoding : function(chartData){
+            
+            chartData = chartData.split(",");
+            var simpleEncodingStr = 
+                'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';            
+                
+            var groupIdx = 0;
+            var textmarkerTmp = [];            
+            var sb = new StringBuffer();
+            sb.append("s:");
+            var result = 0;
+            var k = 0;
+            var maxValue = this.private_chds[groupIdx+1] - this.private_chds[groupIdx];            
+            for (var i = 0; i < chartData.length; i++) {                             
+              
+              //차트 데이터 값이 0보다 작거나 숫자가 아닐 경우
+              if (!isNaN(chartData[i]) && chartData[i] >= 0) {
+                 //차트 데이터의 전체 범위값을 기준으로 백분율을 구한다.
+                 sb.append(simpleEncodingStr.charAt(Math.round((simpleEncodingStr.length-1)*chartData[i] / maxValue)));                
+                }
+              else {
+                    if (chartData[i] == "|") {
+                      groupIdx += 2;
+                      maxValue = this.private_chds[groupIdx+1] - this.private_chds[groupIdx];            
+                      sb.append(',');
+                  }
+                  else {
+                      sb.append('_');
+                  }
+                 
+                }
+            }
+            //인코딩된 배열을 문자열로 반환한다.
+            return sb.toString();
+        },
+        //차트 객체 생성
+        generate : function(){
+            var lineChart = $new("img");
+            var vars = new URLVariables();
+            vars.parameters = {
+                "cht" : this.private_cht,
+                "chs" : this.private_chs,
+                "chd" : this.private_chd,
+                "chco" : this.private_chco,
+                "chls" : this.private_chls,
+                "chxt" : this.private_chxt,
+                "chxl" : this.private_chxl,
+                "chf" : this.private_chf,
+                "chdl" : this.private_chdl,
+                "chdlp" : this.private_chdlp,
+                "chtt" : this.private_chtt,                
+                "chm" : this.private_chm,
+                "chma" : this.private_chma
+            };
+            
+            lineChart.setAttribute("src",this.API_URL + vars.toString());
+            return lineChart;
+        }
+    }
+    
+    function drawLineChart(){
+        var chartdata = [];
+        var chartcolor = [];
+        var chartdatarange = [];
+        
+        LineChart.setChartTitle($E("chartTitleTxt").value);
+        LineChart.setChartSize($E("chartWidthTxt").value,$E("chartHeightTxt").value);        
+        
+        for(var i=0;i < $E("chartLineCnt").value;i++){
+            chartdata.push($E("chartDataDIV"+i).getChildById("chartDataTxt").value);
+            chartcolor.push($E("chartDataDIV"+i).getChildById("chartColorTxt").value || -1);
+            chartdatarange.push($E("chartDataDIV"+i).getChildById("chartDataMinTxt").value);
+            chartdatarange.push($E("chartDataDIV"+i).getChildById("chartDataMaxTxt").value);
+        }
+        LineChart.showChartData($E("showChartData").checked);
+        LineChart.setChartDataRange(chartdatarange);
+        LineChart.setChartColor(chartcolor);
+        LineChart.setChartData(chartdata);
+        LineChart.setChartAxisLable($E("chartXAxisTxt").value,$E("chartYAxisTxt").value);
+        LineChart.setChartLegend($E("chartLegendTxt").value);
+        LineChart.setChartLegendPosition($E("chartLegendPosition").value);    
+        LineChart.setChartBgColor($E("chartBgColorTxt").value);    
+        
+        $E("preview").setHTML("");
+        $E("preview").addChild(LineChart.generate());
+    }
+    
+    function drawChartDataForm(){        
+        var sb = new StringBuffer();
+        var lineCnt = $E("chartLineCnt").value;
+        if(lineCnt > 0){
+            for(var i = 0; i < lineCnt; i++){
+              sb.append('<div class="bottomLine" id="chartDataDIV'+i+'">')
+                .append('<input type="text" class="width180" id="chartDataTxt" /> <br />')
+                .append('<span class="guidement">,(콤마)단위로 작성합니다.</span>')
+                .append('<div class="margin5"></div>')
+                .append('라인 색상 <input type="text" class="width50" maxlength=6 id="chartColorTxt" value="FFCC00"><br/>')
+                .append('<div class="margin5">차트 데이터 기준 범위</div>')
+                .append('<input type="text" class="width50" value="0" id="chartDataMinTxt" class="width50" />')
+                .append('~')
+                .append('<input type="text" class="width50" value="100" id="chartDataMaxTxt" class="width50" />')
+                .append('</div>');
+            }
+            $E("chartDataForm").setHTML(sb.toString());
+        }else{
+            $E("chartDataForm").setHTML("차트로 표현할 <br />라인 개수를 설정하세요");
+        }
+    }
+    
+    </script>
+     <body>
+         <div>
+            <ul>
+                <li>
+                    <table width="320" cellpadding=0 cellspacing=0 bordercolorlight="#CCCCCC" bordercolordark="#FFFFFF" border="1">
+                        <colgroup>
+                        <col width="120"></col>
+                        <col width="200"></col>
+                        </colgroup>
+                        <tr>
+                            <td>차트 명</td>
+                            <td >
+                                <input class="width180" type="text" value="" id="chartTitleTxt" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>차트 크기 설정</td>
+                            <td >
+                                <input type="text" value="200" class="width50" id="chartWidthTxt" />
+                                X
+                                <input type="text" value="125" class="width50" id="chartHeightTxt" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>차트 라인 개수</td>
+                            <td>
+                            <select id="chartLineCnt" onchange="drawChartDataForm()">
+                                <option value="0">차트 라인 개수</option>
+                                <option value="1">1개</option>
+                                <option value="2">2개</option>
+                                <option value="3">3개</option>
+                                <option value="4">4개</option>
+                                <option value="5">5개</option>
+                            </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>차트 데이터</td>
+                            <td id="chartDataForm" height="50">
+                                차트로 표현할 <br />라인 개수를 설정하세요
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>X축 라벨</td>
+                            <td>
+                               <input type="text" class="width180" id="chartXAxisTxt"/> <br />
+                                <span class="guidement">,(콤마)단위로 작성합니다.</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Y축 라벨</td>
+                            <td>
+                                <input type="text" class="width180" id="chartYAxisTxt"/> <br />
+                                <span class="guidement">,(콤마)단위로 작성합니다.</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>차트 범례</td>
+                            <td>
+                                <input type="text" class="width180" id="chartLegendTxt"/> <br />
+                                <span class="guidement">,(콤마)단위로 작성합니다.</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>차트 범례 위치</td>
+                            <td>
+                                <select id="chartLegendPosition">
+                                    <option value="t">차트 상단</option>
+                                    <option value="b">차트 하단</option>
+                                    <option value="l">차트 좌측</option>
+                                    <option value="r">차트 우측</option>
+                                </select>
+                            </td>
+                        </tr>                        
+                        <tr>
+                            <td>차트 배경색</td>
+                            <td>
+                                <input type="text" class="width50" maxlength=6 id="chartBgColorTxt" value="FFFFFF" /> 
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>차트 데이터 표시</td>
+                            <td>
+                                <input type="checkbox" id="showChartData" checked="checked" /> 
+                            </td>
+                        </tr>
+                        <tr>
+                        <td colspan="2" align="center">
+                            <input type="button" value="차트 생성하기" onclick="drawLineChart();" />
+                        </td>
+                        </tr>
+        
+                    </table>
+                </li>
+                <li>
+                    <div id="preview">
+                        
+                    </div>
+                </li>
+            </ul>
+          </div>
+    </body>
+</html>

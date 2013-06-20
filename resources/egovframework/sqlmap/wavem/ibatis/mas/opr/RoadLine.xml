@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="RoadLine">
+	<typeAlias alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap" />
+	<typeAlias alias="egovMapNoCamel" type="egovframework.rte.psl.dataaccess.util.EgovMapNoCamel"/>		
+	<typeAlias alias="roadLineVo" type="egovframework.rte.mas.opr.vo.RoadLineVo" />
+	<resultMap id="Result" class="HashMap">
+		<result property="rsinfo" column="rsinfo" typeHandler="egovframework.rte.cmmn.util.RsMetaData" />
+	</resultMap>
+	
+	<select id="selectRoadLine" resultClass="egovMapNoCamel">
+		SELECT WAY_LINE_CD
+			  ,WAY_LINE_NM
+			  ,WAY_LINE_NO
+			  ,START_AREA_NM
+			  ,END_AREA_NM
+			  ,USE_GB
+		  FROM RESTCM_HILINE_MST
+		 WHERE 1=1
+		 <isNotNull property="way_line_no">
+		   AND UPPER(WAY_LINE_NO) LIKE '%' || UPPER(#way_line_no#) || '%'
+		 </isNotNull>
+		 <isNotNull property="way_line_nm">
+		   AND UPPER(WAY_LINE_NM) LIKE '%' || UPPER(#way_line_nm#) || '%'
+		 </isNotNull>
+	</select>
+	
+	<select id="selectRoadLineDetail" resultClass="egovMapNoCamel">
+		SELECT WAY_LINE_CD
+			  ,WAY_LINE_NM
+			  ,WAY_LINE_NO
+			  ,START_AREA_NM
+			  ,END_AREA_NM
+			  ,USE_GB
+		  FROM RESTCM_HILINE_MST
+		 WHERE 1=1
+		 <isNotNull property="way_line_cd">
+		   AND UPPER(WAY_LINE_CD) LIKE '%' || UPPER(#way_line_cd#) || '%'
+		 </isNotNull>
+	</select>
+</sqlMap>

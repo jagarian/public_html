@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="CtrlRole">
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias alias="egovMapNoCamel" type="egovframework.rte.psl.dataaccess.util.EgovMapNoCamel"/>
+
+	<select id="selectctrlrolereg3" resultClass="egovMapNoCamel">
+		SELECT ROLE_CD
+		      ,ASSIGN_GB
+		      ,ROLE_NM
+		      ,ROLE_EXPL
+		      ,USE_YN
+		      ,REG_ID
+		      ,REG_DTIME
+		      ,LAST_DTIME
+		      ,LAST_ID
+		  FROM RESTCM_ROLEMS_MST
+		 WHERE 1 = 1
+		<isNotEmpty property="pv_assign_gb" prepend="">
+		   AND ASSIGN_GB = #pv_assign_gb#
+		</isNotEmpty>
+		 ORDER BY ROLE_CD
+	</select>
+	
+	<select id="selectctrlrolereg2" resultClass="egovMapNoCamel">
+		SELECT #pv_role_gb# AS ROLE_CD
+		      ,A.MENU_SEQ
+		      ,A.MN_MENU_ID
+		      ,A.GR_MENU_ID
+		      ,A.SB_MENU_ID
+		      ,A.SB_MENU_NM
+		      ,A.LOC_NO
+		      ,NVL(B.ADMIN_ATHR, '0') AS ADMIN_ATHR
+		      ,NVL(B.READ_ATHR, '0') AS READ_ATHR
+		      ,NVL(B.IN_ATHR, '0') AS IN_ATHR
+		      ,NVL(B.UPD_ATHR, '0') AS UPD_ATHR
+		      ,NVL(B.DEL_ATHR, '0') AS DEL_ATHR
+		      ,NVL(B.USE_YN, '0') AS USE_YN
+		      ,SYSDATE
+		  FROM RESTME_MENUSU_MST A
+		      ,(SELECT ROLE_CD
+		              ,MENU_SEQ
+		              ,ADMIN_ATHR
+		              ,READ_ATHR
+		              ,IN_ATHR
+		              ,UPD_ATHR
+		              ,DEL_ATHR
+		              ,USE_YN
+		          FROM RESTCM_MNUROL_MST
+		         WHERE 1 = 1
+		           AND ROLE_CD = #pv_role_gb#) B
+		 WHERE 1 = 1
+		   AND A.MENU_SEQ = B.MENU_SEQ(+)
+		<isNotEmpty property="pv_dmenu" prepend="">
+			AND A.MN_MENU_ID = #pv_dmenu#
+		</isNotEmpty>
+		<isNotEmpty property="pv_jmenu" prepend="">
+			AND A.GR_MENU_ID = #pv_jmenu#
+		</isNotEmpty>
+	</select>
+	
+	<select id="selectctrlrolereg1" resultClass="egovMapNoCamel">
+		SELECT ASSIGN_CD
+		      ,ASSIGN_GB
+		      ,ASSIGN_NM
+		      ,RUN_GB
+		  FROM RESTCM_ASSIGN_MST
+		 WHERE 1 = 1
+		   AND ASSIGN_GB = #pv_assign_gb#
+		<isNotEmpty property="pv_search" prepend="">
+		   AND ASSIGN_NM LIKE '%'||#pv_search#||'%'
+		</isNotEmpty>
+		 ORDER BY ASSIGN_CD
+	</select>
+	
+	<select id="selectctrlrolereg1r" resultClass="egovMapNoCamel">
+		SELECT B.ROLE_CD
+		      ,B.ASSIGN_GB
+		      ,#pv_assign_cd# AS ASSIGN_CD
+		      ,B.ROLE_NM
+		      ,B.ROLE_EXPL
+		      ,NVL(A.USE_YN, '0') AS USE_YN
+		      ,SYSDATE
+		  FROM (SELECT ROLE_CD
+		              ,ASSIGN_CD
+		              ,USE_YN
+		              ,REG_ID
+		              ,REG_DTIME
+		              ,LAST_DTIME
+		              ,LAST_ID
+		          FROM RESTCM_ASSROL_MST
+		         WHERE 1 = 1
+		           AND ASSIGN_CD = #pv_assign_cd#) A
+		      ,RESTCM_ROLEMS_MST B
+		 WHERE 1 = 1
+		   AND B.ROLE_CD = A.ROLE_CD(+)
+		   AND B.ASSIGN_GB = #pv_assign_gb#
+		 ORDER BY ROLE_CD
+	</select>
+		
+	<insert id="insertctrlrolereg3">
+		 INSERT INTO RESTCM_ROLEMS_MST
+		  (ROLE_CD
+		  ,ASSIGN_GB
+		  ,ROLE_NM
+		  ,ROLE_EXPL
+		  ,REG_ID
+		  ,REG_DTIME
+		  ,LAST_DTIME
+		  ,LAST_ID
+		  ,USE_YN)
+		VALUES
+		  ((SELECT FN_GET_PRIMARY_KEY('ROLE1', #assign_gb#) FROM DUAL)
+		  ,#assign_gb#
+		  ,#role_nm#
+		  ,#role_expl#
+		  ,#pv_user_id#
+		  ,TO_CHAR(SYSDATE, 'YYYYMMDDHH24MISS')
+		  ,#last_dtime#
+		  ,#last_id#
+		  ,#use_yn#)
+	</insert>
+	
+	<update id="updatectrlrolereg3">
+		UPDATE RESTCM_ROLEMS_MST
+		   SET ROLE_NM    = #role_nm#
+		      ,ROLE_EXPL  = #role_expl#
+		      ,LAST_DTIME = TO_CHAR(SYSDATE, 'YYYYMMDDHH24MISS')
+		      ,LAST_ID    = #pv_user_id#
+		      ,USE_YN     = #use_yn#
+		 WHERE ROLE_CD = #role_cd#	
+	</update>
+	
+	<delete id="deletectrlrolereg3">
+		DELETE FROM RESTCM_ROLEMS_MST 
+		 WHERE ROLE_CD = #role_cd#	
+	</delete>
+
+	<update id="updatectrlrolereg2">
+		MERGE INTO RESTCM_MNUROL_MST X
+		USING (SELECT #menu_seq# AS MENU_SEQ
+		             ,#role_cd#  AS ROLE_CD
+		         FROM DUAL) Y
+		ON (X.MENU_SEQ = Y.MENU_SEQ AND X.ROLE_CD = Y.ROLE_CD)
+		WHEN MATCHED THEN
+		  UPDATE
+		     SET X.ADMIN_ATHR = #admin_athr#
+		        ,X.READ_ATHR  = #read_athr#
+		        ,X.IN_ATHR    = #in_athr#
+		        ,X.UPD_ATHR   = #upd_athr#
+		        ,X.DEL_ATHR   = #del_athr#
+		        ,X.USE_YN     = #use_yn#
+		        ,X.LAST_DTIME  = TO_CHAR(SYSDATE, 'YYYYMMDDHH24MISS')
+		        ,X.LAST_ID    = #pv_user_id#
+		  
+		WHEN NOT MATCHED THEN
+		  INSERT
+		    (ROLE_CD
+		    ,MENU_SEQ
+		    ,ADMIN_ATHR
+		    ,READ_ATHR
+		    ,IN_ATHR
+		    ,UPD_ATHR
+		    ,DEL_ATHR
+		    ,USE_YN
+		    ,REG_ID
+		    ,REG_DTIME)
+		  VALUES
+		    (#role_cd#
+		    ,#menu_seq#
+		    ,#admin_athr#
+		    ,#read_athr#
+		    ,#in_athr#
+		    ,#upd_athr#
+		    ,#del_athr#
+		    ,#use_yn#
+		    ,#pv_user_id#
+		    ,TO_CHAR(SYSDATE, 'YYYYMMDDHH24MISS'))
+	</update>
+
+	<update id="updatectrlrolereg1r">
+		MERGE INTO RESTCM_ASSROL_MST X
+		USING (SELECT #assign_cd# AS ASSIGN_CD
+		             ,#role_cd# AS ROLE_CD
+		         FROM DUAL) Y
+		ON (X.ASSIGN_CD = Y.ASSIGN_CD AND X.ROLE_CD = Y.ROLE_CD)
+		
+		WHEN MATCHED THEN
+		  UPDATE
+		     SET X.USE_YN    = #use_yn#
+		        ,X.LAST_DTIME = TO_CHAR(SYSDATE, 'YYYYMMDDHH24MISS')
+		        ,X.LAST_ID   = #pv_user_id#
+		  
+		WHEN NOT MATCHED THEN
+		  INSERT
+		    (ROLE_CD, ASSIGN_CD, USE_YN, REG_ID, REG_DTIME)
+		  VALUES
+		    (#role_cd#
+		    ,#assign_cd#
+		    ,#use_yn#
+		    ,#pv_user_id#
+		    ,TO_CHAR(SYSDATE, 'YYYYMMDDHH24MISS'))
+	</update>
+
+</sqlMap>
+
+
+
+

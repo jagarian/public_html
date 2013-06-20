@@ -1,0 +1,11 @@
+시스템으로 Dumpstack 하는 방법은 다음과 같다.
+
+Win32일 경우
+-자바 도스창에서 Ctrl+Break 를 누른다.
+
+Unix일 경우
+-kill -3 pid  명령어를 수행하면 해당 자바프로세스의 standard-out에 dumpstack을 출력함.
+-즉 일반적으로 nohup 같은곳에 해당
+
+하지만 kill -3 명령어가 인식되지 않는 시스템에선 dumpStack을 출력하기 위해
+프로그래밍으로 처리해야하는 경우가 있다. (첨부파일 참조)

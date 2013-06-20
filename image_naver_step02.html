@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />		
+	</head>
+	<body>
+	<script type="text/javascript" src="./js/ajit.js"></script>
+	<script type="text/javascript">
+		
+		NAVER_API_KEY = "d484764d81d84ddcf874cc4547f83f62";
+		NAVER_API_URL = "http://openapi.naver.com/search?";
+
+		function search(q){
+			var loader = new URLLoader();
+			var req = new URLRequest();
+			var params = new URLVariables();		
+
+			params.parameters = {
+				"key" : NAVER_API_KEY,
+				"target" : "image",
+				"query" : q,
+				"display" : "10",
+				"sort" : "sim",
+				"filter" : "all"
+			};
+
+			req.url = NAVER_API_URL + params.toString();
+			loader.load(req);
+
+			//Load완료시 실행할 이벤트 정의
+			loader.addEvent(URLLoaderEvent.COMPLETE,onSearchCompleteHandler);
+		}
+
+		function onSearchCompleteHandler(response){
+			//alert(response.text);
+			loader.addEvent(URLLoaderEvent.COMPLETE,onSearchCompleteHandler);
+		}
+
+		//Load완료 이벤트 핸들러로 Response를 인자로 받는다.
+		function onSearchCompleteHandler(response){
+			//XML을 Javascript 객체로 파싱
+			var xml = new asjs.utils.XmlParser(response.xml).toJson();
+
+			if(xml.rss.channel.item){
+				//RSS결과로 이미지 목록 만들기
+				renderImage(xml.rss.channel.item);
+			}
+		}
+		function renderImage(items){
+			$E("resultList").setHTML("");
+
+			for(var i=0; i < items.length; i++){
+				//IMG 객체 생성
+				var img = $new("img");
+				//LI 객체 생성
+				var li = $new("li");
+				//$E = document.getElementById
+				$E("resultList").addChild(li);
+				li.addChild(img);
+				//img 객체에 src속성 정의
+				img.setAttribute("src",items[i].thumbnail.text);
+				img.setAttribute("src",items[i].link.text);
+			}
+		}
+		
+	</script>
+
+	<div>
+		<input type="text" id="searchQ" />
+		<input type="button" onclick="search($E('searchQ').value)" value="검색" />
+	</div>
+	<ul id="resultList"></ul>
+	
+	</body>
+</html>

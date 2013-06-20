@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Mfictform">
+	<typeAlias alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap" />
+	<typeAlias alias="egovMapNoCamel" type="egovframework.rte.psl.dataaccess.util.EgovMapNoCamel"/>
+	
+	<typeAlias alias="stdCardVo" type="egovframework.rte.com.bas.vo.StdCardVo" />
+
+	<resultMap id="Result" class="HashMap">
+		<result property="rsinfo" column="rsinfo"
+			typeHandler="egovframework.rte.cmmn.util.RsMetaData" />
+	</resultMap>
+
+	<select id="selectMfictform" resultClass="egovMapNoCamel">
+		SELECT FICT_FORM_NO
+		      ,START_DAY
+		      ,DECODE(END_DAY, '99991231', '-', END_DAY) AS END_DAY
+		      ,FICT_FORM
+		      ,REG_ID
+		      ,REG_DTIME
+		      ,LAST_ID
+		      ,LAST_DTIME
+		  FROM RESTRE_FICFOM_MST
+	</select>
+	
+	<select id="selectMfictformFromDate" resultClass="egovMapNoCamel">
+		<![CDATA[
+			SELECT FICT_FORM_NO
+			      ,START_DAY
+			      ,DECODE(END_DAY, '99991231', '-', END_DAY) AS END_DAY
+			      ,FICT_FORM
+			      ,REG_ID
+			      ,REG_DTIME
+			      ,LAST_ID
+			      ,LAST_DTIME
+			  FROM RESTRE_FICFOM_MST
+			 WHERE 1 = 1
+			   AND START_DAY > #pv_date#
+		]]>
+	</select>
+	
+	<update id="updateMfictform">
+		<![CDATA[
+			UPDATE RESTRE_FICFOM_MST
+			   SET FICT_FORM_NO = #fict_form_no#
+			      ,START_DAY    = #start_day#
+			      ,END_DAY      = #end_day#
+			      ,FICT_FORM    = #fict_form#
+			      ,LAST_ID      = #pv_last_id#
+			      ,LAST_DTIME   = #pv_last_dtime#
+			 WHERE FICT_FORM_NO = #fict_form_no#
+		]]>
+	</update>
+	
+	<insert id="insertMfictform"> 
+	<![CDATA[
+		INSERT INTO RESTRE_FICFOM_MST
+			  (FICT_FORM_NO
+			  ,START_DAY
+			  ,END_DAY
+			  ,FICT_FORM
+			  ,REG_ID
+			  ,REG_DTIME
+			  ,LAST_ID
+			  ,LAST_DTIME)
+			VALUES
+			  (#fict_form_no#
+			  ,#start_day#
+			  ,#end_day#
+			  ,#fict_form#
+			  ,#pv_reg_id#
+			  ,#pv_reg_dtime#
+			  ,#pv_last_id#
+			  ,#pv_last_dtime#)
+		  ]]>
+	</insert>
+
+	<delete id="deleteMfictform">
+		<![CDATA[
+		DELETE RESTRE_FICFOM_MST 
+		 WHERE FICT_FORM_NO = #fict_form_no#
+		]]>
+	</delete>
+</sqlMap>

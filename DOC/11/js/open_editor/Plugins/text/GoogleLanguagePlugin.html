@@ -1,0 +1,120 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>Google AJAX Language Plugin</title>
+        <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+        <script type="text/javascript" src="/js/ajit.js"></script>
+        <script type="text/javascript">  google.load("language", "1");</script>        
+    </head>
+    <style type="text/css">
+        textarea{
+            width:600px;
+            height:100px;
+            font-size:12px;            
+        }
+        
+        body{
+        	margin:5px;
+			padding:5px;
+            font-size:12px;            
+        }
+		
+		#reserved{
+			margin-bottom : 10px;
+		}
+		
+        #translateForm{
+            margin-top : 10px;
+        }
+        
+        #result{
+            margin-top : 10px;
+            font-size:25px;
+            color:#ff0000;
+        }
+		
+		#btnWrap{
+			margin-top:10px;
+		}
+		
+		input[type=button]{
+			background:#ffffff;
+			border:1px solid #ccc;
+			font-size:12px;
+			height:22px;
+			cursor:pointer;
+		}
+		
+		select{
+			font-size:12px;
+			height:22px;
+		}		
+		
+    </style>
+    <body>
+
+        <script type="text/javascript">
+            function translate(){
+                var targetStr = $E("targetStr").value;
+				if(targetStr.length < 1){
+					alert("번역할 내용을 입력하세요");
+					$E("targetStr").focus();
+					return;					
+				}
+                var targetLanguage = $E("targetLanguage").value;
+				
+                google.language.translate(targetStr, 
+                    "", targetLanguage, onCompleteTranslate);
+            }            
+            
+            function onCompleteTranslate(response){
+                if (!response.error) {    
+                    $E("resultStr").value = response.translation;
+                }else{
+                    alert("번역중 에러가 발생하였습니다")
+                }
+            }
+			
+			function insertLanguage(){
+				if($E("resultStr").value.length < 1){
+					alert("번역된 내용이 없습니다.");
+					return false;
+				}
+				opener.GoogleLanguagePlugin.insertLanguage($E("resultStr").value);
+			}
+        </script>        
+        <div id="reserved"></div>
+		<script type="text/javascript">google.language.getBranding('reserved');</script>
+        <div>
+            번역할 내용(한글/영문)을 입력하세요 <br />
+           <textarea id="targetStr"></textarea>            
+        </div>
+        
+        <div id="translateForm">
+            <select id="targetLanguage">
+                <option value="en">영어로 번역</option>
+                <option value="ko">한글로 번역</option>
+				<option value="Ja">일본어로 번역</option>
+				<option value="zh-CN">중국어어로 번역</option>
+				<option value="Ru">러시아어로 번역</option>
+				<option value="De">독일어로 번역</option>
+				<option value="hi">힌디어로 번역</option>
+				<option value="iw">히브리어로 번역</option>
+            </select>            
+            <input type="button" value="작성한 내용을 지정한 언어로 번역합니다" 
+            onclick="translate()" />
+        </div>		
+        
+        <div id="result">
+        	<textarea id="resultStr"></textarea>
+        </div>
+		<div id="btnWrap">
+			<input type="button" class="redBG" onclick="insertLanguage()" value="번역된 내용 첨부하기" />
+		</div>
+        
+		
+    </body>
+</html>
+

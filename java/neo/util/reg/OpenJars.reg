@@ -1,0 +1,32 @@
+Windows Registry Editor Version 5.00
+
+; This file will make registry entries that allow you to open Java Archive
+; files (.jar files) natively in Windows 2000/XP as though they were .zip
+; files (which they actually are). Just save this text to a .reg file on
+; your computer, double-click the .reg file to enter the information into
+; the registry, and reboot. If you replace ".jar" with ".ear" and/or ".war",
+; you can open those types of J2EE files natively in Windows too.
+
+[HKEY_CLASSES_ROOT\.jar]
+"Content Type"="application/x-zip-compressed"
+"PerceivedType"="compressed"
+@="CompressedFolder"
+"ZAMailSafeExt"="zm9"
+
+[HKEY_CLASSES_ROOT\.jar\CompressedFolder]
+
+[HKEY_CLASSES_ROOT\.jar\CompressedFolder\ShellNew]
+"Data"=hex:50,4b,05,06,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00
+
+[HKEY_CLASSES_ROOT\.jar\OpenWithProgids]
+"CompressedFolder"=""
+
+[HKEY_CLASSES_ROOT\.jar\PersistentHandler]
+@="{098f2470-bae0-11cd-b579-08002b30bfeb}"
+
+; Here's the default setting for a jar file, so in case you ever want to 
+; switch back you can just rename the HKEY_CLASSES_ROOT\.jar branch to
+; ".jar_new" or something, and then rename HKEY_CLASSES_ROOT\.jar_old as
+; HKEY_CLASSES_ROOT\.jar
+[HKEY_CLASSES_ROOT\.jar_old]
+@="jarfile"

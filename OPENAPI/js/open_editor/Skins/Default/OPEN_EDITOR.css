@@ -1,0 +1,25 @@
+body
+{
+	padding-bottom                   : 0;
+	font-family                      : Dotum, Verdana, AppleGothic, Sans-serif;
+	font-size                        : 12px;
+	line-height                      : 1.4;
+	background-color                 : #FFFFFF;
+}
+
+blockquote
+{
+	border                           : 1px dashed #DFDFDF;
+	padding                          : 5px;
+}
+
+.OpeneditorEmbed{
+	cursor                           : move;
+	background						 : #efefef;
+	border                           : 1px dotted #000;
+}
+
+h1,h2,h3,h4,h5,h6{
+	border                           : 1px dashed #006;
+	margin                           : 0px;	
+}

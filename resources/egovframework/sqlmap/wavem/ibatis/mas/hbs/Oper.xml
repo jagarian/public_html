@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Oper">
+	<typeAlias alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap" />
+	<typeAlias alias="egovMapNoCamel" type="egovframework.rte.psl.dataaccess.util.EgovMapNoCamel"/>	
+	<typeAlias  alias="hbsVo" type="egovframework.rte.mas.hbs.vo.HBSVo"/>
+	<resultMap id="Result" class="HashMap">
+		<result property="rsinfo" column="rsinfo" typeHandler="egovframework.rte.cmmn.util.RsMetaData" />
+	</resultMap>
+
+	<select id="selectOperCorp" resultClass="egovMapNoCamel">
+		SELECT OPER_CD
+		      ,OPER_NM
+		      ,MASTER_NM
+		      ,TEL
+		      ,BIZ_NO
+		      ,USE_GB
+		      ,PROFIT_GUBUN
+		      ,REG_DTIME
+		      ,LAST_DTIME
+		  FROM RESTOP_EXOPER_MST
+		 WHERE 1=1
+		 <isNotNull property="oper_nm">
+		   AND UPPER(OPER_NM) LIKE '%' || UPPER(#oper_nm#) || '%'
+		 </isNotNull>
+		 <isNotNull property="use_gb">
+		   AND UPPER(USE_GB) LIKE '%' || UPPER(#use_gb#) || '%'
+		 </isNotNull>
+		 <isNotNull property="profit_gubun">
+		   AND UPPER(PROFIT_GUBUN) LIKE '%' || UPPER(#profit_gubun#) || '%'
+		 </isNotNull>
+	</select>
+	
+	<select id="selectOperCorpDetail" resultClass="egovMapNoCamel">
+			  SELECT OPER_CD
+					,OPER_NM
+					,OPER_FULL_NM
+					,MASTER_NM
+					,TEL
+					,FAX
+					,BIZ_NO
+					,EMAIL
+					,ZIP_NO
+					,ADDR
+					,BUNJI
+					,OPEN_DAY
+					,END_DAY
+					,USE_GB
+					,PROFIT_GUBUN
+					,RD_OPER_CD
+				FROM RESTOP_EXOPER_MST
+			   WHERE 1=1
+			   <isNotNull property="oper_cd">
+		   		 AND UPPER(OPER_CD) LIKE '%' || UPPER(#oper_cd#) || '%'
+		 	   </isNotNull>
+	</select>
+
+	<select id="selectOperCorpFacility" resultClass="egovMapNoCamel"> 
+		SELECT A.REST_CD
+		      ,A.REST_NM
+		      ,B.STD_REST_GB
+		      ,C.WAY_LINE_NM
+		      ,A.OPEN_DAY
+		      ,A.SYS_OPEN_DAY
+		  FROM RESTCM_EXREST_MST A
+		      ,RESTCM_STDEXR_MST B
+		      ,RESTCM_HILINE_MST C
+		 WHERE 1 = 1
+		 <isNotNull property="oper_cd">
+		   AND UPPER(A.OPER_CD) LIKE '%' || UPPER(#oper_cd#) || '%'
+		 </isNotNull>
+		   AND A.STD_REST_CD = B.STD_REST_CD
+		   AND B.WAY_LINE_CD = C.WAY_LINE_CD
+		
+	</select>
+	
+	<update id="insertOperCorpInfo">
+		<![CDATA[
+			INSERT INTO OPER_CORP
+				(  BONBU ,JISA ,OPER_CORP_CODE ,OPER_CORP_NAME ,CORP_REG_CODE ,OWNER ,PHONE_NUM ,FIRST_REG_DATE ,LAST_UPT_DATE ,USE_YN )
+			VALUES ( '서울'
+				  , '서울'
+				  , #oper_corp_code#
+				  , #oper_corp_name#
+				  , #corp_reg_code#
+				  , #owner#
+				  , #phone_num#
+				  , to_date(substr(#first_reg_date#, 0, 8))
+				  , to_date(substr(#last_upt_date#, 0, 8))
+				  , #use_yn#
+				   )
+		]]>
+	</update>
+</sqlMap>

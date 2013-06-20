@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<Placemark id="21">
+	<name>대한민국 서울특별시 강동구 강일동</name>
+	<address>대한민국 서울특별시 강동구 강일동</address>
+	<styleUrl>#geocode</styleUrl>
+	<MultiGeometry>
+		<Point>
+			<coordinates>127.178089,37.568482,0</coordinates>
+		</Point>
+		<LinearRing>
+			<coordinates>
+				127.1656222,37.5500448,0 127.1656222,37.5869192,0 127.1905558,37.5869192,0 127.1905558,37.5500448,0 127.1656222,37.5500448,0 
+			</coordinates>
+		</LinearRing>
+	</MultiGeometry>
+	<AddressDetails Accuracy="6" xmlns="urn:oasis:names:tc:ciq:xsdschema:xAL:2.0"><Country><CountryNameCode>KR</CountryNameCode><Locality><LocalityName>서울특별시</LocalityName><DependentLocality><DependentLocalityName>강동구</DependentLocalityName><Thoroughfare><ThoroughfareName>강일동</ThoroughfareName></Thoroughfare></DependentLocality></Locality></Country></AddressDetails>
+</Placemark>
+</kml>

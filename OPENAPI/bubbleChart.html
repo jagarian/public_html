@@ -1,0 +1,42 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>Google Bubble Chart Example</title>
+        <script type="text/javascript" src="./js/ajit.js"></script>        
+
+    </head>
+    <body>
+        <div id="chartContainer"></div>
+        <script type="text/javascript">
+            var API_URL = "http://chart.apis.google.com/chart?";
+			var textMarker_data = ["프로젝트A","프로젝트B","프로젝트C","프로젝트D","프로젝트E","프로젝트F","프로젝트G"];
+			var tmp = [];
+			for(var i =0;i < textMarker_data.length;i++){				
+				tmp.push('t'+textMarker_data[i]+',000000,0,'+i+',12');
+			}
+			
+            var lineChart = $new("img");
+            var vars = new URLVariables();
+            vars.parameters = {
+                "cht" : "s",
+                "chs" : "500x300",
+                "chd" : "t:40,50,10,18,80,73|70,50,60,47,90,15|40,100,60,76,100,100,99" ,
+                "chxt" : "x,y",
+				"chco" : "0080ff",
+                "chxl" : "0:||10%|20%|30%|40%|50%|60%|70%|80%|90%|100%|1:|0|25|50|75|100",
+                "chdl" : "프로젝트",
+                "chdlp" : "t",
+                "chtt" : "프로젝트 중요도 대비/진행률",
+                "chg" : "5,5,3,1",              
+                "chma" : "50,30,30,30",
+				//버블 사이즈 모양 및 설정 , 덱스트 마커 설정
+				"chm" : "o,FF9900,0,-1,30|" + tmp.join("|")
+            }
+            lineChart.setAttribute("src",API_URL + vars.toString());
+            $E("chartContainer").addChild(lineChart);
+        </script>
+    </body>
+</html>
+

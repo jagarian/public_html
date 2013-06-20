@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="MainTopMenu">
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias alias="egovMapNoCamel" type="egovframework.rte.psl.dataaccess.util.EgovMapNoCamel"/>
+	
+	<resultMap id="Result" class="HashMap">
+		<result property="rsinfo" column="rsinfo" typeHandler="egovframework.rte.cmmn.util.RsMetaData" />
+	</resultMap>
+	
+	<select id="getTopMenu" resultClass="egovMap">
+	<![CDATA[
+		SELECT MENU_LVL
+		      ,UP_MENU_ID
+		      ,MENU_ID
+		      ,MN_MENU_ID
+		      ,GR_MENU_ID
+		      ,MENU_TEXT
+		      ,SYS_CONNECT_BY_PATH(TRIM(MENU_TEXT), '>') AS MENU_TEXT2
+		      ,MENU_NM_EN
+		      ,PREFIX
+		      ,FORMID
+		      ,URL
+		      ,ADMIN_ATHR AS ADM_YN 
+		      ,READ_ATHR AS RES_YN 
+		      ,IN_ATHR AS INS_YN 
+		      ,UPD_ATHR AS UDP_YN 
+		      ,DEL_ATHR AS DEL_YN 
+		      ,ORDER_SEQ AS ORDER_SEQ
+		      ,USE_YN AS USE_YN
+		  FROM (SELECT 3 AS MENU_LVL
+		              ,SUBSTR(C.MENU_SEQ, 1, 4) || '00' AS UP_MENU_ID
+		              ,C.MENU_SEQ AS MENU_ID
+		              ,K.MN_MENU_ID
+		              ,K.GR_MENU_ID
+		              ,K.SB_MENU_NM AS MENU_TEXT
+		              ,'' AS MENU_NM_EN
+		              ,K.PATH_NM AS PREFIX
+		              ,K.FILE_NM AS FORMID
+		              ,K.PATH_NM || '::' || K.FILE_NM || '.xml' AS URL
+		              ,C.ADMIN_ATHR
+		              ,C.READ_ATHR
+		              ,C.IN_ATHR
+		              ,C.UPD_ATHR
+		              ,C.DEL_ATHR
+		              ,K.LOC_NO ORDER_SEQ
+		              ,'Y' AS USE_YN
+		          FROM RESTCM_USERCD_MST A, RESTCM_USRROL_MST B, RESTCM_MNUROL_MST C, RESTME_MENUSU_MST K
+		         WHERE 1 = 1
+		           AND A.USER_ID = #arg_id#
+		           AND A.USER_ID = B.USER_ID
+		           AND B.ROLE_CD = C.ROLE_CD
+		           AND C.MENU_SEQ = K.MENU_SEQ
+		           AND NVL(A.USER_GB, '1') = '1'
+		        UNION ALL
+		        SELECT 1 AS MENU_LVL
+		              ,'000000' AS UP_MENU_ID
+		              ,MN_MENU_ID || '0000' AS MENU_ID
+		              ,MN_MENU_ID
+		              ,'00' AS GR_MENU_ID
+		              ,MN_MENU_NM AS MENU_TEXT
+		              ,'' AS MENU_NM_EN
+		              ,'' AS PREFIX
+		              ,'' AS FORMID
+		              ,'' AS URL
+		              ,'1' AS ADMIN_ATHR
+		              ,'1' AS READ_ATHR
+		              ,'1' AS IN_ATHR
+		              ,'1' AS UPD_ATHR
+		              ,'1' AS DEL_ATHR
+		              ,LOC_NO AS ORDER_SEQ
+		              ,'Y' AS USE_YN
+		          FROM RESTME_MENUMA_MST
+		        UNION ALL
+		        SELECT 2 AS MENU_LVL
+		              ,MN_MENU_ID || '0000' AS UP_MENU_ID
+		              ,MN_MENU_ID || GR_MENU_ID || '00' AS MENU_ID
+		              ,MN_MENU_ID
+		              ,GR_MENU_ID
+		              ,GR_MENU_NM AS MENU_TEXT
+		              ,'' AS MENU_NM_EN
+		              ,'' AS PREFIX
+		              ,'' AS FORMID
+		              ,'' AS URL
+		              ,'1' AS ADMIN_ATHR
+		              ,'1' AS READ_ATHR
+		              ,'1' AS IN_ATHR
+		              ,'1' AS UPD_ATHR
+		              ,'1' AS DEL_ATHR
+		              ,LOC_NO AS ORDER_SEQ
+		              ,'Y' AS USE_YN
+		          FROM RESTME_MENUGR_MST)
+		 WHERE 1 = 1
+		 START WITH MENU_LVL = '1'
+		CONNECT BY PRIOR MENU_ID = UP_MENU_ID
+	]]>
+	</select>
+
+	
+</sqlMap>

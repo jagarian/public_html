@@ -1,0 +1,20 @@
+loadPlugin(  	
+	"font.FontFamilyPlugin",
+	"font.FontSizePlugin",
+	"etc.Delimiter",
+	"font.FontBoldPlugin",
+	"font.FontUnderLinePlugin",
+	"font.FontStrikePlugin",
+	"font.FontItalicPlugin",
+	"text.ClearFormatPlugin",
+	"font.FontColorPlugin",
+	"font.FontBackGroundColorPlugin",
+	"etc.Delimiter",
+	"text.ParagraphJustifyLeftPlugin",
+	"text.ParagraphJustifyCenterPlugin",
+	"text.ParagraphJustifyRightPlugin",
+	"text.ParagraphOutdentPlugin",
+	"text.ParagraphIndentPlugin",
+	"text.UnOrderedListPlugin",
+	"text.OrderedListPlugin"
+);

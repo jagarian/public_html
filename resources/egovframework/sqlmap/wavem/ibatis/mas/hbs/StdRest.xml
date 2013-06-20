@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="StdRest">
+	<typeAlias alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap" />
+	<typeAlias alias="egovMapNoCamel" type="egovframework.rte.psl.dataaccess.util.EgovMapNoCamel"/>
+	
+	<typeAlias alias="stdCardVo" type="egovframework.rte.com.bas.vo.StdCardVo" />
+
+	<resultMap id="Result" class="HashMap">
+		<result property="rsinfo" column="rsinfo"
+			typeHandler="egovframework.rte.cmmn.util.RsMetaData" />
+	</resultMap>
+
+	<select id="selectStdRestMst" resultClass="egovMapNoCamel">
+		SELECT A.STD_REST_CD AS STD_REST_CD
+		      ,A.STD_REST_NM AS STD_REST_NM
+		      ,B.WAY_LINE_NM AS WAY_LINE_NM
+		      ,A.STD_REST_GB AS STD_REST_GB
+		      ,A.TEL         AS TEL_NO
+		      ,C.RD_DEPT_CD  AS RD_UP_DEPT_CD
+		      ,C.RD_DEPT_NM  AS RD_UP_DEPT_NM
+		      ,D.RD_DEPT_CD  AS RD_DEPT_CD
+		      ,D.RD_DEPT_NM  AS RD_DEPT_NM
+		  FROM RESTCM_STDEXR_MST A, RESTCM_HILINE_MST B, RDDEPTTB C, RDDEPTTB D
+		 WHERE A.WAY_LINE_CD = B.WAY_LINE_CD
+		   AND C.RD_DEPT_CD = D.RD_UP_DEPT_CD
+		   AND A.ROAD_HQ_CD = D.RD_UP_DEPT_CD
+		   AND A.ROAD_BR_CD = D.RD_DEPT_CD
+		   <isNotEmpty property="rd_up_dept_cd">
+		   AND C.RD_DEPT_CD = #pv_rd_up_dept_cd#
+		   </isNotEmpty>
+		   <isNotEmpty property="rd_dept_cd">
+		   AND D.RD_DEPT_CD = #pv_rd_dept_cd#
+		   </isNotEmpty>
+		   AND A.STD_REST_NM LIKE '%'||#std_rest_nm#||'%'
+		   <isNotEmpty property="std_rest_gb">
+		   AND A.STD_REST_GB = #pv_std_rest_gb#
+		   </isNotEmpty>
+		 ORDER BY A.STD_REST_NM
+	</select>
+	
+	<select id="selectStdRestDetail" resultClass="egovMapNoCamel">
+		SELECT STD_REST_CD, STD_REST_NM
+		     , REST_GR_CD, ROAD_HQ_CD
+		     , ROAD_BR_CD, STD_REST_GB
+		     , WAY_LINE_CD, UPDN_LINE_GB
+		     , ZIP_NO, ADDR
+		     , BUNJI, BILL_ADDR
+		     , TEL, FAX
+		     , EMAIL, OPEN_DAY
+		     , END_DAY, USE_GB
+		     , MINJA_GB, LOCAL_1
+		     , LOCAL_2, SUB_REST_CD
+		     , EREST_USE_GB, MASTER_ID
+		     , MASTER_DT, TOT_AREA
+		     , BUILD_AREA, CAR_AREA
+		     , PARK_S_VOL, PARK_L_VOL
+		     , PARK_D_VOL, TRUCK_GB
+		     , (PARK_S_VOL + PARK_L_VOL + PARK_D_VOL) AS PARK_T_VOL
+		     , PRAM_GB, POLESIGN
+		     , INSTALL_DT, CLOSE_DT
+		     , REG_ID, REG_DTIME
+		     , LAST_ID, LAST_DTIME
+		  FROM RESTCM_STDEXR_MST
+		 WHERE STD_REST_CD = #pv_std_rest_cd#
+	</select>
+	
+	<select id="selectStdRestRdCd" resultClass="egovMapNoCamel">
+		SELECT RD_DEPT_CD AS CODE
+		     , RD_DEPT_NM AS CODENM
+		  FROM RDDEPTTB
+		 WHERE 1 = 1
+		   AND RD_DEPT_GB = 1
+		   AND 'A' = #pv_index#
+		   <isNotEmpty property="pv_rd_up_dept_dc">
+		   AND RD_UP_DEPT_CD LIKE '%'||#pv_rd_up_dept_dc#||'%'
+		   </isNotEmpty>
+		UNION ALL
+		SELECT RD_DEPT_CD AS CODE
+		     , RD_DEPT_NM AS CODENM
+		  FROM RDDEPTTB
+		 WHERE 1 = 1
+		   AND RD_DEPT_GB = 2
+		   AND 'B' = #pv_index#
+		   <isNotEmpty property="pv_rd_up_dept_dc">
+		   AND RD_UP_DEPT_CD = #pv_rd_up_dept_dc#
+		   </isNotEmpty>
+		 ORDER BY CODE
+	</select>
+	
+	<select id="selectStdRestRestGb" resultClass="egovMapNoCamel">
+		SELECT DISTINCT STD_REST_GB AS CODE
+               ,DECODE(STD_REST_GB, 0, '휴게소', 1, '주유소') AS CODENM
+               ,'' AS     LOCAL_1
+               ,'' AS     LOCAL_2
+		  FROM RESTCM_STDEXR_MST
+		 WHERE 1 = 1
+		   AND 'A' = #pv_index#
+		UNION ALL
+		SELECT WAY_LINE_CD AS CODE, WAY_LINE_NM AS CODENM, START_AREA_NM AS LOCAL_1, END_AREA_NM AS LOCAL_2
+		  FROM RESTCM_HILINE_MST
+		 WHERE 1 = 1
+		   AND 'B' = #pv_index#
+		 ORDER BY CODENM
+	</select>
+	
+	
+</sqlMap>

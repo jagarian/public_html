@@ -1,0 +1,1097 @@
+From: <Microsoft Internet Explorer 5·Î ÀúÀå>
+Subject: Raw FTP Command List
+Date: Thu, 2 Jul 2009 20:01:57 +0900
+MIME-Version: 1.0
+Content-Type: multipart/related;
+	type="text/html";
+	boundary="----=_NextPart_000_0000_01C9FB4F.F47C1310"
+X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.3350
+
+This is a multi-part message in MIME format.
+
+------=_NextPart_000_0000_01C9FB4F.F47C1310
+Content-Type: text/html;
+	charset="ks_c_5601-1987"
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://www.nsftools.com/tips/RawFTP.htm
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>Raw FTP Command List</TITLE>
+<META http-equiv=3DContent-Type content=3D"text/html; =
+charset=3Dks_c_5601-1987">
+<STYLE>BODY {
+	PADDING-RIGHT: 25px; PADDING-LEFT: 25px; FONT-SIZE: 0.9em; =
+PADDING-BOTTOM: 25px; PADDING-TOP: 25px; FONT-FAMILY: Verdana, 'Lucida =
+Grande', Geneva, Lucida, Arial, Helvetica, sans-serif
+}
+TR {
+	PADDING-RIGHT: 25px; PADDING-LEFT: 25px; FONT-SIZE: 0.9em; =
+PADDING-BOTTOM: 25px; PADDING-TOP: 25px; FONT-FAMILY: Verdana, 'Lucida =
+Grande', Geneva, Lucida, Arial, Helvetica, sans-serif
+}
+TD {
+	PADDING-RIGHT: 25px; PADDING-LEFT: 25px; FONT-SIZE: 0.9em; =
+PADDING-BOTTOM: 25px; PADDING-TOP: 25px; FONT-FAMILY: Verdana, 'Lucida =
+Grande', Geneva, Lucida, Arial, Helvetica, sans-serif
+}
+H3 {
+	BACKGROUND: #eeeeee; WIDTH: 100%
+}
+CODE {
+	PADDING-RIGHT: 5px; PADDING-LEFT: 5px; BACKGROUND: #eeeeff; =
+PADDING-BOTTOM: 0px; PADDING-TOP: 0px; FONT-FAMILY: "lucida console", =
+monaco, "andale mono", "courier new", courier
+}
+TT {
+	PADDING-RIGHT: 5px; PADDING-LEFT: 5px; BACKGROUND: #eeeeff; =
+PADDING-BOTTOM: 0px; PADDING-TOP: 0px; FONT-FAMILY: "lucida console", =
+monaco, "andale mono", "courier new", courier
+}
+PRE {
+	PADDING-RIGHT: 5px; PADDING-LEFT: 5px; BACKGROUND: #eeeeff; =
+PADDING-BOTTOM: 0px; PADDING-TOP: 0px; FONT-FAMILY: "lucida console", =
+monaco, "andale mono", "courier new", courier
+}
+SAMP {
+	PADDING-RIGHT: 5px; PADDING-LEFT: 5px; BACKGROUND: #eeeeff; =
+PADDING-BOTTOM: 0px; PADDING-TOP: 0px; FONT-FAMILY: "lucida console", =
+monaco, "andale mono", "courier new", courier
+}
+</STYLE>
+
+<META content=3D"MSHTML 6.00.2900.3354" name=3DGENERATOR></HEAD>
+<BODY>
+<DIV style=3D"PADDING-LEFT: 10px; FLOAT: right">
+<SCRIPT type=3Dtext/javascript><!--
+google_ad_client =3D "pub-0254740670772704";
+google_ad_width =3D 125;
+google_ad_height =3D 125;
+google_ad_format =3D "125x125_as";
+google_ad_channel =3D"8058137228";
+google_ad_type =3D "text";
+google_color_border =3D "DDDDDD";
+google_color_bg =3D "FFFFFF";
+google_color_link =3D "000000";
+google_color_url =3D "666666";
+google_color_text =3D "333333";
+//--></SCRIPT>
+
+<SCRIPT src=3D"http://pagead2.googlesyndication.com/pagead/show_ads.js"=20
+type=3Dtext/javascript>
+</SCRIPT>
+</DIV><BR>You are on the <A =
+href=3D"http://www.nsftools.com/">nsftools.com</A>=20
+site=20
+<P>This page originally appeared at <A=20
+href=3D"http://www.dreamhaven.org/ftp-raw.html">http://www.dreamhaven.org=
+/ftp-raw.html</A>,=20
+but the last time I looked it wasn't there any more, so I posted a local =
+copy=20
+for you here. If you were really looking for a list of commands for the=20
+Microsoft Windows command-line FTP client, please <A=20
+href=3D"http://www.nsftools.com/tips/MSFTP.htm">look here</A> instead.
+<P>
+<HR>
+
+<H2>List of raw FTP commands</H2><EM>(Warning: this is a technical =
+document, not=20
+necessary for most FTP use.)</EM>=20
+<P>Note that commands marked with a * are not implemented in a number of =
+FTP=20
+servers.=20
+<P></P>
+<H3>Common commands</H3>
+<UL>
+  <LI><A href=3D"http://www.nsftools.com/tips/RawFTP.htm#ABOR">ABOR</A> =
+-=20
+  <B>abor</B>t a file transfer=20
+  <LI><A href=3D"http://www.nsftools.com/tips/RawFTP.htm#CWD">CWD</A> -=20
+  <B>c</B>hange <B>w</B>orking <B>d</B>irectory=20
+  <LI><A href=3D"http://www.nsftools.com/tips/RawFTP.htm#DELE">DELE</A> =
+-=20
+  <B>dele</B>te a remote file=20
+  <LI><A href=3D"http://www.nsftools.com/tips/RawFTP.htm#LIST">LIST</A> =
+-=20
+  <B>list</B> remote files=20
+  <LI><A href=3D"http://www.nsftools.com/tips/RawFTP.htm#MDTM">MDTM</A> =
+- return=20
+  the <B>m</B>o<B>d</B>ification <B>t</B>i<B>m</B>e of a file=20
+  <LI><A href=3D"http://www.nsftools.com/tips/RawFTP.htm#MKD">MKD</A> -=20
+  <B>m</B>a<B>k</B>e a remote <B>d</B>irectory=20
+  <LI><A href=3D"http://www.nsftools.com/tips/RawFTP.htm#NLST">NLST</A> =
+-=20
+  <B>n</B>ame <B>l</B>i<B>st</B> of remote directory=20
+  <LI><A href=3D"http://www.nsftools.com/tips/RawFTP.htm#PASS">PASS</A> =
+- send=20
+  <B>pass</B>word=20
+  <LI><A href=3D"http://www.nsftools.com/tips/RawFTP.htm#PASV">PASV</A> =
+- enter=20
+  <B>pas</B>si<B>v</B>e mode=20
+  <LI><A href=3D"http://www.nsftools.com/tips/RawFTP.htm#PORT">PORT</A> =
+- open a=20
+  data <B>port</B>=20
+  <LI><A href=3D"http://www.nsftools.com/tips/RawFTP.htm#PWD">PWD</A> -=20
+  <B>p</B>rint <B>w</B>orking <B>d</B>irectory=20
+  <LI><A href=3D"http://www.nsftools.com/tips/RawFTP.htm#QUIT">QUIT</A> =
+-=20
+  terminate the connection=20
+  <LI><A href=3D"http://www.nsftools.com/tips/RawFTP.htm#RETR">RETR</A> =
+-=20
+  <B>retr</B>ieve a remote file=20
+  <LI><A href=3D"http://www.nsftools.com/tips/RawFTP.htm#RMD">RMD</A> -=20
+  <B>r</B>e<B>m</B>ove a remote <B>d</B>irectory=20
+  <LI><A href=3D"http://www.nsftools.com/tips/RawFTP.htm#RNFR">RNFR</A> =
+-=20
+  <B>r</B>e<B>n</B>ame <B>fr</B>om=20
+  <LI><A href=3D"http://www.nsftools.com/tips/RawFTP.htm#RNTO">RNTO</A> =
+-=20
+  <B>r</B>e<B>n</B>ame <B>to</B>=20
+  <LI><A href=3D"http://www.nsftools.com/tips/RawFTP.htm#SITE">SITE</A> =
+-=20
+  <B>site</B>-specific commands=20
+  <LI><A href=3D"http://www.nsftools.com/tips/RawFTP.htm#SIZE">SIZE</A> =
+- return=20
+  the <B>size</B> of a file=20
+  <LI><A href=3D"http://www.nsftools.com/tips/RawFTP.htm#STOR">STOR</A> =
+-=20
+  <B>stor</B>e a file on the remote host=20
+  <LI><A href=3D"http://www.nsftools.com/tips/RawFTP.htm#TYPE">TYPE</A> =
+- set=20
+  transfer <B>type</B>=20
+  <LI><A href=3D"http://www.nsftools.com/tips/RawFTP.htm#USER">USER</A> =
+- send=20
+  <B>user</B>name </LI></UL>
+<H3>Less common commands</H3>
+<UL>
+  <LI><A href=3D"http://www.nsftools.com/tips/RawFTP.htm#ACCT">ACCT</A>* =
+- send=20
+  <B>acc</B>oun<B>t</B> information=20
+  <LI><A href=3D"http://www.nsftools.com/tips/RawFTP.htm#APPE">APPE</A> =
+-=20
+  <B>appe</B>nd to a remote file=20
+  <LI><A href=3D"http://www.nsftools.com/tips/RawFTP.htm#CDUP">CDUP</A> =
+- CWD to=20
+  the parent of the current directory=20
+  <LI><A href=3D"http://www.nsftools.com/tips/RawFTP.htm#HELP">HELP</A> =
+- return=20
+  <B>help</B> on using the server=20
+  <LI><A href=3D"http://www.nsftools.com/tips/RawFTP.htm#MODE">MODE</A> =
+- set=20
+  transfer <B>mode</B>=20
+  <LI><A href=3D"http://www.nsftools.com/tips/RawFTP.htm#NOOP">NOOP</A> =
+- do=20
+  nothing=20
+  <LI><A href=3D"http://www.nsftools.com/tips/RawFTP.htm#REIN">REIN</A>* =
+-=20
+  <B>rein</B>itialize the connection=20
+  <LI><A href=3D"http://www.nsftools.com/tips/RawFTP.htm#STAT">STAT</A> =
+- return=20
+  server <B>stat</B>us=20
+  <LI><A href=3D"http://www.nsftools.com/tips/RawFTP.htm#STOU">STOU</A> =
+-=20
+  <B>sto</B>re a file <B>u</B>niquely=20
+  <LI><A href=3D"http://www.nsftools.com/tips/RawFTP.htm#STRU">STRU</A> =
+- set file=20
+  transfer <B>stru</B>cture=20
+  <LI><A href=3D"http://www.nsftools.com/tips/RawFTP.htm#SYST">SYST</A> =
+- return=20
+  <B>syst</B>em type </LI></UL>
+<HR>
+<A name=3DABOR></A>
+<H3>ABOR</H3><I>Syntax:</I> <SAMP>ABOR</SAMP>=20
+<P>Aborts a file transfer currently in progress.=20
+<P><A name=3DACCT></A></P>
+<H3>ACCT*</H3><I>Syntax:</I> <SAMP>ACCT <I>account-info</I></SAMP>=20
+<P>This command is used to send account information on systems that =
+require it.=20
+Typically sent after a <A=20
+href=3D"http://www.nsftools.com/tips/RawFTP.htm#PASS">PASS</A> command.=20
+<P><A name=3DALLO></A></P>
+<H3>ALLO</H3><I>Syntax:</I> <SAMP>ALLO <I>size</I> [R=20
+<I>max-record-size</I>]</SAMP>=20
+<P>Allocates sufficient storage space to receive a file. If the maximum =
+size of=20
+a record also needs to be known, that is sent as a second numeric =
+parameter=20
+following a space, the capital letter "R", and another space.=20
+<P><A name=3DAPPE></A></P>
+<H3>APPE</H3><I>Syntax:</I> <SAMP>APPE <I>remote-filename</I></SAMP>=20
+<P>Append data to the end of a file on the remote host. If the file does =
+not=20
+already exist, it is created. This command must be preceded by a <A=20
+href=3D"http://www.nsftools.com/tips/RawFTP.htm#PORT">PORT</A> or <A=20
+href=3D"http://www.nsftools.com/tips/RawFTP.htm#PASV">PASV</A> command =
+so that the=20
+server knows where to receive data from.=20
+<P><A name=3DCDUP></A></P>
+<H3>CDUP</H3><I>Syntax:</I> <SAMP>CDUP</SAMP>=20
+<P>Makes the parent of the current directory be the current directory.=20
+<P><A name=3DCWD></A></P>
+<H3>CWD</H3><I>Syntax:</I> <SAMP>CWD <I>remote-directory</I></SAMP>=20
+<P>Makes the given directory be the current directory on the remote =
+host.=20
+<P><A name=3DDELE></A></P>
+<H3>DELE</H3><I>Syntax:</I> <SAMP>DELE <I>remote-filename</I></SAMP>=20
+<P>Deletes the given file on the remote host.=20
+<P><A name=3DHELP></A></P>
+<H3>HELP</H3><I>Syntax:</I> <SAMP>HELP [<I>command</I>]</SAMP>=20
+<P>If a <I>command</I> is given, returns help on that command; =
+otherwise,=20
+returns general help for the FTP server (usually a list of supported =
+commands).=20
+<P><A name=3DLIST></A></P>
+<H3>LIST</H3><I>Syntax:</I> <SAMP>LIST [<I>remote-filespec</I>]</SAMP>=20
+<P>If <I>remote-filespec</I> refers to a file, sends information about =
+that=20
+file. If <I>remote-filespec</I> refers to a directory, sends information =
+about=20
+each file in that directory. <I>remote-filespec</I> defaults to the =
+current=20
+directory. This command must be preceded by a <A=20
+href=3D"http://www.nsftools.com/tips/RawFTP.htm#PORT">PORT</A> or <A=20
+href=3D"http://www.nsftools.com/tips/RawFTP.htm#PASV">PASV</A> command.=20
+<P><A name=3DMDTM></A></P>
+<H3>MDTM</H3><I>Syntax:</I> <SAMP>MDTM <I>remote-filename</I></SAMP>=20
+<P>Returns the last-modified time of the given file on the remote host =
+in the=20
+format "<SAMP>YYYYMMDDhhmmss</SAMP>": <SAMP>YYYY</SAMP> is the =
+four-digit year,=20
+<SAMP>MM</SAMP> is the month from 01 to 12, <SAMP>DD</SAMP> is the day =
+of the=20
+month from 01 to 31, <SAMP>hh</SAMP> is the hour from 00 to 23, =
+<SAMP>mm</SAMP>=20
+is the minute from 00 to 59, and <SAMP>ss</SAMP> is the second from 00 =
+to 59.=20
+<P><A name=3DMKD></A></P>
+<H3>MKD</H3><I>Syntax:</I> <SAMP>MKD <I>remote-directory</I></SAMP>=20
+<P>Creates the named directory on the remote host.=20
+<P><A name=3DMODE></A></P>
+<H3>MODE</H3><I>Syntax:</I> <SAMP>MODE <I>mode-character</I></SAMP>=20
+<P>Sets the transfer mode to one of:=20
+<UL>
+  <LI>S - Stream=20
+  <LI>B - Block=20
+  <LI>C - Compressed </LI></UL>The default mode is Stream.=20
+<P><A name=3DNLST></A></P>
+<H3>NLST</H3><I>Syntax:</I> <SAMP>NLST [<I>remote-directory</I>]</SAMP>=20
+<P>Returns a list of filenames in the given directory (defaulting to the =
+current=20
+directory), with no other information. Must be preceded by a <A=20
+href=3D"http://www.nsftools.com/tips/RawFTP.htm#PORT">PORT</A> or <A=20
+href=3D"http://www.nsftools.com/tips/RawFTP.htm#PASV">PASV</A> command.=20
+<P><A name=3DNOOP></A></P>
+<H3>NOOP</H3><I>Syntax:</I> <SAMP>NOOP</SAMP>=20
+<P>Does nothing except return a response.=20
+<P><A name=3DPASS></A></P>
+<H3>PASS</H3><I>Syntax:</I> <SAMP>PASS <I>password</I></SAMP>=20
+<P>After sending the <A=20
+href=3D"http://www.nsftools.com/tips/RawFTP.htm#USER">USER</A> command, =
+send this=20
+command to complete the login process. (Note, however, that an <A=20
+href=3D"http://www.nsftools.com/tips/RawFTP.htm#ACCT">ACCT</A> command =
+may have to=20
+be used on some systems.)=20
+<P><A name=3DPASV></A></P>
+<H3>PASV</H3><I>Syntax:</I> <SAMP>PASV</SAMP>=20
+<P>Tells the server to enter "passive mode". In passive mode, the server =
+will=20
+wait for the client to establish a connection with it rather than =
+attempting to=20
+connect to a client-specified port. The server will respond with the =
+address of=20
+the port it is listening on, with a message like:<BR><SAMP>227 Entering =
+Passive=20
+Mode=20
+(<I>a1</I>,<I>a2</I>,<I>a3</I>,<I>a4</I>,<I>p1</I>,<I>p2</I>)</SAMP><BR>w=
+here=20
+<I>a1</I>.<I>a2</I>.<I>a3</I>.<I>a4</I> is the IP address and=20
+<I>p1</I>*256+<I>p2</I> is the port number.=20
+<P><A name=3DPORT></A></P>
+<H3>PORT</H3><I>Syntax:</I> <SAMP>PORT=20
+<I>a1</I>,<I>a2</I>,<I>a3</I>,<I>a4</I>,<I>p1</I>,<I>p2</I></SAMP>=20
+<P>Specifies the host and port to which the server should connect for =
+the next=20
+file transfer. This is interpreted as IP address=20
+<I>a1</I>.<I>a2</I>.<I>a3</I>.<I>a4</I>, port <I>p1</I>*256+<I>p2</I>.=20
+<P><A name=3DPWD></A></P>
+<H3>PWD</H3><I>Syntax:</I> <SAMP>PWD</SAMP>=20
+<P>Returns the name of the current directory on the remote host.=20
+<P><A name=3DQUIT></A></P>
+<H3>QUIT</H3><I>Syntax:</I> <SAMP>QUIT</SAMP>=20
+<P>Terminates the command connection.=20
+<P><A name=3DREIN></A></P>
+<H3>REIN*</H3><I>Syntax:</I> <SAMP>REIN</SAMP>=20
+<P>Reinitializes the command connection - cancels the current=20
+user/password/account information. Should be followed by a <A=20
+href=3D"http://www.nsftools.com/tips/RawFTP.htm#USER">USER</A> command =
+for another=20
+login.=20
+<P><A name=3DREST></A></P>
+<H3>REST</H3><I>Syntax:</I> <SAMP>REST <I>position</I></SAMP>=20
+<P>Sets the point at which a file transfer should start; useful for =
+resuming=20
+interrupted transfers. For nonstructured files, this is simply a decimal =
+number.=20
+This command must immediately precede a data transfer command (<A=20
+href=3D"http://www.nsftools.com/tips/RawFTP.htm#RETR">RETR</A> or <A=20
+href=3D"http://www.nsftools.com/tips/RawFTP.htm#STOR">STOR</A> only); =
+i.e. it must=20
+come after any <A =
+href=3D"http://www.nsftools.com/tips/RawFTP.htm#PORT">PORT</A>=20
+or <A href=3D"http://www.nsftools.com/tips/RawFTP.htm#PASV">PASV</A> =
+command.=20
+<P><A name=3DRETR></A></P>
+<H3>RETR</H3><I>Syntax:</I> <SAMP>RETR <I>remote-filename</I></SAMP>=20
+<P>Begins transmission of a file from the remote host. Must be preceded =
+by=20
+either a <A =
+href=3D"http://www.nsftools.com/tips/RawFTP.htm#PORT">PORT</A> command=20
+or a <A href=3D"http://www.nsftools.com/tips/RawFTP.htm#PASV">PASV</A> =
+command to=20
+indicate where the server should send data.=20
+<P><A name=3DRMD></A></P>
+<H3>RMD</H3><I>Syntax:</I> <SAMP>RMD <I>remote-directory</I></SAMP>=20
+<P>Deletes the named directory on the remote host.=20
+<P><A name=3DRNFR></A></P>
+<H3>RNFR</H3><I>Syntax:</I> <SAMP>RNFR <I>from-filename</I></SAMP>=20
+<P>Used when renaming a file. Use this command to specify the file to be =
+
+renamed; follow it with an <A=20
+href=3D"http://www.nsftools.com/tips/RawFTP.htm#RNTO">RNTO</A> command =
+to specify=20
+the new name for the file.=20
+<P><A name=3DRNTO></A></P>
+<H3>RNTO</H3><I>Syntax:</I> <SAMP>RNTO <I>to-filename</I></SAMP>=20
+<P>Used when renaming a file. After sending an <A=20
+href=3D"http://www.nsftools.com/tips/RawFTP.htm#RNFR">RNFR</A> command =
+to specify=20
+the file to rename, send this command to specify the new name for the =
+file.=20
+<P><A name=3DSITE></A></P>
+<H3>SITE*</H3><I>Syntax:</I> <SAMP>SITE =
+<I>site-specific-command</I></SAMP>=20
+<P>Executes a site-specific command.=20
+<P><A name=3DSIZE></A></P>
+<H3>SIZE</H3><I>Syntax:</I> <SAMP>SIZE <I>remote-filename</I></SAMP>=20
+<P>Returns the size of the remote file as a decimal number.=20
+<P><A name=3DSTAT></A></P>
+<H3>STAT</H3><I>Syntax:</I> <SAMP>STAT [<I>remote-filespec</I>]</SAMP>=20
+<P>If invoked without parameters, returns general status information =
+about the=20
+FTP server process. If a parameter is given, acts like the <A=20
+href=3D"http://www.nsftools.com/tips/RawFTP.htm#LIST">LIST</A> command, =
+except=20
+that data is sent over the control connection (no <A=20
+href=3D"http://www.nsftools.com/tips/RawFTP.htm#PORT">PORT</A> or <A=20
+href=3D"http://www.nsftools.com/tips/RawFTP.htm#PASV">PASV</A> command =
+is=20
+required).=20
+<P><A name=3DSTOR></A></P>
+<H3>STOR</H3><I>Syntax:</I> <SAMP>STOR <I>remote-filename</I></SAMP>=20
+<P>Begins transmission of a file to the remote site. Must be preceded by =
+either=20
+a <A href=3D"http://www.nsftools.com/tips/RawFTP.htm#PORT">PORT</A> =
+command or a=20
+<A href=3D"http://www.nsftools.com/tips/RawFTP.htm#PASV">PASV</A> =
+command so the=20
+server knows where to accept data from.=20
+<P><A name=3DSTOU></A></P>
+<H3>STOU</H3><I>Syntax:</I> <SAMP>STOU</SAMP>=20
+<P>Begins transmission of a file to the remote site; the remote filename =
+will be=20
+unique in the current directory. The response from the server will =
+include the=20
+filename.=20
+<P><A name=3DSTRU></A></P>
+<H3>STRU</H3><I>Syntax:</I> <SAMP>STRU <I>structure-character</I></SAMP> =
+
+<P>Sets the file structure for transfer to one of:=20
+<UL>
+  <LI>F - File (no structure)=20
+  <LI>R - Record structure=20
+  <LI>P - Page structure </LI></UL>The default structure is File.=20
+<P><A name=3DSYST></A></P>
+<H3>SYST</H3><I>Syntax:</I> <SAMP>SYST</SAMP>=20
+<P>Returns a word identifying the system, the word "Type:", and the =
+default=20
+transfer type (as would be set by the <A=20
+href=3D"http://www.nsftools.com/tips/RawFTP.htm#TYPE">TYPE</A> command). =
+For=20
+example: <SAMP>UNIX Type: L8</SAMP>=20
+<P><A name=3DTYPE></A></P>
+<H3>TYPE</H3><I>Syntax:</I> <SAMP>TYPE <I>type-character</I>=20
+[<I>second-type-character</I>]</SAMP>=20
+<P>Sets the type of file to be transferred. <I>type-character</I> can be =
+any of:=20
+
+<UL>
+  <LI>A - ASCII text=20
+  <LI>E - EBCDIC text=20
+  <LI>I - image (binary data)=20
+  <LI>L - local format </LI></UL>For A and E, the =
+<I>second-type-character</I>=20
+specifies how the text should be interpreted. It can be:=20
+<UL>
+  <LI>N - Non-print (not destined for printing). This is the default if=20
+  <I>second-type-character</I> is omitted.=20
+  <LI>T - Telnet format control (<SAMP>&lt;CR&gt;</SAMP>,=20
+  <SAMP>&lt;FF&gt;</SAMP>, etc.)=20
+  <LI>C - ASA Carriage Control </LI></UL>For L, the =
+<I>second-type-character</I>=20
+specifies the number of bits per byte on the local system, and may not =
+be=20
+omitted.=20
+<P><A name=3DUSER></A></P>
+<H3>USER</H3><I>Syntax:</I> <SAMP>USER <I>username</I></SAMP>=20
+<P>Send this command to begin the login process. <I>username</I> should =
+be a=20
+valid username on the system, or "anonymous" to initiate an anonymous =
+login.=20
+<P></P></BODY></HTML>
+
+------=_NextPart_000_0000_01C9FB4F.F47C1310
+Content-Type: application/octet-stream
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://pagead2.googlesyndication.com/pagead/show_ads.js
+
+(function(){=0A=
+var i=3Dtrue,l=3Dnull,m=3Dfalse,n=3D(new Date).getTime();var =
+o=3Dthis,aa=3Dfunction(a,b,c){var d=3Da.split("."),e=3Dc||o;!(d[0]in =
+e)&&e.execScript&&e.execScript("var "+d[0]);for(var =
+f;d.length&&(f=3Dd.shift());)if(!d.length&&b!=3D=3Dundefined)e[f]=3Db;els=
+e e=3De[f]?e[f]:(e[f]=3D{})},p=3Dfunction(a){var b=3Dtypeof =
+a;if(b=3D=3D"object")if(a){if(a instanceof Array||!(a instanceof =
+Object)&&Object.prototype.toString.call(a)=3D=3D"[object Array]"||typeof =
+a.length=3D=3D"number"&&typeof a.splice!=3D"undefined"&&typeof =
+a.propertyIsEnumerable!=3D"undefined"&&!a.propertyIsEnumerable("splice"))=
+return"array";=0A=
+if(!(a instanceof =
+Object)&&(Object.prototype.toString.call(a)=3D=3D"[object =
+Function]"||typeof a.call!=3D"undefined"&&typeof =
+a.propertyIsEnumerable!=3D"undefined"&&!a.propertyIsEnumerable("call")))r=
+eturn"function"}else return"null";else if(b=3D=3D"function"&&typeof =
+a.call=3D=3D"undefined")return"object";return b},ba=3Dfunction(a){var =
+b=3Dp(a);return b=3D=3D"array"||b=3D=3D"object"&&typeof =
+a.length=3D=3D"number"},q=3Dfunction(a){return typeof =
+a=3D=3D"string"},ca=3Dfunction(a){var b=3Dp(a);return =
+b=3D=3D"object"||b=3D=3D"array"||b=3D=3D"function"};=0A=
+Math.floor(Math.random()*2147483648).toString(36);=0A=
+var da=3Dfunction(a){var =
+b=3Dp(a);if(b=3D=3D"object"||b=3D=3D"array"){if(a.clone)return =
+a.clone.call(a);var c=3Db=3D=3D"array"?[]:{};for(var d in =
+a)c[d]=3Dda(a[d]);return c}return a},ea=3Dfunction(a,b){var =
+c=3Da.u;if(arguments.length>2){var =
+d=3DArray.prototype.slice.call(arguments,2);c&&d.unshift.apply(d,c);c=3Dd=
+}b=3Da.w||b;a=3Da.v||a;var e,f=3Db||o;e=3Dc?function(){var =
+h=3DArray.prototype.slice.call(arguments);h.unshift.apply(h,c);return =
+a.apply(f,h)}:function(){return =
+a.apply(f,arguments)};e.u=3Dc;e.w=3Db;e.v=3Da;return =
+e},fa=3DDate.now||function(){return(new Date).getTime()},=0A=
+r=3Dfunction(a,b,c){aa(a,b,c)};function t(a,b){var =
+c=3DparseFloat(a);return isNaN(c)||c>1||c<0?b:c}function =
+ga(a,b){if(a=3D=3D"true")return i;if(a=3D=3D"false")return m;return =
+b}function v(a,b){var c=3D/^([\w-]+\.)+[\w-]{2,}(\:[0-9]+)?$/;return =
+c.test(a)?a:b};var =
+ha=3D"pagead2.googlesyndication.com",ia=3D"googleads.g.doubleclick.net",j=
+a=3D"pubads.g.doubleclick.net",ka=3D"partner.googleadservices.com",y=3Dv(=
+"pagead2.googlesyndication.com",ha),la=3Dv("googleads.g.doubleclick.net",=
+ia),ma=3Dv("pagead2.googlesyndication.com",ha);v("pubads.g.doubleclick.ne=
+t",ja);v("partner.googleadservices.com",ka);function z(a){return typeof =
+encodeURIComponent=3D=3D"function"?encodeURIComponent(a):escape(a)}functi=
+on na(a,b,c){var =
+d=3Ddocument.createElement("script");d.type=3D"text/javascript";if(b)d.on=
+load=3Db;if(c)d.id=3Dc;d.src=3Da;var =
+e=3Ddocument.getElementsByTagName("head")[0];if(!e)return =
+m;window.setTimeout(function(){e.appendChild(d)},0);return i}function =
+oa(a,b){a.google_image_requests||(a.google_image_requests=3D[]);var =
+c=3Dnew Image;c.src=3Db;a.google_image_requests.push(c)}=0A=
+function pa(a){if(a in qa)return qa[a];return =
+qa[a]=3Dnavigator.userAgent.toLowerCase().indexOf(a)!=3D-1}var qa=3D{};=0A=
+function ra(){if(navigator.plugins&&navigator.mimeTypes.length){var =
+a=3Dnavigator.plugins["Shockwave Flash"];if(a&&a.description)return =
+a.description.replace(/([a-zA-Z]|\s)+/,"").replace(/(\s)+r/,".")}else =
+if(navigator.userAgent&&navigator.userAgent.indexOf("Windows =
+CE")>=3D0){for(var b=3D3,c=3D1;c;)try{c=3Dnew =
+ActiveXObject("ShockwaveFlash.ShockwaveFlash."+(b+1));b++}catch(d){c=3Dl}=
+return b.toString()}else if(pa("msie")&&!window.opera){c=3Dl;try{c=3Dnew =
+ActiveXObject("ShockwaveFlash.ShockwaveFlash.7")}catch(e){b=3D=0A=
+0;try{c=3Dnew =
+ActiveXObject("ShockwaveFlash.ShockwaveFlash.6");b=3D6;c.AllowScriptAcces=
+s=3D"always"}catch(f){if(b=3D=3D6)return b.toString()}try{c=3Dnew =
+ActiveXObject("ShockwaveFlash.ShockwaveFlash")}catch(h){}}if(c){b=3Dc.Get=
+Variable("$version").split(" ")[1];return =
+b.replace(/,/g,".")}}return"0"}function sa(a){var =
+b=3Da.google_ad_format;if(b)return b.indexOf("_0ads")>0;return =
+a.google_ad_output!=3D"html"&&a.google_num_radlinks>0}function =
+B(a){return!!a&&a.indexOf("_sdo")!=3D-1}=0A=
+function ta(a){return sa(a)||B(a.google_ad_format)}function C(a,b){var =
+c=3DMath.random();if(c<b){var d=3DMath.floor(c/b*a.length);return =
+a[d]}return""};var =
+ua=3D{google_ad_channel:"channel",google_ad_host:"host",google_ad_host_ch=
+annel:"h_ch",google_ad_host_tier_id:"ht_id",google_ad_region:"region",goo=
+gle_ad_section:"region",google_ad_type:"ad_type",google_adtest:"adtest",g=
+oogle_allow_expandable_ads:"ea",google_alternate_ad_url:"alternate_ad_url=
+",google_alternate_color:"alt_color",google_bid:"bid",google_city:"gcs",g=
+oogle_color_bg:"color_bg",google_color_border:"color_border",google_color=
+_line:"color_line",google_color_link:"color_link",google_color_text:"colo=
+r_text",=0A=
+google_color_url:"color_url",google_contents:"contents",google_country:"g=
+l",google_cust_age:"cust_age",google_cust_ch:"cust_ch",google_cust_gender=
+:"cust_gender",google_cust_id:"cust_id",google_cust_interests:"cust_inter=
+ests",google_cust_job:"cust_job",google_cust_l:"cust_l",google_cust_lh:"c=
+ust_lh",google_cust_u_url:"cust_u_url",google_disable_video_autoplay:"dis=
+able_video_autoplay",google_ed:"ed",google_encoding:"oe",google_feedback:=
+"feedback_link",google_flash_version:"flash",google_font_face:"f",=0A=
+google_font_size:"fs",google_gl:"gl",google_hints:"hints",google_kw:"kw",=
+google_kw_type:"kw_type",google_language:"hl",google_page_url:"url",googl=
+e_referrer_url:"ref",google_region:"gr",google_reuse_colors:"reuse_colors=
+",google_safe:"adsafe",google_tag_info:"gut",google_targeting:"targeting"=
+,google_ui_features:"ui",google_ui_version:"uiv",google_video_doc_id:"vid=
+eo_doc_id",google_video_product_type:"video_product_type"},ya=3D{google_a=
+d_format:"format",google_ad_output:"output",google_ad_callback:"callback"=
+,=0A=
+google_ad_height:"h",google_ad_override:"google_ad_override",google_ad_sl=
+ot:"slotname",google_ad_width:"w",google_analytics_uacct:"ga_wpids",googl=
+e_correlator:"correlator",google_cpa_choice:"cpa_choice",google_ctr_thres=
+hold:"ctr_t",google_image_size:"image_size",google_last_modified_time:"lm=
+t",google_max_num_ads:"num_ads",google_max_radlink_len:"max_radlink_len",=
+google_num_radlinks:"num_radlinks",google_num_radlinks_per_unit:"num_radl=
+inks_per_unit",google_only_ads_with_video:"only_ads_with_video",=0A=
+google_page_location:"loc",google_rl_dest_url:"rl_dest_url",google_rl_fil=
+tering:"rl_filtering",google_rl_mode:"rl_mode",google_rt:"rt",google_skip=
+:"skip"},za=3D{google_only_pyv_ads:"pyv"};function Aa(a){return =
+ua[a]||ya[a]||za[a]||l};var =
+Ba=3Ddocument,Ca=3Dga("true",m),Da=3Dga("false",m),Ea=3Dga("false",m),D=3D=
+window;document.URL&&(document.URL.indexOf("?google_debug")>0||document.U=
+RL.indexOf("&google_debug")>0);var Fa=3Dfunction(a){return =
+a.replace(/^[\s\xa0]+|[\s\xa0]+$/g,"")},La=3Dfunction(a,b){if(b)return =
+a.replace(Ga,"&amp;").replace(Ha,"&lt;").replace(Ia,"&gt;").replace(Ja,"&=
+quot;");else{if(!Ka.test(a))return =
+a;if(a.indexOf("&")!=3D-1)a=3Da.replace(Ga,"&amp;");if(a.indexOf("<")!=3D=
+-1)a=3Da.replace(Ha,"&lt;");if(a.indexOf(">")!=3D-1)a=3Da.replace(Ia,"&gt=
+;");if(a.indexOf('"')!=3D-1)a=3Da.replace(Ja,"&quot;");return =
+a}},Ga=3D/&/g,Ha=3D/</g,Ia=3D/>/g,Ja=3D/\"/g,Ka=3D/[&<>\"]/,Oa=3Dfunction=
+(a){if(E(a,"&"))return"document"in o&&!E(a,"<")?=0A=
+Ma(a):Na(a);return a},Ma=3Dfunction(a){var =
+b=3Do.document.createElement("a");b.innerHTML=3Da;b.normalize&&b.normaliz=
+e();a=3Db.firstChild.nodeValue;b.innerHTML=3D"";return =
+a},Na=3Dfunction(a){return =
+a.replace(/&([^;]+);/g,function(b,c){switch(c){case "amp":return"&";case =
+"lt":return"<";case "gt":return">";case =
+"quot":return'"';default:if(c.charAt(0)=3D=3D"#"){var =
+d=3DNumber("0"+c.substr(1));if(!isNaN(d))return =
+String.fromCharCode(d)}return b}})},Pa=3Dfunction(a,b){for(var =
+c=3Db.length,d=3D0;d<c;d++){var e=3Dc=3D=3D1?b:b.charAt(d);=0A=
+if(a.charAt(0)=3D=3De&&a.charAt(a.length-1)=3D=3De)return =
+a.substring(1,a.length-1)}return a},E=3Dfunction(a,b){return =
+a.indexOf(b)!=3D-1},Ra=3Dfunction(a,b){for(var =
+c=3D0,d=3DFa(String(a)).split("."),e=3DFa(String(b)).split("."),f=3DMath.=
+max(d.length,e.length),h=3D0;c=3D=3D0&&h<f;h++){var =
+k=3Dd[h]||"",j=3De[h]||"",g=3Dnew RegExp("(\\d*)(\\D*)","g"),u=3Dnew =
+RegExp("(\\d*)(\\D*)","g");do{var =
+w=3Dg.exec(k)||["","",""],x=3Du.exec(j)||["","",""];if(w[0].length=3D=3D0=
+&&x[0].length=3D=3D0)break;var =
+s=3Dw[1].length=3D=3D0?0:parseInt(w[1],10),N=3Dx[1].length=3D=3D=0A=
+0?0:parseInt(x[1],10);c=3DQa(s,N)||Qa(w[2].length=3D=3D0,x[2].length=3D=3D=
+0)||Qa(w[2],x[2])}while(c=3D=3D0)}return =
+c},Qa=3Dfunction(a,b){if(a<b)return-1;else if(a>b)return 1;return =
+0};fa();var =
+F=3Dfunction(a){this.t=3Da;this.i=3D[];this.p=3Dthis.h=3D0;this.d=3D[];th=
+is.n=3Dm};F.prototype.s=3Dfunction(a,b){var =
+c=3Dthis.t[b],d=3Dthis.i;this.t[b]=3Dfunction(e){if(e&&e.length>0){var =
+f=3De.length>1?e[1].url:l;d.push([a,Oa(e[0].url),f])}c(e)}};F.prototype.r=
+=3Dfunction(){this.h++};F.prototype.o=3Dfunction(){if(!this.n){na("http:/=
+/"+y+"/pagead/osd.js");this.n=3Di}};F.prototype.j=3Dfunction(a){if(this.h=
+>0)for(var =
+b=3Ddocument.getElementsByTagName("iframe"),c=3D0;c<b.length;c++)b.item(c=
+).name=3D=3D"google_ads_frame"&&a(b.item(c),b.item(c).src)};=0A=
+F.prototype.k=3Dfunction(a){var b=3Dthis.i;if(b.length>0)for(var =
+c=3Ddocument.getElementsByTagName("a"),d=3Dfunction(g,u){return =
+g.innerHTML.indexOf(u)>0},e=3D0;e<c.length;e++)for(var =
+f=3D0;f<b.length;f++)if(c.item(e).href=3D=3Db[f][1]){var =
+h=3Dc.item(e).parentNode;if(b[f][2])for(var =
+k=3Dh,j=3D0;j<4;j++){if(d(k,b[f][2])){h=3Dk;break}k=3Dk.parentNode}a(h,b[=
+f][0]);b.splice(f,1);break}};F.prototype.e=3Dfunction(a){this.k(a);this.j=
+(a)};F.prototype.a=3Dfunction(a){this.p=3Da};F.prototype.g=3Dfunction(){r=
+eturn this.p};=0A=
+F.prototype.f=3Dfunction(){return =
+this.i.length+this.h};F.prototype.b=3Dfunction(a){this.d=3Da};F.prototype=
+.q=3Dfunction(a,b){if(this.d.length>0){for(var =
+c=3D0;c<this.d.length;c++)if(this.d[c]=3D=3Da)if(a=3D=3D"js")this.s(b,"go=
+ogle_ad_request_done");else a=3D=3D"html"&&this.r();this.o()}};var =
+Sa=3Dfunction(){window.__google_ad_urls||(window.__google_ad_urls=3Dnew =
+F(window));return =
+window.__google_ad_urls};r("Goog_AdSense_getAdAdapterInstance",Sa);r("Goo=
+g_AdSense_OsdAdapter",F);=0A=
+r("Goog_AdSense_OsdAdapter.prototype.numBlocks",F.prototype.f);r("Goog_Ad=
+Sense_OsdAdapter.prototype.findBlocks",F.prototype.e);r("Goog_AdSense_Osd=
+Adapter.prototype.getOsdMode",F.prototype.g);function Ta(a,b){try{return =
+a.top.document.URL=3D=3Db.URL}catch(c){}return m}function =
+Ua(a,b,c,d){var =
+e=3Dc||a.google_ad_width,f=3Dd||a.google_ad_height;if(Ta(a,b))return =
+m;var h=3Db.documentElement;if(e&&f){var =
+k=3D1,j=3D1;if(a.innerHeight){k=3Da.innerWidth;j=3Da.innerHeight}else =
+if(h&&h.clientHeight){k=3Dh.clientWidth;j=3Dh.clientHeight}else =
+if(b.body){k=3Db.body.clientWidth;j=3Db.body.clientHeight}if(j>2*f||k>2*e=
+)return m}return i}function Va(a,b){for(var c in b)a["google_"+c]=3Db[c]}=0A=
+function Wa(a,b){if(!b)return a.URL;return a.referrer}function =
+Xa(a,b){if(!b&&a.google_referrer_url=3D=3Dl)return"0";else =
+if(b&&a.google_referrer_url=3D=3Dl)return"1";else =
+if(!b&&a.google_referrer_url!=3Dl)return"2";else =
+if(b&&a.google_referrer_url!=3Dl)return"3";return"4"}function =
+Ya(a,b,c,d){a.page_url=3DWa(c,d);a.page_location=3Dl}function =
+Za(a,b,c,d){a.page_url=3Db.google_page_url;a.page_location=3DWa(c,d)||"EM=
+PTY"}=0A=
+function $a(a,b){var =
+c=3D{},d=3DUa(a,b,a.google_ad_width,a.google_ad_height);c.iframing=3DXa(a=
+,d);a.google_page_url?Za(c,a,b,d):Ya(c,a,b,d);c.last_modified_time=3Db.UR=
+L=3D=3Dc.page_url?Date.parse(b.lastModified)/1000:l;c.referrer_url=3Dd?a.=
+google_referrer_url:a.google_page_url&&a.google_referrer_url?a.google_ref=
+errer_url:b.referrer;return c}function ab(a){var =
+b=3D{},c=3Da.URL.substring(a.URL.lastIndexOf("http"));b.iframing=3Dl;b.pa=
+ge_url=3Dc;b.page_location=3Da.URL;b.last_modified_time=3Dl;b.referrer_ur=
+l=3Dc;return b}=0A=
+function bb(a,b){var c=3Dcb(a,b);Va(a,c)}function cb(a,b){var c;return =
+c=3Da.google_page_url=3D=3Dl&&db[b.domain]?ab(b):$a(a,b)}var =
+db=3D{};db["ad.yieldmanager.com"]=3Di;var eb=3Dfunction(a,b,c){var =
+d=3Dea(b,o,a),e=3Dwindow.onerror;window.onerror=3Dd;try{c()}catch(f){var =
+h=3Df.toString(),k=3D"";if(f.fileName)k=3Df.fileName;var =
+j=3D-1;if(f.lineNumber)j=3Df.lineNumber;var g=3Dd(h,k,j);if(!g)throw =
+f;}window.onerror=3De};r("google_protectAndRun",eb);=0A=
+var gb=3Dfunction(a,b,c,d){if(Math.random()<0.01){var =
+e=3DBa,f=3D["http://",y,"/pagead/gen_204","?id=3Djserror","&cb=3D",Ca?1:0=
+,"&cd=3D",Da?1:0,"&context=3D",z(a),"&msg=3D",z(b),"&file=3D",z(c),"&line=
+=3D",z(d.toString()),"&url=3D",z(e.URL.substring(0,512)),"&ref=3D",z(e.re=
+ferrer.substring(0,512))];f.push(fb());oa(D,f.join(""))}return!Ea};r("goo=
+gle_handleError",gb);=0A=
+var fb=3Dfunction(){var =
+a=3D["&client=3D",z(D.google_ad_client),"&format=3D",z(D.google_ad_format=
+),"&slotname=3D",z(D.google_ad_slot),"&output=3D",z(D.google_ad_output),"=
+&ad_type=3D",z(D.google_ad_type)];return a.join("")};var =
+hb=3Dfunction(a,b,c){if(a.forEach)a.forEach(b,c);else =
+if(Array.forEach)Array.forEach(a,b,c);else for(var =
+d=3Da.length,e=3Dq(a)?a.split(""):a,f=3D0;f<d;f++)f in =
+e&&b.call(c,e[f],f,a)},ib=3Dfunction(a){if(p(a)=3D=3D"array")return =
+a.concat();else{for(var =
+b=3D[],c=3D0,d=3Da.length;c<d;c++)b[c]=3Da[c];return b}};var =
+G=3Dfunction(a,b){this.x=3Da!=3D=3Dundefined?a:0;this.y=3Db!=3D=3Dundefin=
+ed?b:0};G.prototype.clone=3Dfunction(){return new =
+G(this.x,this.y)};G.prototype.toString=3Dfunction(){return"("+this.x+", =
+"+this.y+")"};var =
+H=3Dfunction(a,b){this.width=3Da;this.height=3Db};H.prototype.clone=3Dfun=
+ction(){return new =
+H(this.width,this.height)};H.prototype.toString=3Dfunction(){return"("+th=
+is.width+" x =
+"+this.height+")"};H.prototype.ceil=3Dfunction(){this.width=3DMath.ceil(t=
+his.width);this.height=3DMath.ceil(this.height);return =
+this};H.prototype.floor=3Dfunction(){this.width=3DMath.floor(this.width);=
+this.height=3DMath.floor(this.height);return this};=0A=
+H.prototype.round=3Dfunction(){this.width=3DMath.round(this.width);this.h=
+eight=3DMath.round(this.height);return =
+this};H.prototype.scale=3Dfunction(a){this.width*=3Da;this.height*=3Da;re=
+turn this};var jb=3Dfunction(a,b,c){for(var d in =
+a)b.call(c,a[d],d,a)};var =
+I,kb,J,lb,mb,nb,ob,pb,qb,sb,wb=3Dfunction(){return =
+o.navigator?o.navigator.userAgent:l},xb=3Dfunction(){return =
+o.navigator},yb=3Dfunction(){nb=3Dmb=3Dlb=3DJ=3Dkb=3DI=3Dm;var =
+a;if(a=3Dwb()){var =
+b=3Dxb();I=3Da.indexOf("Opera")=3D=3D0;kb=3D!I&&a.indexOf("MSIE")!=3D-1;l=
+b=3D(J=3D!I&&a.indexOf("WebKit")!=3D-1)&&a.indexOf("Mobile")!=3D-1;nb=3D(=
+mb=3D!I&&!J&&b.product=3D=3D"Gecko")&&b.vendor=3D=3D"Camino"}};yb();=0A=
+var K=3DI,L=3Dkb,zb=3Dmb,M=3DJ,Ab=3Dlb,Bb=3Dfunction(){var =
+a=3Dxb();return =
+a&&a.platform||""},Cb=3DBb(),Db=3Dfunction(){ob=3DE(Cb,"Mac");pb=3DE(Cb,"=
+Win");qb=3DE(Cb,"Linux");sb=3D!!xb()&&E(xb().appVersion||"","X11")};Db();=0A=
+var Eb=3Dob,Fb=3Dpb,Gb=3Dqb,Hb=3Dfunction(){var =
+a=3D"",b;if(K&&o.opera){var c=3Do.opera.version;a=3Dtypeof =
+c=3D=3D"function"?c():c}else{if(zb)b=3D/rv\:([^\);]+)(\)|;)/;else =
+if(L)b=3D/MSIE\s+([^\);]+)(\)|;)/;else =
+if(M)b=3D/WebKit\/(\S+)/;if(b){var =
+d=3Db.exec(wb());a=3Dd?d[1]:""}}return =
+a},Ib=3DHb(),Jb=3D{},O=3Dfunction(a){return =
+Jb[a]||(Jb[a]=3DRa(Ib,a)>=3D0)};var Kb;var Lb=3Dfunction(a){return =
+q(a)?document.getElementById(a):a},Mb=3DLb,Ob=3Dfunction(a,b){jb(b,functi=
+on(c,d){if(d=3D=3D"style")a.style.cssText=3Dc;else =
+if(d=3D=3D"class")a.className=3Dc;else =
+if(d=3D=3D"for")a.htmlFor=3Dc;else if(d in =
+Nb)a.setAttribute(Nb[d],c);else =
+a[d]=3Dc})},Nb=3D{cellpadding:"cellPadding",cellspacing:"cellSpacing",col=
+span:"colSpan",rowspan:"rowSpan",valign:"vAlign",height:"height",width:"w=
+idth",usemap:"useMap",frameborder:"frameBorder",type:"type"},Pb=3Dfunctio=
+n(a){var b=3Da.document;if(M&&!O("500")&&!Ab){if(typeof a.innerHeight=3D=3D=0A=
+"undefined")a=3Dwindow;var =
+c=3Da.innerHeight,d=3Da.document.documentElement.scrollHeight;if(a=3D=3Da=
+.top)if(d<c)c-=3D15;return new H(a.innerWidth,c)}var =
+e=3Db.compatMode=3D=3D"CSS1Compat"&&(!K||K&&O("9.50"))?b.documentElement:=
+b.body;return new H(e.clientWidth,e.clientHeight)},Qb=3Dfunction(a){var =
+b=3D!M&&a.compatMode=3D=3D"CSS1Compat"?a.documentElement:a.body;return =
+new G(b.scrollLeft,b.scrollTop)},Sb=3Dfunction(){return =
+Rb(document,arguments)},Rb=3Dfunction(a,b){var =
+c=3Db[0],d=3Db[1];if(L&&d&&(d.name||d.type)){var e=3D["<",c];d.name&&=0A=
+e.push(' name=3D"',La(d.name),'"');if(d.type){e.push(' =
+type=3D"',La(d.type),'"');d=3Dda(d);delete =
+d.type}e.push(">");c=3De.join("")}var =
+f=3Da.createElement(c);if(d)if(q(d))f.className=3Dd;else =
+Ob(f,d);if(b.length>2){function =
+h(g){if(g)f.appendChild(q(g)?a.createTextNode(g):g)}for(var =
+k=3D2;k<b.length;k++){var =
+j=3Db[k];ba(j)&&!(ca(j)&&j.nodeType>0)?hb(Tb(j)?ib(j):j,h):h(j)}}return =
+f},Ub=3Dfunction(a,b){a.appendChild(b)},Vb=3Dfunction(a){return =
+a&&a.parentNode?a.parentNode.removeChild(a):l},Wb=3Dfunction(a,b){var =
+c=3Db.parentNode;=0A=
+c&&c.replaceChild(a,b)},Xb=3DM&&Ra(Ib,"521")<=3D0,Yb=3Dfunction(a,b){if(t=
+ypeof a.contains!=3D"undefined"&&!Xb&&b.nodeType=3D=3D1)return =
+a=3D=3Db||a.contains(b);if(typeof =
+a.compareDocumentPosition!=3D"undefined")return =
+a=3D=3Db||Boolean(a.compareDocumentPosition(b)&16);for(;b&&a!=3Db;)b=3Db.=
+parentNode;return b=3D=3Da},P=3Dfunction(a){return =
+a.nodeType=3D=3D9?a:a.ownerDocument||a.document},Tb=3Dfunction(a){if(a&&t=
+ypeof a.length=3D=3D"number")if(ca(a))return typeof =
+a.item=3D=3D"function"||typeof a.item=3D=3D"string";else =
+if(p(a)=3D=3D"function")return typeof a.item=3D=3D=0A=
+"function";return =
+m},Q=3Dfunction(a){this.c=3Da||o.document||document};Q.prototype.createEl=
+ement=3Dfunction(a){return =
+this.c.createElement(a)};Q.prototype.createTextNode=3Dfunction(a){return =
+this.c.createTextNode(a)};Q.prototype.m=3Dfunction(){return =
+this.c.compatMode=3D=3D"CSS1Compat"};Q.prototype.l=3Dfunction(){return =
+Qb(this.c)};Q.prototype.appendChild=3DUb;Q.prototype.removeNode=3DVb;Q.pr=
+ototype.replaceNode=3DWb;Q.prototype.contains=3DYb;var =
+Zb,$b,ac,bc,cc,dc,ec=3Dfunction(){dc=3Dcc=3Dbc=3Dac=3D$b=3DZb=3Dm;var =
+a=3Dwb();if(a)if(a.indexOf("Firefox")!=3D-1)Zb=3Di;else =
+if(a.indexOf("Camino")!=3D-1)$b=3Di;else =
+if(a.indexOf("iPhone")!=3D-1||a.indexOf("iPod")!=3D-1)ac=3Di;else =
+if(a.indexOf("Android")!=3D-1)bc=3Di;else =
+if(a.indexOf("Chrome")!=3D-1)cc=3Di;else =
+if(a.indexOf("Safari")!=3D-1)dc=3Di};ec();var fc=3Dfunction(a,b){var =
+c=3DP(a);if(c.defaultView&&c.defaultView.getComputedStyle){var =
+d=3Dc.defaultView.getComputedStyle(a,"");if(d)return d[b]}return =
+l},R=3Dfunction(a,b){return =
+fc(a,b)||(a.currentStyle?a.currentStyle[b]:l)||a.style[b]},gc=3Dfunction(=
+a){var b;b=3Da?a.nodeType=3D=3D9?a:P(a):document;if(L&&!(b?new =
+Q(P(b)):Kb||(Kb=3Dnew Q)).m())return b.body;return =
+b.documentElement},hc=3Dfunction(a){var =
+b=3Da.getBoundingClientRect();if(L){var =
+c=3Da.ownerDocument;b.left-=3Dc.documentElement.clientLeft+c.body.clientL=
+eft;=0A=
+b.top-=3Dc.documentElement.clientTop+c.body.clientTop}return =
+b},ic=3Dfunction(a){if(L)return a.offsetParent;for(var =
+b=3DP(a),c=3DR(a,"position"),d=3Dc=3D=3D"fixed"||c=3D=3D"absolute",e=3Da.=
+parentNode;e&&e!=3Db;e=3De.parentNode){c=3DR(e,"position");d=3Dd&&c=3D=3D=
+"static"&&e!=3Db.documentElement&&e!=3Db.body;if(!d&&(e.scrollWidth>e.cli=
+entWidth||e.scrollHeight>e.clientHeight||c=3D=3D"fixed"||c=3D=3D"absolute=
+"))return e}return l},jc=3Dfunction(a){var =
+b,c=3DP(a),d=3DR(a,"position"),e=3Dzb&&c.getBoxObjectFor&&!a.getBoundingC=
+lientRect&&d=3D=3D"absolute"&&(b=3D=0A=
+c.getBoxObjectFor(a))&&(b.screenX<0||b.screenY<0),f=3Dnew =
+G(0,0),h=3Dgc(c);if(a=3D=3Dh)return =
+f;if(a.getBoundingClientRect){b=3Dhc(a);var k=3D(c?new =
+Q(P(c)):Kb||(Kb=3Dnew Q)).l();f.x=3Db.left+k.x;f.y=3Db.top+k.y}else =
+if(c.getBoxObjectFor&&!e){b=3Dc.getBoxObjectFor(a);var =
+j=3Dc.getBoxObjectFor(h);f.x=3Db.screenX-j.screenX;f.y=3Db.screenY-j.scre=
+enY}else{var =
+g=3Da;do{f.x+=3Dg.offsetLeft;f.y+=3Dg.offsetTop;if(g!=3Da){f.x+=3Dg.clien=
+tLeft||0;f.y+=3Dg.clientTop||0}if(M&&R(g,"position")=3D=3D"fixed"){f.x+=3D=
+c.body.scrollLeft;f.y+=3Dc.body.scrollTop;=0A=
+break}g=3Dg.offsetParent}while(g&&g!=3Da);if(K||M&&d=3D=3D"absolute")f.y-=
+=3Dc.body.offsetTop;for(g=3Da;(g=3Dic(g))&&g!=3Dc.body&&g!=3Dh;){f.x-=3Dg=
+.scrollLeft;if(!K||g.tagName!=3D"TR")f.y-=3Dg.scrollTop}}return =
+f};zb&&O("1.9");=0A=
+var kc=3Dfunction(a,b,c,d){if(/^\d+px?$/.test(b))return =
+parseInt(b,10);else{var =
+e=3Da.style[c],f=3Da.runtimeStyle[c];a.runtimeStyle[c]=3Da.currentStyle[c=
+];a.style[c]=3Db;var =
+h=3Da.style[d];a.style[c]=3De;a.runtimeStyle[c]=3Df;return =
+h}},lc=3Dfunction(a){var b=3DP(a),c=3D"";if(b.createTextRange){var =
+d=3Db.body.createTextRange();d.moveToElementText(a);c=3Dd.queryCommandVal=
+ue("FontName")}if(!c){c=3DR(a,"fontFamily");if(K&&Gb)c=3Dc.replace(/ =
+\[[^\]]*\]/,"")}var e=3Dc.split(",");if(e.length>1)c=3De[0];return =
+Pa(c,"\"'")},mc=3Dfunction(a){var b=3D=0A=
+a.match(/[^\d]+$/);return =
+b&&b[0]||l},nc=3D{cm:1,"in":1,mm:1,pc:1,pt:1},oc=3D{em:1,ex:1},pc=3Dfunct=
+ion(a){var b=3DR(a,"fontSize"),c=3Dmc(b);if(b&&"px"=3D=3Dc)return =
+parseInt(b,10);if(L)if(c in nc)return kc(a,b,"left","pixelLeft");else =
+if(a.parentNode&&a.parentNode.nodeType=3D=3D1&&c in oc){var =
+d=3Da.parentNode,e=3DR(d,"fontSize");return =
+kc(d,b=3D=3De?"1em":b,"left","pixelLeft")}var =
+f=3DSb("span",{style:"visibility:hidden;position:absolute;line-height:0;p=
+adding:0;margin:0;border:0;height:1em;"});Ub(a,f);b=3Df.offsetHeight;Vb(f=
+);=0A=
+return b};var S=3Ddocument,T=3Dnavigator,U=3Dwindow;=0A=
+function qc(){var a=3DS.cookie,b=3DMath.round((new =
+Date).getTime()/1000),c=3DU.google_analytics_domain_name,d=3Dtypeof =
+c=3D=3D"undefined"?rc("auto"):rc(c),e=3Da.indexOf("__utma=3D"+d+".")>-1,f=
+=3Da.indexOf("__utmb=3D"+d)>-1,h=3Da.indexOf("__utmc=3D"+d)>-1,k,j=3D{},g=
+=3D!!U&&!!U.gaGlobal;if(e){k=3Da.split("__utma=3D"+d+".")[1].split(";")[0=
+].split(".");j.sid=3Df&&h?k[3]+"":g&&U.gaGlobal.sid?U.gaGlobal.sid:b+"";j=
+.vid=3Dk[0]+"."+k[1];j.from_cookie=3Di}else{j.sid=3Dg&&U.gaGlobal.sid?U.g=
+aGlobal.sid:b+"";j.vid=3Dg&&U.gaGlobal.vid?U.gaGlobal.vid:(Math.round(Mat=
+h.random()*=0A=
+2147483647)^sc()&2147483647)+"."+b;j.from_cookie=3Dm}j.dh=3Dd;j.hid=3Dg&&=
+U.gaGlobal.hid?U.gaGlobal.hid:Math.round(Math.random()*2147483647);return=
+ U.gaGlobal=3Dj}=0A=
+function sc(){var =
+a=3DS.cookie?S.cookie:"",b=3DU.history.length,c,d,e=3D[T.appName,T.versio=
+n,T.language?T.language:T.browserLanguage,T.platform,T.userAgent,T.javaEn=
+abled()?1:0].join("");if(U.screen)e+=3DU.screen.width+"x"+U.screen.height=
++U.screen.colorDepth;else =
+if(U.java){d=3Djava.awt.Toolkit.getDefaultToolkit().getScreenSize();e+=3D=
+d.screen.width+"x"+d.screen.height}e+=3Da;e+=3DS.referrer?S.referrer:"";f=
+or(c=3De.length;b>0;)e+=3Db--^c++;return tc(e)}=0A=
+function tc(a){var =
+b=3D1,c=3D0,d,e;if(!(a=3D=3Dundefined||a=3D=3D"")){b=3D0;for(d=3Da.length=
+-1;d>=3D0;d--){e=3Da.charCodeAt(d);b=3D(b<<6&268435455)+e+(e<<14);c=3Db&2=
+66338304;b=3Dc!=3D0?b^c>>21:b}}return b}function =
+rc(a){if(!a||a=3D=3D""||a=3D=3D"none")return =
+1;if("auto"=3D=3Da){a=3DS.domain;if("www."=3D=3Da.substring(0,4))a=3Da.su=
+bstring(4,a.length)}return tc(a.toLowerCase())};var uc=3D"";function =
+vc(a){if(a){if(uc!=3D"")uc+=3D",";uc+=3Da}}function wc(a){if(a&&a =
+instanceof Array)for(var b=3D0;b<a.length;b++)a[b]&&typeof =
+a[b]=3D=3D"string"&&vc(a[b])}var xc=3Dm;=0A=
+function yc(a,b){var =
+c=3D"script";(xc=3Dzc(a,b))||(a.google_allow_expandable_ads=3Dm);var =
+d=3D!Ac();xc&&d&&b.write("<"+c+' =
+src=3D"http://'+y+'/pagead/expansion_embed.js"></'+c+">");var =
+e=3DBc(a,b,t("1",0.01)),f=3Dd||e;f&&pa("msie")&&!window.opera?b.write("<"=
++c+' =
+src=3D"http://'+y+'/pagead/render_ads.js"></'+c+">"):b.write("<"+c+'>goog=
+le_protectAndRun("ads_core.google_render_ad", google_handleError, =
+google_render_ad);</'+c+">")}function V(a){return a!=3Dl?'"'+a+'"':'""'}=0A=
+function W(a,b){if(a&&b)window.google_ad_url+=3D"&"+a+"=3D"+b}function =
+X(a){var b=3Dwindow,c=3DAa(a),d=3Db[a];W(c,d)}function =
+Y(a,b){b!=3Dl&&W(a,z(b))}function Z(a){var =
+b=3Dwindow,c=3DAa(a),d=3Db[a];Y(c,d)}function $(a,b){var =
+c=3Dwindow,d=3DAa(a),e=3Dc[a];if(d&&e&&typeof =
+e=3D=3D"object")e=3De[b%e.length];W(d,e)}=0A=
+function Cc(a){var b=3Da.screen,c=3Dnavigator.javaEnabled(),d=3D-(new =
+Date).getTimezoneOffset();if(b){W("u_h",b.height);W("u_w",b.width);W("u_a=
+h",b.availHeight);W("u_aw",b.availWidth);W("u_cd",b.colorDepth)}W("u_tz",=
+d);W("u_his",history.length);W("u_java",c);navigator.plugins&&W("u_nplug"=
+,navigator.plugins.length);navigator.mimeTypes&&W("u_nmime",navigator.mim=
+eTypes.length)}function =
+Dc(a){if(a){a=3Da.toLowerCase();if(a.substring(0,3)!=3D"ca-")a=3D"ca-"+a}=
+return a}=0A=
+function =
+Ec(a){if(a){a=3Da.toLowerCase();if(a.substring(0,9)!=3D"dist-aff-")a=3D"d=
+ist-aff-"+a}return a}function Fc(a){var =
+b=3D"google_unique_id";if(a[b])++a[b];else a[b]=3D1;return a[b]}function =
+Gc(){var =
+a=3DL&&O("6"),b=3Dzb&&O("1.8.1"),c=3DM&&O("525");if(Fb&&(a||b||c))return =
+i;else if(Eb&&(c||b))return i;else if(Gb&&b)return i;return m}function =
+Ac(){return(typeof ExpandableAdSlotFactory=3D=3D"function"||typeof =
+ExpandableAdSlotFactory=3D=3D"object")&&typeof =
+ExpandableAdSlotFactory.createIframe=3D=3D"function"}=0A=
+function =
+zc(a,b){if(a.google_allow_expandable_ads=3D=3D=3Dm||!b.body||a.google_ad_=
+output!=3D"html"||Ua(a,b)||ta(a)||isNaN(a.google_ad_height)||isNaN(a.goog=
+le_ad_width)||!Gc())return m;return i}function =
+Hc(a,b){if((a.google_unique_id||0)=3D=3D0&&a.google_ad_output=3D=3D"html"=
+&&document.body&&typeof =
+b.body.getBoundingClientRect=3D=3D"function")return =
+C(["36812001","36812002"],t("0.01",0));return""}=0A=
+function Ic(a){var =
+b=3D"";if((a.google_unique_id||0)=3D=3D0&&(a.google_ad_output=3D=3D"js"||=
+a.google_ad_output=3D=3D"html")){ta(a)||(b=3DC(["36813001","36813002","36=
+813003","36813004"],t("0.008",0)));if(b=3D=3D"")b=3DC(["36813005","368130=
+06"],t("0.008",0))}return b}function Jc(a,b){switch(a){case =
+"36813002":b.a(1);b.b(["js"]);break;case =
+"36813003":b.a(1);b.b(["html"]);break;case =
+"36813004":b.a(2);b.b(["html","js"]);break;case =
+"36813006":b.a(0);b.b(["html","js"]);break}}=0A=
+function Kc(a,b,c,d){var =
+e=3DFc(a);c=3Dc.substring(0,1992);c=3Dc.replace(/%\w?$/,"");var =
+f=3D"script";if((a.google_ad_output=3D=3D"js"||a.google_ad_output=3D=3D"j=
+son_html")&&(a.google_ad_request_done||a.google_radlink_request_done))b.w=
+rite("<"+f+' language=3D"JavaScript1.1" =
+src=3D'+V(Lc(c))+"></"+f+">");else =
+if(a.google_ad_output=3D=3D"html")if(xc&&Ac()){var =
+h=3Da.google_container_id||d||l;a["google_expandable_ad_slot"+e]=3DExpand=
+ableAdSlotFactory.createIframe("google_ads_frame"+e,Lc(c),a.google_ad_wid=
+th,a.google_ad_height,=0A=
+h)}else{var k=3D'<iframe name=3D"google_ads_frame" =
+width=3D'+V(a.google_ad_width)+" height=3D"+V(a.google_ad_height)+" =
+frameborder=3D"+V(a.google_ad_frameborder)+" src=3D"+V(Lc(c))+' =
+marginwidth=3D"0" marginheight=3D"0" vspace=3D"0" hspace=3D"0" =
+allowtransparency=3D"true" =
+scrolling=3D"no"></iframe>';a.google_container_id?Mc(a.google_container_i=
+d,b,k):b.write(k)}else =
+a.google_ad_output=3D=3D"textlink"&&b.write("<"+f+' =
+language=3D"JavaScript1.1" src=3D'+V(Lc(c))+"></"+f+">")}=0A=
+function Nc(a,b,c){if(!a)return m;if(!b)return i;return c}function =
+Oc(a){for(var b in ua)a[b]=3Dl;for(b in =
+ya)b=3D=3D"google_correlator"||(a[b]=3Dl);for(b in =
+za)a[b]=3Dl;a.google_allow_expandable_ads=3Dl;a.google_container_id=3Dl;a=
+.google_tag_info=3Dl;a.google_eids=3Dl}=0A=
+function Pc(a,b){var =
+c=3Dl,d=3Dwindow,e=3Ddocument,f=3Dn,h=3Dd.google_ad_format,k=3DQc(d),j;if=
+(d.google_cpa_choice!=3Dc){d.google_ad_url=3Dk+"/cpa/ads?";j=3Descape(Dc(=
+d.google_ad_client));d.google_ad_region=3D"_google_cpa_region_";X("google=
+_cpa_choice");if(typeof =
+e.characterSet!=3D"undefined")Y("oe",e.characterSet);else typeof =
+e.charset!=3D"undefined"&&Y("oe",e.charset)}else =
+if(B(h)){d.google_ad_url=3Dk+"/pagead/sdo?";j=3Descape(Ec(d.google_ad_cli=
+ent))}else{d.google_ad_url=3Dk+"/pagead/ads?";j=3Descape(Dc(d.google_ad_c=
+lient))}d.google_ad_url+=3D=0A=
+"client=3D"+j;X("google_ad_host");X("google_ad_host_tier_id");var =
+g=3Dd.google_num_slots_by_client,u=3Dd.google_num_slots_by_channel,w=3Dd.=
+google_prev_ad_formats_by_region,x=3Dd.google_prev_ad_slotnames_by_region=
+;if(d.google_ad_region=3D=3Dc&&d.google_ad_section!=3Dc)d.google_ad_regio=
+n=3Dd.google_ad_section;var =
+s=3Dd.google_ad_region=3D=3Dc?"":d.google_ad_region;if(B(h)){d.google_num=
+_sdo_slots=3Dd.google_num_sdo_slots?d.google_num_sdo_slots+1:1;if(d.googl=
+e_num_sdo_slots>4)return m}else =
+if(sa(d)){d.google_num_0ad_slots=3Dd.google_num_0ad_slots?=0A=
+d.google_num_0ad_slots+1:1;if(d.google_num_0ad_slots>3)return m}else =
+if(d.google_cpa_choice=3D=3Dc){d.google_num_ad_slots=3Dd.google_num_ad_sl=
+ots?d.google_num_ad_slots+1:1;if(d.google_num_slots_to_rotate){w[s]=3Dc;x=
+[s]=3Dc;if(d.google_num_slot_to_show=3D=3Dc)d.google_num_slot_to_show=3Df=
+%d.google_num_slots_to_rotate+1;if(d.google_num_slot_to_show!=3Dd.google_=
+num_ad_slots)return m}else if(d.google_num_ad_slots>6&&s=3D=3D"")return =
+m}W("dt",n);X("google_language");d.google_country?X("google_country"):X("=
+google_gl");X("google_region");=0A=
+Z("google_city");Z("google_hints");X("google_safe");X("google_encoding");=
+X("google_last_modified_time");Z("google_alternate_ad_url");X("google_alt=
+ernate_color");X("google_skip");X("google_targeting");var =
+N=3Dd.google_ad_client;if(g[N])g[N]+=3D1;else{g[N]=3D1;g.length+=3D1}if(w=
+[s])if(!B(h)){Y("prev_fmts",w[s].toLowerCase());g.length>1&&W("slot",g[N]=
+)}x[s]&&Y("prev_slotnames",x[s].toLowerCase());if(Nc(h,d.google_ad_slot,d=
+.google_override_format)){Y("format",h.toLowerCase());B(h)||(w[s]=3Dw[s]?=
+w[s]+","+h:h)}else if(d.google_ad_slot)x[s]=3D=0A=
+x[s]?x[s]+","+d.google_ad_slot:d.google_ad_slot;X("google_max_num_ads");W=
+("output",d.google_ad_output);X("google_adtest");X("google_ad_callback");=
+X("google_ad_slot");Z("google_correlator");d.google_new_domain_checked=3D=
+=3D1&&d.google_new_domain_enabled=3D=3D0&&W("dblk",1);if(d.google_ad_chan=
+nel){Z("google_ad_channel");for(var =
+rb=3D"",tb=3Dd.google_ad_channel.split(Rc),va=3D0;va<tb.length;va++){var =
+wa=3Dtb[va];if(u[wa])rb+=3Dwa+"+";else =
+u[wa]=3D1}Y("pv_ch",rb)}if(d.google_ad_host_channel){Z("google_ad_host_ch=
+annel");=0A=
+var =
+Wc=3DSc(d.google_ad_host_channel,d.google_viewed_host_channels);Y("pv_h_c=
+h",Wc)}Z("google_page_url");$("google_color_bg",f);$("google_color_text",=
+f);$("google_color_link",f);$("google_color_url",f);$("google_color_borde=
+r",f);$("google_color_line",f);d.google_reuse_colors?W("reuse_colors",1):=
+W("reuse_colors",0);X("google_font_face");X("google_font_size");X("google=
+_kw_type");Z("google_kw");Z("google_contents");X("google_num_radlinks");X=
+("google_max_radlink_len");X("google_rl_filtering");X("google_rl_mode");=0A=
+X("google_rt");Z("google_rl_dest_url");X("google_num_radlinks_per_unit");=
+X("google_ad_type");X("google_image_size");X("google_ad_region");wc(d.goo=
+gle_eids);Y("eid",uc);var =
+ub=3Dd.google_allow_expandable_ads;if(ub!=3Dl)ub?W("ea","1"):W("ea","0");=
+Ca&&W("cb",1);Da&&W("cd",1);X("google_feedback");Z("google_referrer_url")=
+;Z("google_page_location");W("frm",d.google_iframing);X("google_bid");X("=
+google_ctr_threshold");X("google_cust_age");X("google_cust_gender");X("go=
+ogle_cust_interests");X("google_cust_id");=0A=
+X("google_cust_job");X("google_cust_u_url");X("google_cust_l");X("google_=
+cust_lh");X("google_cust_ch");X("google_ed");X("google_video_doc_id");X("=
+google_video_product_type");Z("google_ui_features");Z("google_ui_version"=
+);Z("google_tag_info");Z("google_only_ads_with_video");Z("google_only_pyv=
+_ads");Z("google_disable_video_autoplay");if(a){Y("dff",lc(a));Y("dfs",pc=
+(a));var A;if(b)if(typeof a.getBoundingClientRect=3D=3D"function"){var =
+vb=3Da.getBoundingClientRect();A=3D{x:vb.left,y:vb.top}}else{A=3D{};A.x=3D=
+"-252738";=0A=
+A.y=3D"-252738"}else =
+try{A=3Djc(a)}catch(kd){A=3D{};A.x=3D"-252738";A.y=3D"-252738"}var =
+xa=3DPb(window);if(A&&xa){Y("biw",xa.width);Y("bih",xa.height);Y("adx",A.=
+x);Y("ady",A.y)}}qc();W("ga_vid",d.gaGlobal.vid);W("ga_sid",d.gaGlobal.si=
+d);W("ga_hid",d.gaGlobal.hid);W("ga_fc",d.gaGlobal.from_cookie);Z("google=
+_analytics_uacct");X("google_ad_override");X("google_flash_version");W("w=
+",d.google_ad_width||-1);W("h",d.google_ad_height||-1);Cc(d);return i}=0A=
+function Sc(a,b){for(var =
+c=3Da.split("|"),d=3D-1,e=3D[],f=3D0;f<c.length;f++){var =
+h=3Dc[f].split(Rc);b[f]||(b[f]=3D{});for(var =
+k=3D"",j=3D0;j<h.length;j++){var =
+g=3Dh[j];if(!(g=3D=3D""))if(b[f][g])k+=3D"+"+g;else =
+b[f][g]=3D1}k=3Dk.slice(1);e[f]=3Dk;if(k!=3D"")d=3Df}var =
+u=3D"";if(d>-1){for(f=3D0;f<d;f++)u+=3De[f]+"|";u+=3De[d]}return u}=0A=
+function Tc(){var =
+a=3Dwindow,b=3Ddocument,c=3DSa(),d=3Da.google_enable_osd,e=3D"";if(d=3D=3D=
+=3Di){e=3D"36813006";Jc(e,c)}else =
+if(d!=3D=3Dm){e=3DC(["68120011","68120021","68120031","68120041"],t("0.04=
+",0));if(e=3D=3D""){e=3DHc(a,b);if(e=3D=3D""){e=3DIc(a);e!=3D""&&Jc(e,c)}=
+}}vc(e);var f,h=3Dm,k=3Dm,j=3Dm;switch(e){case "68120031":j=3Di;case =
+"68120021":k=3Di;case "68120041":h=3Di;break;case =
+"36812002":if(!window.google_atf_included){window.google_atf_included=3Di=
+;na("http://"+y+"/pagead/atf.js")}break}if(h){var g=3D"google_temp_span";=0A=
+f=3Da.google_container_id&&Mb(a.google_container_id)||Mb(g);if(!f&&!a.goo=
+gle_container_id){b.write("<span id=3D"+g+"></span>");f=3DMb(g)}}var =
+u=3Dm;u=3Dk?Pc(f,j):Pc();f&&f.id=3D=3Dg&&Vb(f);if(u){c.q(a.google_ad_outp=
+ut,a.google_ad_url);Kc(a,b,a.google_ad_url);Oc(a)}}function Lc(a){var =
+b=3D(new Date).getTime()-n,c=3D"&dtd=3D"+(b<1000?b:"M");return =
+a+c}function Uc(a,b,c,d){var e=3Dgb(a,b,c,d);yc(window,document);return =
+e}=0A=
+function Vc(){var =
+a=3Dwindow,b=3Dl;if(a.google_ad_frameborder=3D=3Db)a.google_ad_frameborde=
+r=3D0;if(a.google_ad_output=3D=3Db)a.google_ad_output=3D"html";if(B(a.goo=
+gle_ad_format)){var =
+c=3Da.google_ad_format.match(/^(\d+)x(\d+)_.*/);if(c){a.google_ad_width=3D=
+parseInt(c[1],10);a.google_ad_height=3DparseInt(c[2],10);a.google_ad_outp=
+ut=3D"html"}}if(a.google_ad_format=3D=3Db&&a.google_ad_output=3D=3D"html"=
+)a.google_ad_format=3Da.google_ad_width+"x"+a.google_ad_height;bb(a,docum=
+ent);if(a.google_num_slots_by_channel=3D=3Db)a.google_num_slots_by_channe=
+l=3D=0A=
+[];if(a.google_viewed_host_channels=3D=3Db)a.google_viewed_host_channels=3D=
+[];if(a.google_num_slots_by_client=3D=3Db)a.google_num_slots_by_client=3D=
+[];if(a.google_prev_ad_formats_by_region=3D=3Db)a.google_prev_ad_formats_=
+by_region=3D[];if(a.google_prev_ad_slotnames_by_region=3D=3Db)a.google_pr=
+ev_ad_slotnames_by_region=3D[];if(a.google_correlator=3D=3Db)a.google_cor=
+relator=3Dn;if(a.google_adslot_loaded=3D=3Db)a.google_adslot_loaded=3D{};=
+if(a.google_adContentsBySlot=3D=3Db)a.google_adContentsBySlot=3D{};if(a.g=
+oogle_flash_version=3D=3Db)a.google_flash_version=3D=0A=
+ra();if(a.google_new_domain_checked=3D=3Db)a.google_new_domain_checked=3D=
+0;if(a.google_new_domain_enabled=3D=3Db)a.google_new_domain_enabled=3D0}f=
+unction Xc(a){for(var =
+b=3D{},c=3Da.split("?"),d=3Dc[c.length-1].split("&"),e=3D0;e<d.length;e++=
+){var =
+f=3Dd[e].split("=3D");if(f[0])try{b[f[0].toLowerCase()]=3Df.length>1?wind=
+ow.decodeURIComponent?decodeURIComponent(f[1].replace(/\+/g," =
+")):unescape(f[1]):""}catch(h){}}return b}=0A=
+function Yc(){var =
+a=3Dwindow,b=3DXc(document.URL);if(b.google_ad_override){a.google_ad_over=
+ride=3Db.google_ad_override;a.google_adtest=3D"on"}}function =
+Mc(a,b,c){if(a){var =
+d=3Db.getElementById(a);if(d&&c&&c.length!=3D""){d.style.visibility=3D"vi=
+sible";d.innerHTML=3Dc}}}var Rc=3D/[+, =
+]/;window.google_render_ad=3DTc;var =
+Zc=3D{google:1,googlegroups:1,gmail:1,googlemail:1,googleimages:1,googlep=
+rint:1};function $c(a){var =
+b=3Da.google_page_location||a.google_page_url;if(!b)return =
+m;b=3Db.toString();if(b.indexOf("http://")=3D=3D0)b=3Db.substring(7,b.len=
+gth);else =
+if(b.indexOf("https://")=3D=3D0)b=3Db.substring(8,b.length);var =
+c=3Db.indexOf("/");if(c=3D=3D-1)c=3Db.length;var =
+d=3Db.substring(0,c),e=3Dd.split("."),f=3Dm;if(e.length>=3D3)f=3De[e.leng=
+th-3]in Zc;if(e.length>=3D2)f=3Df||e[e.length-2]in Zc;return f}=0A=
+function Bc(a,b,c){if($c(a)){a.google_new_domain_checked=3D1;return =
+m}if(a.google_new_domain_checked=3D=3D0){var =
+d=3DMath.random();if(d<=3Dc){var =
+e=3D"http://"+la+"/pagead/test_domain.js",f=3D"script";b.write("<"+f+' =
+src=3D"'+e+'"></'+f+">");a.google_new_domain_checked=3D1;return =
+i}}return m}function =
+Qc(a){if(!$c(a)&&a.google_new_domain_enabled=3D=3D1)return"http://"+la;re=
+turn"http://"+ma};var =
+ad=3D["30143070","30143071","30143072","30143073","30143074","30143075"],=
+bd=3Dtypeof window.postMessage=3D=3D"function"||typeof =
+window.postMessage=3D=3D"object"||typeof =
+document.postMessage=3D=3D"function",dd=3Dfunction(a,b){typeof =
+A1_googleCreateSlot=3D=3D"function"?A1_googleCreateSlot(a.google_ad_clien=
+t):cd(a,b)},ed=3Dfunction(){if(!(bd||!M))return m;return =
+i},fd=3Dfunction(a){if(ta(a))return m;var =
+b=3Da.google_ad_output;if(b&&b!=3D"html")return m;var =
+c=3Da.google_ad_client;if(typeof =
+c!=3D"string"||c.substring(0,4)!=3D"pub-"&&=0A=
+c.substring(0,7)!=3D"ca-pub-")return m;return =
+i},hd=3Dfunction(a){if(typeof a.google_a1_eid=3D=3D"string")return =
+a.google_a1_eid;var b=3Dt("0.005",0);a.google_a1_eid=3Dgd(ad,b);return =
+a.google_a1_eid},cd=3Dfunction(a,b){if(!a.google_included_a1_script){var =
+c=3D"script",d=3D"/pagead/show_ads_sra3.js";b.write("<"+c+' =
+src=3D"http://'+y+d+'"></'+c+">");a.google_included_a1_script=3Di}},gd=3D=
+function(a,b){var c=3DMath.random();if(c<b){var =
+d=3DMath.floor(c/b*a.length);return a[d]}return""};function =
+id(){Yc();eb("show_ads.google_init_globals",Uc,Vc);yc(window,document)}fu=
+nction jd(){if(!ed(window)||!fd(window))id();else{var =
+a=3Dhd(window);if(a){vc(a);window.google_allow_expandable_ads=3Dm}!a||a=3D=
+=3D"30143070"?id():dd(window,document)}}eb("show_ads.main",gb,jd);=0A=
+})()=0A=
+
+------=_NextPart_000_0000_01C9FB4F.F47C1310--

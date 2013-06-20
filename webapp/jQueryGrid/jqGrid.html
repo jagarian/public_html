@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>서학리조트 컨텐츠</title>
+<link rel="stylesheet" type="text/css" href="style/css/contents.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="style/css/grid.css" media="screen" />
+<script type="text/javascript" src="style/js/jquery.js" charset="utf-8"></script>
+<script type="text/javascript" src="style/js/jquery.jqGrid.js" charset="utf-8"></script>
+<script type="text/javascript" src="style/js/contents_04.js"  charset="utf-8"></script>
+</head>
+<body>
+
+
+	<!-- title 영역 시작 -->
+	<table class="tbl_tit01">
+	<col width="*" />
+	<col width="300" />
+	<tr>
+		<td class="title"><strong>탭 테스트</strong> | [대외비 FOBASEO4]</td>
+		<td class="depth">시스템 > 사용자관리 > 사용자역할 관리</td>
+	</tr>
+	</table>
+	<!-- title 영역 끝 -->
+	<div class="space10"></div>
+
+    <div style="width:810px;overflow:hidden;">
+        <table width="100%" cellspacing="1" class="tbl_grid02" id="htmlGrid">
+        <col width="60" />
+        <col width="*" />
+        <col width="80" />
+        <col width="80" />
+        <col width="100" />
+        <tr>
+            <th class="grdhead">선택</th>
+            <th class="grdhead">담보명</th>
+            <th class="grdhead">가입금액</th>
+            <th class="grdhead">보험료</th>
+            <th class="grdhead">비고</th>
+        </tr>
+        <tr>
+            <td class="grdrow"></td>
+            <td class="grdrow"></td>
+            <td class="grdrow"></td>
+            <td class="grdrow"></td>
+            <td class="grdrow"></td>
+        </tr>
+        <tr>
+            <td class="grdrow"></td>
+            <td class="grdrow"></td>
+            <td class="grdrow"></td>
+            <td class="grdrow"></td>
+            <td class="grdrow"></td>
+        </tr>
+        <tr>
+            <td class="grdrow"></td>
+            <td class="grdrow"></td>
+            <td class="grdrow"></td>
+            <td class="grdrow"></td>
+            <td class="grdrow"></td>
+        </tr>
+        </table>
+    </div>
+    <div class="space10"></div>
+	
+    <table class="tbl_tit02"><tr><td>담보 사항</td></tr></table>
+    <div class="gridJ" style="width:780px"><table id="gridList" class="scroll" ></table></div>
+
+
+    <div id="rsperror" title="서버에러나오는곳"></div>
+
+
+<input type="button" value="그리드API" onclick="window.open('http://www.trirand.com/blog/jqgrid/jqgrid.html','Continue_to_Application','width=900,height=800')" href="#")" />
+    <input type="button" value="그리드API" onclick="window.open('http://www.trirand.com/blog/jqgrid/jqgrid.html','true','true')" />
+    <input type="button" value="선택된Row 데이터가져오기" id="a1" />
+    <input type="button" value="Row삭제" id="a2" />
+    <input type="button" value="마지막Row추가" id="a3" />
+    <input type="button" value="id가 13인 Row선택하기" id="a4" /><br />
+    <input type="button" value="tax컬럼 숨기기" id="a5" />
+    <input type="button" value="tax컬럼 나타내기" id="a6" />
+
+    <input type="button" value="id가 13 에디팅하기" id="a7" />
+    <input type="button" value="저장" id="a8" />
+    <input type="button" value="취소" id="a9" /><br />
+
+    <input type="button" value="header값 스타일변경" id="a10" />
+    <input type="button" value="셀값 스타일변경" id="a11" />
+    <input type="button" value="데이타초기화" id="a12" />
+    <input type="button" value="그리드 width/height조절" id="a13" /><br />
+    
+    <input type="button" value="HTML 테이블을 그리드화하기" id="a14" />
+	
+	<input type="button" value="Get number of record " id="a15" />
+</body>
+</html>

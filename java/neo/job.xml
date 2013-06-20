@@ -1,0 +1,966 @@
+<?xml version="1.0" encoding="EUC-KR"?>
+
+<job-definitions>
+
+	<!-- 구분 라인 -->
+
+	<job>
+		<job-name>board_list</job-name>
+		<job-class>com.appl.board.action.BoardListAction</job-class>
+		<parameter key="SUCCESS" value="/jsp/board/board_list.jsp" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>
+
+  <job>
+		<job-name>board_read</job-name>
+		<job-class>com.appl.board.action.BoardViewAction</job-class>
+		<parameter key="SUCCESS" value="/jsp/board/board_read.jsp" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+  </job>
+
+  <job>
+		<job-name>board_edit</job-name>
+		<job-class>com.appl.board.action.BoardEditAction</job-class>
+		<parameter key="SUCCESS" value="/jsp/board/board_write.jsp" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+  </job>
+
+  <job>
+		<job-name>board_write</job-name>
+		<job-class>com.appl.board.action.BoardWriteAction</job-class>
+		<parameter key="SUCCESS" value="!board_list" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+  </job>
+
+  <job>
+		<job-name>board_del</job-name>
+		<job-class>com.appl.board.action.BoardDelAction</job-class>
+		<parameter key="SUCCESS" value="@board_list" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+  </job>
+
+  <job>
+		<job-name>board_comment_del</job-name>
+		<job-class>com.appl.board.action.BoardCommentDelAction</job-class>
+		<parameter key="SUCCESS" value="@board_read" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+  </job>
+
+  <job>
+		<job-name>board_comment_ins</job-name>
+		<job-class>com.appl.board.action.BoardCommentInsAction</job-class>
+		<parameter key="SUCCESS" value="@board_read" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+  </job>  
+
+  <job>
+		<job-name>board_file_del</job-name>
+		<job-class>com.appl.board.action.BoardFileDelAction</job-class>
+		<parameter key="SUCCESS" value="@board_edit" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+  </job>
+
+  <job>
+		<job-name>board_mail_send</job-name>
+		<job-class>com.appl.board.action.MailSendAction</job-class>
+		<parameter key="SUCCESS" value="/jsp/blank.jsp" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+  </job>
+  
+  <job>
+		<job-name>file_download</job-name>
+		<job-class>com.common.action.FileDownloadAction</job-class>
+		<parameter key="SUCCESS" value="/jsp/blank.jsp" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+  </job>
+  
+  <!-- 구분 라인 -->
+  
+  <job>
+		<job-name>board_mgr_list</job-name>
+		<job-class>com.appl.board.action.BoardMgrListAction</job-class>
+		<parameter key="SUCCESS" value="/jsp/board/board_mgr_list.jsp" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>
+
+  <job>
+		<job-name>board_mgr_read</job-name>
+		<job-class>com.appl.board.action.BoardMgrViewAction</job-class>
+		<parameter key="SUCCESS" value="/jsp/board/board_mgr_read.jsp" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+  </job>
+
+  <job>
+		<job-name>board_mgr_edit</job-name>
+		<job-class>com.appl.board.action.BoardMgrEditAction</job-class>
+		<parameter key="SUCCESS" value="/jsp/board/board_mgr_write.jsp" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+  </job>
+
+  <job>
+		<job-name>board_mgr_write</job-name>
+		<job-class>com.appl.board.action.BoardMgrWriteAction</job-class>
+		<parameter key="SUCCESS" value="!board_mgr_list" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+  </job>
+
+  <job>
+		<job-name>board_mgr_del</job-name>
+		<job-class>com.appl.board.action.BoardMgrDelAction</job-class>
+		<parameter key="SUCCESS" value="@board_mgr_list" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+  </job>
+
+  <job>
+		<job-name>board_mgr_file_del</job-name>
+		<job-class>com.appl.board.action.BoardMgrFileDelAction</job-class>
+		<parameter key="SUCCESS" value="@board_mgr_edit" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+  </job>
+
+	<!-- 구분 라인 -->
+
+	<job>
+		<job-name>addr_list</job-name>
+		<job-class>com.appl.addr.action.AddrListAction</job-class>
+		<parameter key="SUCCESS" value="/jsp/addr/addr_list.jsp" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>	
+
+	<job>
+		<job-name>addr_edit</job-name>
+		<job-class>com.appl.addr.action.AddrEditAction</job-class>
+		<parameter key="SUCCESS" value="/jsp/addr/addr_edit.jsp" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>
+
+	<job>
+		<job-name>addr_del</job-name>
+		<job-class>com.appl.addr.action.AddrDelAction</job-class>
+		<parameter key="SUCCESS" value="@addr_list" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>
+
+	<job>
+		<job-name>addr_simple_save</job-name>
+		<job-class>com.appl.addr.action.AddrSaveAction</job-class>
+		<parameter key="SUCCESS" value="@addr_list" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>
+
+	<job>
+		<job-name>addr_write</job-name>
+		<job-class>com.appl.addr.action.AddrWriteAction</job-class>
+		<parameter key="SUCCESS" value="/jsp/blank.jsp" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>
+
+	<job>
+		<job-name>addr_chg_grp</job-name>
+		<job-class>com.appl.addr.action.AddrGrpChgAction</job-class>
+		<parameter key="SUCCESS" value="@addr_list" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>
+	
+	<!-- 구분 라인 -->
+	
+	<job>
+		<job-name>postit_list</job-name>
+		<job-class>com.appl.postit.action.DragMemoListAction</job-class>
+		<parameter key="SUCCESS" value="/jsp/postit/postit.jsp" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>	
+
+	<job>
+		<job-name>postit_del</job-name>
+		<job-class>com.appl.postit.action.DragMemoDeleteAction</job-class>
+		<parameter key="SUCCESS" value="@postit_list" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>
+
+	<job>
+		<job-name>postit_update</job-name>
+		<job-class>com.appl.postit.action.DragMemoUpdatetAction</job-class>
+		<parameter key="SUCCESS" value="@postit_list" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>
+
+	<job>
+		<job-name>postit_edit</job-name>
+		<job-class>com.appl.postit.action.DragMemoEditAction</job-class>
+		<parameter key="SUCCESS" value="/jsp/postit/postit_write.jsp" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>
+
+	<job>
+		<job-name>postit_write</job-name>
+		<job-class>com.appl.postit.action.DragMemoWriteAction</job-class>
+		<parameter key="SUCCESS" value="/jsp/postit/postit_write.jsp" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>
+
+	<job>
+		<job-name>postit_simple_list</job-name>
+		<job-class>com.appl.postit.action.DragFolderListAction</job-class>
+		<parameter key="SUCCESS" value="/jsp/postit/postit_folder.jsp" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>
+
+	<job>
+		<job-name>postit_simple_save</job-name>
+		<job-class>com.appl.postit.action.DragFolderSaveAction</job-class>
+		<parameter key="SUCCESS" value="@postit_simple_list" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>
+	
+	<!-- 구분 라인 -->
+	
+	<job>
+		<job-name>meet_list</job-name>
+		<job-class>com.appl.meet.action.MeetListAction</job-class>
+		<parameter key="SUCCESS" value="/jsp/meet/meet_list.jsp" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>	
+
+	<job>
+		<job-name>meet_edit</job-name>
+		<job-class>com.appl.meet.action.MeetEditAction</job-class>
+		<parameter key="SUCCESS" value="/jsp/meet/meet_write.jsp" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>
+
+	<job>
+		<job-name>meet_del</job-name>
+		<job-class>com.appl.meet.action.MeetDelAction</job-class>
+		<parameter key="SUCCESS" value="@meet_list" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>
+
+	<job>
+		<job-name>meet_file_del</job-name>
+		<job-class>com.appl.meet.action.MeetViewAction</job-class>
+		<parameter key="SUCCESS" value="@meet_edit" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>
+
+	<job>
+		<job-name>meet_comment_del</job-name>
+		<job-class>com.appl.meet.action.MeetCommentsDelAction</job-class>
+		<parameter key="SUCCESS" value="@meet_read" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+  </job>
+
+  <job>
+		<job-name>meet_comment_ins</job-name>
+		<job-class>com.appl.meet.action.MeetCommentsInsAction</job-class>
+		<parameter key="SUCCESS" value="@meet_read" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+  </job>  
+
+	<job>
+		<job-name>meet_read</job-name>
+		<job-class>com.appl.meet.action.MeetViewAction</job-class>
+		<parameter key="SUCCESS" value="/jsp/meet/meet_read.jsp" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>
+
+	<job>
+		<job-name>meet_write</job-name>
+		<job-class>com.appl.meet.action.MeetWriteAction</job-class>
+		<parameter key="SUCCESS" value="!meet_list" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>
+	
+	<!-- 구분 라인 -->
+	
+	<job>
+		<job-name>notice_list</job-name>
+		<job-class>com.appl.notice.action.NoticeListAction</job-class>
+		<parameter key="SUCCESS" value="/jsp/notice/notice_list.jsp" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>
+
+	<job>
+		<job-name>notice_read</job-name>
+		<job-class>com.appl.notice.action.NoticeViewAction</job-class>
+		<parameter key="SUCCESS" value="/jsp/notice/notice_read.jsp" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>
+
+	<job>
+		<job-name>notice_edit</job-name>
+		<job-class>com.appl.notice.action.NoticeEditAction</job-class>
+		<parameter key="SUCCESS" value="/jsp/notice/notice_write.jsp" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>
+
+	<job>
+		<job-name>notice_write</job-name>
+		<job-class>com.appl.notice.action.NoticeWriteAction</job-class>
+		<parameter key="SUCCESS" value="!notice_list" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>
+
+	<job>
+		<job-name>notice_del</job-name>
+		<job-class>com.appl.notice.action.NoticeDelAction</job-class>
+		<parameter key="SUCCESS" value="@notice_list" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>
+
+	<job>
+		<job-name>notice_file_del</job-name>
+		<job-class>com.appl.notice.action.NoticeFileDelAction</job-class>
+		<parameter key="SUCCESS" value="@notice_edit" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>
+
+	<job>
+		<job-name>notice_updown_move</job-name>
+		<job-class>com.appl.notice.action.NoticeUpDownMoveAction</job-class>
+		<parameter key="SUCCESS" value="@notice_list" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>
+
+	<job>
+		<job-name>notice_useyn_apply</job-name>
+		<job-class>com.appl.notice.action.NoticeUseynAction</job-class>
+		<parameter key="SUCCESS" value="@notice_list" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>
+
+	<job>
+		<job-name>small_notice_popup</job-name>
+		<job-class>com.appl.notice.action.NoticeSmallPopupAction</job-class>
+		<parameter key="SUCCESS" value="/jsp/notice/small_notice_popup.jsp" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>
+
+	<job>
+		<job-name>small_notice_list</job-name>
+		<job-class>com.appl.notice.action.NoticeSmallListAction</job-class>
+		<parameter key="SUCCESS" value="/jsp/notice/small_notice_list.jsp" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>
+	
+	<!-- 구분 라인 -->
+	
+	<job>
+		<job-name>todolist_list</job-name>
+		<job-class>com.appl.todolist.action.ToDoListSearchListAction</job-class>
+		<parameter key="SUCCESS" value="/jsp/todolist/todolist_list.jsp" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>
+
+	<job>
+		<job-name>todolist_edit</job-name>
+		<job-class>com.appl.todolist.action.ToDoListEditAction</job-class>
+		<parameter key="SUCCESS" value="/jsp/todolist/todolist_write.jsp" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>
+
+	<job>
+		<job-name>todolist_write</job-name>
+		<job-class>com.appl.todolist.action.ToDoListWriteAction</job-class>
+		<parameter key="SUCCESS" value="!todolist_list" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>
+
+	<job>
+		<job-name>todolist_read</job-name>
+		<job-class>com.appl.todolist.action.ToDoListViewAction</job-class>
+		<parameter key="SUCCESS" value="/jsp/todolist/todolist_read.jsp" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>
+
+	<job>
+		<job-name>todolist_del</job-name>
+		<job-class>com.appl.todolist.action.ToDoListDeleteAction</job-class>
+		<parameter key="SUCCESS" value="!todolist_list" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>
+
+	<job>
+		<job-name>todolist_file_del</job-name>
+		<job-class>com.appl.todolist.action.ToDoListFileDelAction</job-class>
+		<parameter key="SUCCESS" value="@todolist_edit" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>
+
+	<job>
+		<job-name>todolist_batch</job-name>
+		<job-class>com.appl.todolist.action.ToDoListAllApplyAction</job-class>
+		<parameter key="SUCCESS" value="/jsp/blank.jsp" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>
+	
+	<!-- 구분 라인 -->
+	
+	<job>
+		<job-name>user_list</job-name>
+		<job-class>com.appl.user.action.UserListAction</job-class>
+		<parameter key="SUCCESS" value="/jsp/user/user_list.jsp" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>	
+
+	<job>
+		<job-name>user_edit</job-name>
+		<job-class>com.appl.user.action.UserEditAction</job-class>
+		<parameter key="SUCCESS" value="/jsp/user/user_write.jsp" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>
+
+	<job>
+		<job-name>user_write</job-name>
+		<job-class>com.appl.user.action.UserWriteAction</job-class>
+		<parameter key="SUCCESS" value="!user_list" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>
+
+	<job>
+		<job-name>user_read</job-name>
+		<job-class>com.appl.user.action.UserViewAction</job-class>
+		<parameter key="SUCCESS" value="/jsp/user/user_read.jsp" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>
+
+	<job>
+		<job-name>user_del</job-name>
+		<job-class>com.appl.user.action.UserDelAction</job-class>
+		<parameter key="SUCCESS" value="!user_list" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>
+
+	<job>
+		<job-name>user_file_del</job-name>
+		<job-class>com.appl.user.action.UserFileDelAction</job-class>
+		<parameter key="SUCCESS" value="@user_edit" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>
+
+	<job>
+		<job-name>user_simple_list</job-name>
+		<job-class>com.appl.user.action.UserSimpleListAction</job-class>
+		<parameter key="SUCCESS" value="/jsp/user/user_simple_list.jsp" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>
+
+	<job>
+		<job-name>user_simple_save</job-name>
+		<job-class>com.appl.user.action.UserSimpleSaveAction</job-class>
+		<parameter key="SUCCESS" value="@user_simple_list" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>
+
+	<job>
+		<job-name>addr_pop_select</job-name>
+		<job-class>com.appl.user.action.UserAddrSearchAction</job-class>
+		<parameter key="SUCCESS" value="/jsp/user/user_addr_search.jsp" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>	
+
+	<job>
+		<job-name>userid_dup_chk</job-name>
+		<job-class>com.appl.user.action.UserIdCheckAction</job-class>
+		<parameter key="SUCCESS" value="/jsp/user/user_id_chk.jsp" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>	
+	
+	<!-- 구분 라인 -->
+	
+	<job>
+		<job-name>role_list</job-name>
+		<job-class>com.appl.user.action.RoleListAction</job-class>
+		<parameter key="SUCCESS" value="/jsp/user/role_list.jsp" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>	
+
+	<job>
+		<job-name>role_edit</job-name>
+		<job-class>com.appl.user.action.RoleEditAction</job-class>
+		<parameter key="SUCCESS" value="/jsp/user/role_write.jsp" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>
+
+	<job>
+		<job-name>role_write</job-name>
+		<job-class>com.appl.user.action.RoleWriteAction</job-class>
+		<parameter key="SUCCESS" value="!role_list" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>
+
+	<job>
+		<job-name>role_read</job-name>
+		<job-class>com.appl.user.action.RoleViewAction</job-class>
+		<parameter key="SUCCESS" value="/jsp/user/role_read.jsp" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>
+
+	<job>
+		<job-name>role_del</job-name>
+		<job-class>com.appl.user.action.RoleDelAction</job-class>
+		<parameter key="SUCCESS" value="!role_list" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>
+
+	<job>
+		<job-name>role_file_del</job-name>
+		<job-class>com.appl.user.action.RoleFileDelAction</job-class>
+		<parameter key="SUCCESS" value="@role_edit" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>
+
+	<job>
+		<job-name>role_simple_list</job-name>
+		<job-class>com.appl.user.action.RoleSimpleListAction</job-class>
+		<parameter key="SUCCESS" value="/jsp/user/role_simple_list.jsp" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>
+
+	<job>
+		<job-name>role_simple_save</job-name>
+		<job-class>com.appl.user.action.RoleSimpleSaveAction</job-class>
+		<parameter key="SUCCESS" value="@role_simple_list" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>
+	
+	<!-- 구분 라인 -->
+	
+	<job>
+		<job-name>lookup_type_list</job-name>
+		<job-class>com.appl.code.action.LookupTypeListAction</job-class>
+		<parameter key="SUCCESS" value="/jsp/code/lookuptype_list.jsp" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>	
+
+	<job>
+		<job-name>lookup_type_edit</job-name>
+		<job-class>com.appl.code.action.LookupTypeEditAction</job-class>
+		<parameter key="SUCCESS" value="/jsp/code/lookuptype_write.jsp" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>
+
+	<job>
+		<job-name>lookup_type_write</job-name>
+		<job-class>com.appl.code.action.LookupTypeWriteAction</job-class>
+		<parameter key="SUCCESS" value="!lookup_type_list" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>
+
+	<job>
+		<job-name>lookup_type_read</job-name>
+		<job-class>com.appl.code.action.LookupTypeViewAction</job-class>
+		<parameter key="SUCCESS" value="/jsp/code/lookuptype_read.jsp" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>
+
+	<job>
+		<job-name>lookup_type_del</job-name>
+		<job-class>com.appl.code.action.LookupTypeDelAction</job-class>
+		<parameter key="SUCCESS" value="!lookup_type_list" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>
+
+	<job>
+		<job-name>lookup_type_file_del</job-name>
+		<job-class>com.appl.code.action.LookupTypeFileDelAction</job-class>
+		<parameter key="SUCCESS" value="@lookup_type_edit" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>
+
+	<job>
+		<job-name>lookup_type_simple_list</job-name>
+		<job-class>com.appl.code.action.LookupTypeSimpleListAction</job-class>
+		<parameter key="SUCCESS" value="/jsp/code/lookuptype_simple_list.jsp" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>
+
+
+	<job>
+		<job-name>lookup_type_simple_save</job-name>
+		<job-class>com.appl.code.action.LookupTypeSimpleSaveAction</job-class>
+		<parameter key="SUCCESS" value="@lookup_type_simple_list" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>
+	
+	<!-- 구분 라인 -->
+
+	<job>
+		<job-name>lookup_code_list</job-name>
+		<job-class>com.appl.code.action.LookupCodeListAction</job-class>
+		<parameter key="SUCCESS" value="/jsp/code/lookupcode_list.jsp" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>
+
+	<job>
+		<job-name>lookup_code_edit</job-name>
+		<job-class>com.appl.code.action.LookupCodeEditAction</job-class>
+		<parameter key="SUCCESS" value="/jsp/code/lookupcode_write.jsp" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>
+
+	<job>
+		<job-name>lookup_code_write</job-name>
+		<job-class>com.appl.code.action.LookupCodeWriteAction</job-class>
+		<parameter key="SUCCESS" value="!lookup_code_list" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>
+
+	<job>
+		<job-name>lookup_code_read</job-name>
+		<job-class>com.appl.code.action.LookupCodeViewAction</job-class>
+		<parameter key="SUCCESS" value="/jsp/code/lookupcode_read.jsp" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>
+
+	<job>
+		<job-name>lookup_code_del</job-name>
+		<job-class>com.appl.code.action.LookupCodeDelAction</job-class>
+		<parameter key="SUCCESS" value="!lookup_code_list" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>
+
+	<job>
+		<job-name>lookup_code_file_del</job-name>
+		<job-class>com.appl.code.action.LookupCodeFileDelAction</job-class>
+		<parameter key="SUCCESS" value="@lookup_code_edit" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>
+
+	<job>
+		<job-name>lookup_code_simple_list</job-name>
+		<job-class>com.appl.code.action.LookupCodeSimpleListAction</job-class>
+		<parameter key="SUCCESS" value="/jsp/code/lookupcode_simple_list.jsp" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>
+
+
+	<job>
+		<job-name>lookup_code_simple_save</job-name>
+		<job-class>com.appl.code.action.LookupCodeSimpleSaveAction</job-class>
+		<parameter key="SUCCESS" value="@lookup_code_simple_list" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>
+	
+	<!-- 구분 라인 -->
+
+	<job>
+		<job-name>lookup_detail_list</job-name>
+		<job-class>com.appl.code.action.LookupDetailListAction</job-class>
+		<parameter key="SUCCESS" value="/jsp/code/lookupdetail_list.jsp" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>
+
+	<job>
+		<job-name>lookup_detail_edit</job-name>
+		<job-class>com.appl.code.action.LookupDetailEditAction</job-class>
+		<parameter key="SUCCESS" value="/jsp/code/lookupdetail_write.jsp" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>
+
+	<job>
+		<job-name>lookup_detail_write</job-name>
+		<job-class>com.appl.code.action.LookupDetailWriteAction</job-class>
+		<parameter key="SUCCESS" value="!lookup_detail_list" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>
+
+	<job>
+		<job-name>lookup_detail_read</job-name>
+		<job-class>com.appl.code.action.LookupDetailViewAction</job-class>
+		<parameter key="SUCCESS" value="/jsp/code/lookupdetail_read.jsp" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>
+
+	<job>
+		<job-name>lookup_detail_del</job-name>
+		<job-class>com.appl.code.action.LookupDetailDelAction</job-class>
+		<parameter key="SUCCESS" value="!lookup_detail_list" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>
+
+	<job>
+		<job-name>lookup_detail_file_del</job-name>
+		<job-class>com.appl.code.action.LookupDetailFileDelAction</job-class>
+		<parameter key="SUCCESS" value="@lookup_detail_edit" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>
+
+	<job>
+		<job-name>lookup_detail_simple_list</job-name>
+		<job-class>com.appl.code.action.LookupDetailSimpleListAction</job-class>
+		<parameter key="SUCCESS" value="/jsp/code/lookupdetail_simple_list.jsp" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>
+
+	<job>
+		<job-name>lookup_detail_simple_save</job-name>
+		<job-class>com.appl.code.action.LookupDetailSimpleSaveAction</job-class>
+		<parameter key="SUCCESS" value="@lookup_detail_simple_list" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>
+	
+	<!-- 구분 라인 -->
+	
+	<job>
+		<job-name>favorites_my_list</job-name>
+		<job-class>com.appl.favorites.action.FavoritesMyListAction</job-class>
+		<parameter key="SUCCESS" value="/jsp/favorites/favorites_my_list.jsp" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>	
+
+	<job>
+		<job-name>favorites_my_edit</job-name>
+		<job-class>com.appl.favorites.action.FavoritesMyEditAction</job-class>
+		<parameter key="SUCCESS" value="/jsp/favorites/favorites_my_write.jsp" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>
+
+	<job>
+		<job-name>favorites_my_write</job-name>
+		<job-class>com.appl.favorites.action.FavoritesMyWriteAction</job-class>
+		<parameter key="SUCCESS" value="!favorites_my_list" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>
+
+	<job>
+		<job-name>favorites_my_read</job-name>
+		<job-class>com.appl.favorites.action.FavoritesMyViewAction</job-class>
+		<parameter key="SUCCESS" value="/jsp/favorites/favorites_my_read.jsp" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>
+
+	<job>
+		<job-name>favorites_my_del</job-name>
+		<job-class>com.appl.favorites.action.FavoritesMyDelAction</job-class>
+		<parameter key="SUCCESS" value="!favorites_my_list" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>
+
+	<job>
+		<job-name>favorites_my_file_del</job-name>
+		<job-class>com.appl.favorites.action.FavoritesMyFileDelAction</job-class>
+		<parameter key="SUCCESS" value="@favorites_my_edit" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>
+
+	<job>
+		<job-name>favorites_my_simple_list</job-name>
+		<job-class>com.appl.favorites.action.FavoritesMySimpleListAction</job-class>
+		<parameter key="SUCCESS" value="/jsp/favorites/favorites_my_simple_list.jsp" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>
+
+
+	<job>
+		<job-name>favorites_my_simple_save</job-name>
+		<job-class>com.appl.favorites.action.FavoritesMySimpleSaveAction</job-class>
+		<parameter key="SUCCESS" value="@favorites_my_simple_list" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>
+
+	<job>
+		<job-name>favorites_my_add_pop</job-name>
+		<job-class>com.appl.favorites.action.FavoritesAddMyPopAction</job-class>
+		<parameter key="SUCCESS" value="/jsp/favorites/favorites_my_add_pop.jsp" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>
+
+	<job>
+		<job-name>favorites_my_save_pop</job-name>
+		<job-class>com.appl.favorites.action.FavoritesAddMyPopSaveAction</job-class>
+		<parameter key="SUCCESS" value="@favorites_my_add_pop" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>
+
+	<job>
+		<job-name>favorites_my_order_pop</job-name>
+		<job-class>com.appl.favorites.action.FavoritesAddMyPopOrderAction</job-class>
+		<parameter key="SUCCESS" value="@favorites_my_add_pop" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>
+
+	<job>
+		<job-name>favorites_my_del_pop</job-name>
+		<job-class>com.appl.favorites.action.FavoritesAddMyPopDelAction</job-class>
+		<parameter key="SUCCESS" value="@favorites_my_add_pop" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>
+	
+	<!-- 구분 라인 -->
+
+	<job>
+		<job-name>favorites_gun_list</job-name>
+		<job-class>com.appl.favorites.action.FavoritesGunListAction</job-class>
+		<parameter key="SUCCESS" value="/jsp/favorites/favorites_gun_list.jsp" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>	
+
+	<job>
+		<job-name>favorites_gun_edit</job-name>
+		<job-class>com.appl.favorites.action.FavoritesGunEditAction</job-class>
+		<parameter key="SUCCESS" value="/jsp/favorites/favorites_gun_write.jsp" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>
+
+	<job>
+		<job-name>favorites_gun_write</job-name>
+		<job-class>com.appl.favorites.action.FavoritesGunWriteAction</job-class>
+		<parameter key="SUCCESS" value="!favorites_gun_list" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>
+
+	<job>
+		<job-name>favorites_gun_read</job-name>
+		<job-class>com.appl.favorites.action.FavoritesGunViewAction</job-class>
+		<parameter key="SUCCESS" value="/jsp/favorites/favorites_gun_read.jsp" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>
+
+	<job>
+		<job-name>favorites_gun_del</job-name>
+		<job-class>com.appl.favorites.action.FavoritesGunDelAction</job-class>
+		<parameter key="SUCCESS" value="!favorites_gun_list" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>
+
+	<job>
+		<job-name>favorites_gun_file_del</job-name>
+		<job-class>com.appl.favorites.action.FavoritesGunFileDelAction</job-class>
+		<parameter key="SUCCESS" value="@favorites_gun_edit" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>
+
+	<job>
+		<job-name>favorites_gun_simple_list</job-name>
+		<job-class>com.appl.favorites.action.FavoritesGunSimpleListAction</job-class>
+		<parameter key="SUCCESS" value="/jsp/favorites/favorites_gun_simple_list.jsp" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>
+
+
+	<job>
+		<job-name>favorites_gun_simple_save</job-name>
+		<job-class>com.appl.favorites.action.FavoritesGunSimpleSaveAction</job-class>
+		<parameter key="SUCCESS" value="@favorites_gun_simple_list" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>
+
+	<job>
+		<job-name>favorites_gun_add_pop</job-name>
+		<job-class>com.appl.favorites.action.FavoritesAddGunPopAction</job-class>
+		<parameter key="SUCCESS" value="/jsp/favorites/favorites_gun_add_pop.jsp" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>
+
+	<job>
+		<job-name>favorites_gun_save_pop</job-name>
+		<job-class>com.appl.favorites.action.FavoritesAddGunPopSaveAction</job-class>
+		<parameter key="SUCCESS" value="@favorites_gun_add_pop" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>
+
+	<job>
+		<job-name>favorites_gun_order_pop</job-name>
+		<job-class>com.appl.favorites.action.FavoritesAddGunPopOrderAction</job-class>
+		<parameter key="SUCCESS" value="@favorites_gun_add_pop" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>
+
+	<job>
+		<job-name>favorites_gun_del_pop</job-name>
+		<job-class>com.appl.favorites.action.FavoritesAddGunPopDelAction</job-class>
+		<parameter key="SUCCESS" value="@favorites_gun_add_pop" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>
+	
+	<!-- 구분 라인 -->
+
+	<job>
+		<job-name>favorites_menu_list</job-name>
+		<job-class>com.appl.favorites.action.FavoritesMenuListAction</job-class>
+		<parameter key="SUCCESS" value="/jsp/favorites/favorites_menu_list.jsp" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>	
+
+	<job>
+		<job-name>favorites_menu_edit</job-name>
+		<job-class>com.appl.favorites.action.FavoritesMenuEditAction</job-class>
+		<parameter key="SUCCESS" value="/jsp/favorites/favorites_menu_write.jsp" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>
+
+	<job>
+		<job-name>favorites_menu_write</job-name>
+		<job-class>com.appl.favorites.action.FavoritesMenuWriteAction</job-class>
+		<parameter key="SUCCESS" value="!favorites_menu_list" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>
+
+	<job>
+		<job-name>favorites_menu_read</job-name>
+		<job-class>com.appl.favorites.action.FavoritesMenuViewAction</job-class>
+		<parameter key="SUCCESS" value="/jsp/favorites/favorites_menu_read.jsp" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>
+
+	<job>
+		<job-name>favorites_menu_del</job-name>
+		<job-class>com.appl.favorites.action.FavoritesMenuDelAction</job-class>
+		<parameter key="SUCCESS" value="!favorites_menu_list" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>
+
+	<job>
+		<job-name>favorites_menu_file_del</job-name>
+		<job-class>com.appl.favorites.action.FavoritesMenuFileDelAction</job-class>
+		<parameter key="SUCCESS" value="@favorites_menu_edit" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>
+
+	<job>
+		<job-name>favorites_menu_simple_list</job-name>
+		<job-class>com.appl.favorites.action.FavoritesMenuSimpleListAction</job-class>
+		<parameter key="SUCCESS" value="/jsp/favorites/favorites_menu_simple_list.jsp" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>
+
+	<job>
+		<job-name>favorites_menu_simple_save</job-name>
+		<job-class>com.appl.favorites.action.FavoritesMenuSimpleSaveAction</job-class>
+		<parameter key="SUCCESS" value="@favorites_menu_simple_list" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>
+
+	<job>
+		<job-name>favorites_menu_add_pop</job-name>
+		<job-class>com.appl.favorites.action.FavoritesAddMenuPopAction</job-class>
+		<parameter key="SUCCESS" value="/jsp/favorites/favorites_menu_add_pop.jsp" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>
+
+	<job>
+		<job-name>favorites_menu_save_pop</job-name>
+		<job-class>com.appl.favorites.action.FavoritesAddMenuPopSaveAction</job-class>
+		<parameter key="SUCCESS" value="@favorites_menu_add_pop" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>
+
+	<job>
+		<job-name>favorites_menu_order_pop</job-name>
+		<job-class>com.appl.favorites.action.FavoritesAddMenuPopOrderAction</job-class>
+		<parameter key="SUCCESS" value="@favorites_menu_add_pop" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>
+
+	<job>
+		<job-name>favorites_menu_del_pop</job-name>
+		<job-class>com.appl.favorites.action.FavoritesAddMenuPopDelAction</job-class>
+		<parameter key="SUCCESS" value="@favorites_menu_add_pop" />
+		<parameter key="FAIL"	 value="/error.jsp" />
+	</job>
+	
+	<!-- 구분 라인 -->
+	
+</job-definitions>
+

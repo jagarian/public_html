@@ -1,0 +1,327 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=euc-kr">
+<link rel="stylesheet" href="css/css.css" type="text/css">
+<title>MAIN PAGE MoreList</title>
+<script language="javascript">
+function chk_all(val) {
+	
+	var arr_chk = document.getElementsByName("chk");
+	
+		if (val == "Y") {
+		
+			for(i=0;i< arr_chk.length; i++) {
+				arr_chk[i].checked =true;
+			}
+		}
+		else if(val == "N") {
+			for(i=0;i< arr_chk.length; i++) {
+				arr_chk[i].checked =false;
+			}
+		}
+
+}
+</script>
+</head>
+
+<body>
+<!-- top -->
+<table width="900" border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="176" height="112"><img src="images/logo.gif" width="176" height="112"></td>
+<td width="724">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+        <td width="560" height="68" class="t_strong">테스트 사이트</td>
+        <td width="164">
+            <div>
+                <select name="select">
+                <option value="./jqia.source/index.html">jqia.source</option>
+                <option value=""> Quick View 2</option>
+                <option value=""> Quick View 3</option>
+                <option value=""> Quick View 4</option>
+                <option value=""> Quick View 5 </option>
+                <option value=""> Quick View 6</option>
+                </select>
+            </div>
+        </td>
+    </tr>
+    <!-- top menu background -->
+    <tr class="TopMenuBg">
+    <td height="44" colspan="2">
+        <!-- top menu start -->
+        <table width="700px" border="0" cellspacing="0" cellpadding="0" style="padding-top:6px;">
+            <tr>
+                <td align="right" width="76"><a href="EgovMainView_login.html">HOME</a></td>
+                <td align="center" width="100"><a href="board.html">BOARD PAGE</a></td>
+                <td align="center" width="88"><a href="#">구글맵</a></td>
+                <td align="center" width="85"><a href="#">사용자</a></td>
+                <td align="center" width="86"><a href="#">유튜브</a></td>
+                <td align="center" width="66"><a href="#">CHART</a></td>
+                <td align="center" width="94"><a href="#">이미지검색</a></td>
+                <td align="center" width="105"><a href="#">전국 저수지 리스트맵</a></td>
+            </tr>
+        </table>
+       <!-- top menu end -->
+    </td>
+    </tr>
+    </table>
+</td>
+</tr>
+</table>
+<!-- //top -->
+<table width="900" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+    <td width="181" valign="top">
+        <!-- left menu start -->
+        <table width="181" height="94" border="0" align="center" cellpadding="0" cellspacing="0">
+            <tr>
+                <td valign="bottom" style="background-image:url('images/left_menu_top.gif'); background-repeat:no-repeat;">
+                <div class="LeftMenuTitle">LeftMenuTitle</div>
+                <div class="LeftMenuWelcome">관리자 님 어서오세요</div>
+                <div class="LeftMenuBtn"><font color="#000"><b><a href="#"><img src="images/btn_logout.gif"></a></b></font></div></td>
+            </tr>
+            <tr>
+                <td><div class="LeftMenuBg"><a href="#">사용자</a></div></td>
+            </tr>
+            <tr>
+                <td><div class="LeftMenuBgList"><a href="#">나의정보수정</a></div><div class="LeftMenuBgList"><a href="#">사용자관리</a></div></td>
+           </tr>
+            <tr>
+                <td><div class="LeftMenuBg"><a href="#">사용자관리</a></div></td>
+            </tr>
+            <tr>
+                <td><div class="LeftMenuBgList"><a href="#">나의정보수정</a></div><div class="LeftMenuBgList"><a href="#">사용자관리</a></div></td>
+            </tr>
+            <tr>
+                <td><div class="LeftMenuBg"><a href="#">사용자관리</a></div></td>
+            </tr>
+            <tr>
+                <td><div class="LeftMenuBgList"><a href="#">나의정보수정</a></div><div class="LeftMenuBgList"><a href="#">사용자관리</a></div></td>
+            </tr>
+            <tr>
+                <td><img src="images/left_menu_btm.gif"></td>
+            </tr>
+        </table>
+    </td>
+    <td valign="top">
+    <!-- 본문시작 -->
+        <table border="0" cellpadding="0" cellspacing="0">
+            <tr>
+                <td width="717">
+                    <!-- QuickLink -->
+                    <div class="QuickLink">
+                        <table width="240" border="0" cellspacing="0" cellpadding="0" align="right">
+                            <tr>
+                                <td width="80" align="right"><a href="#">HOME></a></td>
+                                <td width="80" align="center"><a href="#">인증></a></td>
+                                <td width="80" align="left"><a href="#">관리</a></td>
+                            </tr>
+                        </table>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <!--Page title -->
+                <td width="717">
+                    <div class="PageTitle">
+                        <table width="100%" height="26" border="0" align="center" cellpadding="0" cellspacing="0">
+                            <tr>
+                                <td><font color="#000" class="t_strong">관리</font></td>
+                            </tr>
+                        </table>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <!-- LIST -->
+        <!-- article_list -->
+        <div>
+        <table width="712px" cellspacing="0" cellpadding="0" border="0" align="center" class="table_listA">
+        <colgroup>
+        <col width="30px">
+        <col width="30px">
+        <col width="70px">
+        <col width="70px">
+        <col width="260px">
+        <col width="70px">
+        <col width="50px">
+        <col width="50px">
+        <col width="50px">
+        </colgroup>
+            <thead>
+                <tr>
+                    <th>NO.</th>
+                    <th>선택</th>
+                    <th>SPACE명</th>
+                    <th>SPACE키</th>
+                    <th>Description</th>
+                    <th>사용자</th>
+                    <th>필드</th>
+                    <th>상태</th>
+                    <th>수정</th>
+                </tr>
+            </thead>
+            <tbody>
+            <!-- loop -->
+                <tr align="center">
+                    <td>1</td>
+                    <td><input type="checkbox" name="chk" class="checkbox"></td>
+                    <td>SPACE명</td>
+                    <td>SPACE키</td>
+                    <td><a href="#">DescriptionDescription</a></td>
+                    <td><span><input type="button"value="사용자"></span></td>
+                    <td><span><input type="button"value="필드"></span></td>
+                    <td><span><input type="button"value="상태"></span></td>
+                    <td><span><input type="button"value="수정"></span></td>
+                </tr>
+                <tr align="center">
+                    <td>1</td>
+                    <td><input type="checkbox" name="chk" class="checkbox"></td>
+                    <td>SPACE명</td>
+                    <td>SPACE키</td>
+                    <td><a href="#">DescriptionDescription</a></td>
+                    <td><span><input type="button"value="사용자"></span></td>
+                    <td><span><input type="button"value="필드"></span></td>
+                    <td><span><input type="button"value="상태"></span></td>
+                    <td><span><input type="button"value="수정"></span></td>
+                </tr>
+                <tr align="center">
+                    <td>1</td>
+                    <td><input type="checkbox" name="chk" class="checkbox"></td>
+                    <td>SPACE명</td>
+                    <td>SPACE키</td>
+                    <td><a href="#">DescriptionDescription</a></td>
+                    <td><span><input type="button"value="사용자"></span></td>
+                    <td><span><input type="button"value="필드"></span></td>
+                    <td><span><input type="button"value="상태"></span></td>
+                    <td><span><input type="button"value="수정"></span></td>
+                </tr>
+                <tr align="center">
+                    <td>1</td>
+                    <td><input type="checkbox" name="chk" class="checkbox"></td>
+                    <td>SPACE명</td>
+                    <td>SPACE키</td>
+                    <td><a href="#">DescriptionDescription</a></td>
+                    <td><span><input type="button"value="사용자"></span></td>
+                    <td><span><input type="button"value="필드"></span></td>
+                    <td><span><input type="button"value="상태"></span></td>
+                    <td><span><input type="button"value="수정"></span></td>
+                </tr>
+                <tr align="center">
+                    <td>1</td>
+                    <td><input type="checkbox" name="chk" class="checkbox"></td>
+                    <td>SPACE명</td>
+                    <td>SPACE키</td>
+                    <td><a href="#">DescriptionDescription</a></td>
+                    <td><span><input type="button"value="사용자"></span></td>
+                    <td><span><input type="button"value="필드"></span></td>
+                    <td><span><input type="button"value="상태"></span></td>
+                    <td><span><input type="button"value="수정"></span></td>
+                </tr>
+                <tr align="center">
+                    <td>1</td>
+                    <td><input type="checkbox" name="chk" class="checkbox"></td>
+                    <td>SPACE명</td>
+                    <td>SPACE키</td>
+                    <td><a href="#">DescriptionDescription</a></td>
+                    <td><span><input type="button"value="사용자"></span></td>
+                    <td><span><input type="button"value="필드"></span></td>
+                    <td><span><input type="button"value="상태"></span></td>
+                    <td><span><input type="button"value="수정"></span></td>
+                </tr>
+                <tr align="center">
+                    <td>1</td>
+                    <td><input type="checkbox" name="chk" class="checkbox"></td>
+                    <td>SPACE명</td>
+                    <td>SPACE키</td>
+                    <td><a href="#">DescriptionDescription</a></td>
+                    <td><span><input type="button"value="사용자"></span></td>
+                    <td><span><input type="button"value="필드"></span></td>
+                    <td><span><input type="button"value="상태"></span></td>
+                    <td><span><input type="button"value="수정"></span></td>
+                </tr>
+                <tr align="center">
+                    <td>1</td>
+                    <td><input type="checkbox" name="chk" class="checkbox"></td>
+                    <td>SPACE명</td>
+                    <td>SPACE키</td>
+                    <td><a href="#">DescriptionDescription</a></td>
+                    <td><span><input type="button"value="사용자"></span></td>
+                    <td><span><input type="button"value="필드"></span></td>
+                    <td><span><input type="button"value="상태"></span></td>
+                    <td><span><input type="button"value="수정"></span></td>
+                </tr>
+                <tr align="center">
+                    <td>1</td>
+                    <td><input type="checkbox" name="chk" class="checkbox"></td>
+                    <td>SPACE명</td>
+                    <td>SPACE키</td>
+                    <td><a href="#">DescriptionDescription</a></td>
+                    <td><span><input type="button"value="사용자"></span></td>
+                    <td><span><input type="button"value="필드"></span></td>
+                    <td><span><input type="button"value="상태"></span></td>
+                    <td><span><input type="button"value="수정"></span></td>
+                </tr>
+                <tr align="center">
+                    <td>1</td>
+                    <td><input type="checkbox" name="chk" class="checkbox"></td>
+                    <td>SPACE명</td>
+                    <td>SPACE키</td>
+                    <td><a href="#">DescriptionDescription</a></td>
+                    <td><span><input type="button"value="사용자"></span></td>
+                    <td><span><input type="button"value="필드"></span></td>
+                    <td><span><input type="button"value="상태"></span></td>
+                    <td><span><input type="button"value="수정"></span></td>
+                </tr>
+            <!--// loop -->
+            </tbody>
+        </table>
+        <!-- end line -->
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td height="1px" bgcolor="#eaecf0"></td>
+            </tr>
+        </table>
+
+        <!-- button -->
+        <table>
+            <tr>
+                <td><span><input type="button" id="ChkTrue" onClick="chk_all('Y')" value="전체선택"><input type="button" id="ChkFalse" onClick="chk_all('N')" value="선택해제"></span></td>
+                <td><span><input type="button"value=" 등록"><input type="button"value=" 삭제"></span></td>
+            </tr>
+        </table>
+        <!-- //button -->
+        </div>
+        <!-- page -->
+        <div class="PageNumber">
+        <span><a href="#">이전페이지로</a></span>
+        <a href="#">1</a> 
+        <a href="#">2</a> 
+        <a href="#">3</a> 
+        <a href="#">4</a>
+        <a href="#">5</a>
+        <a href="#">6</a>
+        <a href="#">7</a> 
+        <a href="#">8</a>
+        <a href="#">9</a>
+        <a href="#">10</a>
+        <span>
+        <a href="#">다음페이지로</a>
+        </span>
+        </div>
+        <!--// page -->
+        <!--// LIST -->
+    
+        </td>
+        </tr>
+        </table>
+<!-- bottom -->
+<table width="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="#f4f4f4" class="BottomStyle">
+    <tr>
+        <td width="900px" height="80px"align="center">Copyright 2013 All rights reserved.</td>
+        <td></td>
+    </tr>
+</table>
+</body>
+</html>

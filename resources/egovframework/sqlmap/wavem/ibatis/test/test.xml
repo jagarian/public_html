@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Test">
+
+	<insert id="insert1">
+		INSERT INTO TEST1
+		  (EMPNO, ENAME)
+		values
+		  (#empno#,#ename#)
+	</insert>
+	
+	<insert id="insert2">
+		insert into test2
+		  (empno, ename, hiredate)
+		values
+		  ('2001', 'ALLEN-2', sysdate)
+	</insert>
+	
+	<insert id="insert3">
+		insert into test3
+		  (empno, ename, hiredate)
+		values
+		  ('3001', 'ALLEN-3',sysdate)
+	</insert>
+	<insert id="ibatis.test.insert4">
+		insert into test4
+		  (empno, ename, hiredate)
+		values
+		  ('4001', 'ALLEN-4',sysdate)
+	</insert>
+	<delete id="delete2">
+		delete from test2 where empno = '2001'
+	</delete>
+	<delete id="delete3">
+		delete from test3 where empno = '3001'
+	</delete>
+	<delete id="delete4">
+		delete from test3 where emp_no = '4001'
+	</delete>
+	<delete id="delete">
+		delete from test1 where empno = #empno#
+	</delete>
+	<update id="update">
+		UPDATE TEST1 SET EMPNO = #empno# WHERE EMPNO = #empno#
+	</update>
+	
+
+</sqlMap>

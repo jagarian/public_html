@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html DIR="LTR">
+<head>
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no"  /> <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<title>Google Maps JavaScript API v3 예제: KmlLayer KML</title>
+<link href="http://code.google.com/apis/maps/documentation/javascript/examples/default.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+<script type="text/javascript">
+function initialize() {
+  //var Hangokji = new google.maps.LatLng(49.496675,-102.65625);
+  var Hangokji = new google.maps.LatLng(126.5990517446888,36.89806123111404);
+  var myOptions = {
+    zoom: 11,
+    center: Hangokji,
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  }
+  
+  //object 자바 스크립트를 쓰다보면 object 리턴값 구조를 알고 싶어질때
+  var str='';
+  for(var i in Hangokji)
+  {
+    if(Hangokji.hasOwnProperty(i))
+    {
+      str += i + " = " + Hangokji[i] + '\n';
+    }
+  }
+  alert(str);
+  
+  
+  var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+  
+  //var ctaLayer = new google.maps.KmlLayer('http://gmaps-samples.googlecode.com/svn/trunk/ggeoxml/cta.kml');
+  //var ctaLayer = new google.maps.KmlLayer('http://jagarian.zz.mu/kangildong1.kml');
+  //var ctaLayer = new google.maps.KmlLayer('http://jagarian.zz.mu/HangokjiMyplace.kml');  
+  var ctaLayer = new google.maps.KmlLayer('http://jagarian.zz.mu/HangokjiMyplace1.kml');
+  ctaLayer.setMap(map);
+}
+</script>
+</head>
+<body onload="initialize()">
+  <div id="map_canvas"></div>
+</body>
+</html>

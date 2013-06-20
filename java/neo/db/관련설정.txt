@@ -1,0 +1,37 @@
+		<default-pool>JDBC</default-pool>
+		<default-jdbc-select>
+			<D>default</D>
+			<T>test</T>
+			<R>run</R>
+		</default-jdbc-select>
+		<jdbc-datasource>
+			<pool>
+				<max-active-connections>100</max-active-connections>
+				<max-idle-connections>5</max-idle-connections>
+				<max-checkout-time>20000</max-checkout-time>
+				<wait-time>15000</wait-time>
+				<ping-query>select * from dual</ping-query>
+				<ping-enabled>false</ping-enabled>
+				<ping-connection-time>0</ping-connection-time>
+				<ping-connections-notused>0</ping-connections-notused>
+				<quiet-mode>true</quiet-mode>
+			</pool>			
+			<spec name="default">
+				<driver>oracle.jdbc.driver.OracleDriver</driver>
+				<url>jdbc:oracle:thin:@127.0.0.1:1521:wind</url>
+				<user>111</user>
+				<password>222</password>
+			</spec>
+		</jdbc-datasource>
+		<jndi-datasource>
+		</jndi-datasource>
+
+		<page>
+			<spec name="default">
+				<row-per-page>10</row-per-page>
+				<page-per-block>10</page-per-block>
+				<statement>neo.page.OracleClientPageStatement</statement>
+				<dao>neo.page.OracleClientPageDao</dao>
+				<navigation>neo.page.DefaultPageNavigationByPost</navigation>
+			</spec>
+		</page>

@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />		
+	</head>
+	<body>
+	<script type="text/javascript" src="./js/ajit.js"></script>
+	<script type="text/javascript">
+		 //전역변수 선언
+		NAVER_API_KEY = "d484764d81d84ddcf874cc4547f83f62";
+		NAVER_API_URL = "http://openapi.naver.com/search?";
+
+		function search(q){
+			var loader = new URLLoader();
+			var req = new URLRequest();
+			var params = new URLVariables();		
+
+			params.parameters = {
+				"key" : NAVER_API_KEY,
+				"target" : "image",
+				"query" : q,
+				"display" : "10",
+				"sort" : "sim",
+				"filter" : "all"
+			};
+
+			req.url = NAVER_API_URL + params.toString();
+			loader.load(req);
+
+			//Load완료시 실행할 이벤트 정의
+			loader.addEvent(URLLoaderEvent.COMPLETE
+				,onSearchCompleteHandler);
+		}
+
+		function onSearchCompleteHandler(response){
+			//alert(response.text);
+		}
+
+		//"서울디지털대학교"를 검색하고 Response를 받아 본다.
+		search("서울디지털대학교");
+		
+	</script>
+
+	<div>
+		<input type="text" id="searchQ" />
+		<input type="button" value="검색" />
+	</div>
+	<ul id="resultList"></ul>
+	
+	</body>
+</html>

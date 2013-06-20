@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="StdUnit">
+	<typeAlias alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap" />
+	<typeAlias alias="egovMapNoCamel" type="egovframework.rte.psl.dataaccess.util.EgovMapNoCamel"/>
+	
+	<typeAlias alias="stdCardVo" type="egovframework.rte.com.bas.vo.StdCardVo" />
+
+	<resultMap id="Result" class="HashMap">
+		<result property="rsinfo" column="rsinfo"
+			typeHandler="egovframework.rte.cmmn.util.RsMetaData" />
+	</resultMap>
+
+	<select id="selectStdUnit" resultClass="egovMapNoCamel">
+		SELECT UNIT_CD
+		     , UNIT_NM
+		     , UNIT_EX
+		     , UNIT_GB
+		     , USE_GB
+		     , REG_ID
+      		 , REG_DTIME
+      		 , LAST_ID
+      		 , LAST_DTIME
+		FROM   RESTCM_UNITCD_MST
+		WHERE  1=1
+		<isNotEmpty property="pv_unit_cd">
+   		AND    UNIT_CD = #pv_unit_cd#
+   		</isNotEmpty>
+		<isNotEmpty property="pv_unit_nm">
+		AND    UNIT_NM LIKE '%' || #pv_unit_nm# || '%'
+		</isNotEmpty>
+		<isNotEmpty property="pv_unit_gb">
+   		AND    UNIT_GB = #pv_unit_gb#
+   		</isNotEmpty>
+   		<isNotEmpty property="pv_use_gb">
+   		AND    USE_GB = #pv_use_gb#
+   		</isNotEmpty>
+   		ORDER BY UNIT_CD
+	</select>
+	
+	<update id="updateStdUnit">
+		UPDATE RESTCM_UNITCD_MST
+		   SET UNIT_CD    = #unit_cd#
+		     , UNIT_NM    = #unit_nm#
+		     , UNIT_EX    = #unit_ex#
+		     , UNIT_GB    = #unit_gb#
+		     , USE_GB	  = #use_gb#
+		     , LAST_ID    = #pv_last_id#
+       		 , LAST_DTIME = TO_CHAR(SYSDATE,'YYYYMMDDHH24MISS')
+		 WHERE UNIT_CD = #unit_cd#
+	</update>
+	
+	<insert id="insertStdUnit">
+		<selectKey keyProperty="eseq">
+			SELECT MAX(UNIT_CD) + 1 
+			  FROM RESTCM_UNITCD_MST
+		</selectKey>
+		<![CDATA[
+			INSERT INTO RESTCM_UNITCD_MST
+			  (UNIT_CD, UNIT_NM, UNIT_EX, UNIT_GB, USE_GB, REG_ID, REG_DTIME, LAST_ID, LAST_DTIME)
+			VALUES
+			  (#eseq#, #unit_nm#, #unit_ex#, #unit_gb#, #use_gb#, #pv_reg_id#, TO_CHAR(SYSDATE,'YYYYMMDDHH24MISS'), #pv_last_id#, TO_CHAR(SYSDATE,'YYYYMMDDHH24MISS'))
+		  ]]>
+	</insert>
+
+	<delete id="deleteStdUnit">
+		<![CDATA[
+		DELETE RESTCM_UNITCD_MST
+		 WHERE UNIT_CD = #unit_cd#
+		]]>
+	</delete>
+</sqlMap>

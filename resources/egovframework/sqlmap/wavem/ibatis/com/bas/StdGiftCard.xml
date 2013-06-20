@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="StdGiftCard">
+	<typeAlias alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap" />
+	<typeAlias alias="egovMapNoCamel" type="egovframework.rte.psl.dataaccess.util.EgovMapNoCamel"/>
+	<typeAlias alias="stdGiftCardVo" type="egovframework.rte.com.bas.vo.StdGiftCardVo" />
+	<resultMap id="Result" class="HashMap">
+		<result property="rsinfo" column="rsinfo" typeHandler="egovframework.rte.cmmn.util.RsMetaData" />
+	</resultMap>
+	
+	<select id="selectStdGiftCard" resultClass="egovMapNoCamel">
+		SELECT A.GIFT_CLASS_CD,
+       		   A.GIFT_CLASS_NM,
+       		   A.USE_LIMIT_GB,
+       		   B.GIFT_CARD_NM,
+       		   B.FACE_AMT
+ 		  FROM RESTCM_GIFTCL_MST A,
+	           RESTCM_GIFTCD_MST B
+		 WHERE 1=1
+		 <isNotNull>
+		   AND A.GIFT_CLASS_CD = B.GIFT_CLASS_CD
+		 </isNotNull>	 
+		 <isNotNull property="gift_class_cd">
+		   AND UPPER(A.GIFT_CLASS_CD) LIKE '%' || UPPER(#gift_class_cd#) || '%'
+		 </isNotNull>
+		 <isNotNull property="gift_class_nm">
+		   AND UPPER(A.GIFT_CLASS_NM) LIKE '%' || UPPER(#gift_class_nm#) || '%'
+		 </isNotNull>
+		 <isNotNull property="gift_card_nm">
+		   AND UPPER(B.GIFT_CARD_NM) LIKE '%' || UPPER(#gift_card_nm#) || '%'
+		 </isNotNull>
+		 <isNotNull property="face_amt">
+		   AND UPPER(B.FACE_AMT) LIKE '%' || UPPER(#face_amt#) || '%'
+		 </isNotNull>
+		 <isNotNull property="use_limit_gb">
+		   AND UPPER(A.USE_LIMIT_GB) LIKE '%' || UPPER(#use_limit_gb#) || '%'
+		 </isNotNull>
+	</select>
+</sqlMap>

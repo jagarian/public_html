@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Deptlist">
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias alias="egovMapNoCamel" type="egovframework.rte.psl.dataaccess.util.EgovMapNoCamel"/>
+	
+	<select id="getComUpDeptlist" resultClass="egovMapNoCamel">
+		<![CDATA[
+				/* 1. 본사본부 선택 */
+				SELECT RD_DEPT_CD AS CODE ,
+				       DECODE(RD_DEPT_GB, '0', '', '1', '  ') 
+				       || DECODE(RD_DEPT_GB, '1', RD_DEPT_NM, DECODE(RD_DEPT_NM, '한국도로공사', '도로공사본사') ) AS CODENM ,
+				       RANK() OVER ( ORDER BY RD_DEPT_GB ,RD_DEPT_CD DESC )  AS  RANK
+				FROM RDDEPTTB				
+				WHERE 1 = 1
+				  AND RD_DEPT_GB IN ('0' /* 본사 */, '1' /* 본부 */)
+				ORDER BY RD_DEPT_GB ,RD_DEPT_CD 
+		]]>
+	</select> 
+	
+	<select id="getComDeptlist" resultClass="egovMapNoCamel">
+		<![CDATA[
+			/* 2. 지사 선택 */ 
+			    SELECT '' as UP_DEPT_CD, '' as CODE, '::전체::' as CODENM ,  0 as RANK FROM dual
+		        union all
+			    SELECT  DECODE(RD_DEPT_GB, '0', '100000', RD_UP_DEPT_CD) AS UP_DEPT_CD ,
+			            RD_DEPT_CD AS CODE ,
+			            DECODE(RD_DEPT_GB, '2', RD_DEPT_NM, DECODE(RD_DEPT_NM, '한국도로공사', '도로공사본사') ) AS CODENM,
+			            RANK() OVER ( ORDER BY SCCODE DESC )  AS  RANK
+				FROM RDDEPTTB				
+				WHERE 1 = 1
+				  AND RD_DEPT_GB IN ( '0' /* 본사 */ ,'2' /* 지사 */) 				 
+				ORDER BY RANK
+		]]>
+	</select> 
+	
+	
+</sqlMap>

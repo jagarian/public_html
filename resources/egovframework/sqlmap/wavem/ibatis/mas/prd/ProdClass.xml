@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="ProdClass">
+	<typeAlias alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap" />
+	<typeAlias alias="egovMapNoCamel" type="egovframework.rte.psl.dataaccess.util.EgovMapNoCamel"/>
+	<!-- <typeAlias alias="stdCardVo" type="egovframework.rte.com.bas.vo.StdCardVo" /> -->
+
+	<resultMap id="Result" class="HashMap">
+		<result property="rsinfo" column="rsinfo"
+			typeHandler="egovframework.rte.cmmn.util.RsMetaData" />
+	</resultMap>
+	
+	<select id="selectProdClass" resultClass="egovMapNoCamel">
+		SELECT CLASS_GB
+		      ,CLASS_CD
+		      ,CLASS_NM
+		      ,PCLSS_CD
+		      ,USE_YN
+		      ,REG_ID
+		      ,REG_DTIME
+		      ,LAST_ID
+		      ,LAST_DTIME
+		  FROM RESTCM_CLSPRD_MST
+	     WHERE 1 = 1
+	       AND CLASS_GB = #pv_class_gb#
+	       AND CLASS_CD LIKE #pv_class_cd# || '%'
+	       AND CLASS_NM LIKE '%'|| #pv_class_nm# || '%'
+	</select>
+	
+	<update id="updateProdClass1">
+		UPDATE RESTCM_CLSPRD_MST
+		   SET CLASS_GB    = #pv_class_gb#
+		     , CLASS_CD    = #class_cd#
+		     , CLASS_NM    = #class_nm#
+		     , PCLSS_CD    = #pv_pclass_cd#
+		     , USE_YN	   = #use_yn#
+		     , LAST_ID     = #pv_last_id#
+       		 , LAST_DTIME  = TO_CHAR(SYSDATE,'YYYYMMDDHH24MISS')
+		 WHERE 1 = 1
+		   AND CLASS_CD    = #class_cd#
+	</update>
+	
+	<insert id="insertProdClass1"> 
+		<selectKey keyProperty="eseq">
+       SELECT DECODE(MAX(CLASS_CD), '', '10000', SUBSTR(TRIM(TO_CHAR(MAX(CLASS_CD) + 10000, '000000')), 0, 2)) || '0000'
+		 FROM RESTCM_CLSPRD_MST
+		WHERE 1 = 1
+	      AND CLASS_GB = 1
+		</selectKey>
+		<![CDATA[
+		INSERT INTO RESTCM_CLSPRD_MST
+		  (CLASS_GB, CLASS_CD, CLASS_NM, PCLSS_CD, USE_YN, REG_ID, REG_DTIME, LAST_ID, LAST_DTIME)
+		VALUES
+		  (#pv_class_gb#, #eseq#, #class_nm#, #pv_pclass_cd#, #use_yn#, #pv_reg_id#, TO_CHAR(SYSDATE,'YYYYMMDDHH24MISS'), #pv_last_id#, TO_CHAR(SYSDATE,'YYYYMMDDHH24MISS'))
+		  ]]>
+	</insert>
+
+	<delete id="deleteProdClass1">
+		<![CDATA[
+		DELETE RESTCM_CLSPRD_MST
+		 WHERE CLASS_GB = 1
+		   AND CLASS_CD = #class_cd#
+		   AND (SELECT MAX(ROWNUM)
+		          FROM RESTCM_CLSPRD_MST
+		         WHERE CLASS_GB = 2
+		           AND PCLSS_CD = #class_cd#) IS NULL
+		]]>
+	</delete>
+	
+	<update id="updateProdClass2">
+		UPDATE RESTCM_CLSPRD_MST
+		   SET CLASS_GB    = #pv_class_gb#
+		     , CLASS_CD    = #class_cd#
+		     , CLASS_NM    = #class_nm#
+		     , PCLSS_CD    = #pv_pclass_cd#
+		     , USE_YN	   = #use_yn#
+		     , LAST_ID     = #pv_last_id#
+       		 , LAST_DTIME  = TO_CHAR(SYSDATE,'YYYYMMDDHH24MISS')
+		 WHERE CLASS_CD    = #class_cd#
+	</update>
+	
+	<insert id="insertProdClass2"> 
+		<selectKey keyProperty="eseq">
+		SELECT SUBSTR(#pv_pclass_cd#, 0, 2) ||
+		       DECODE(MAX(CLASS_CD), '', '01', SUBSTR(TRIM(TO_CHAR(MAX(CLASS_CD) + 100, '000000')), 3, 2)) || '00'
+		  FROM RESTCM_CLSPRD_MST
+		 WHERE 1 = 1
+		   AND CLASS_GB = 2
+		   AND PCLSS_CD = #pv_pclass_cd#
+		</selectKey>
+		<![CDATA[
+		INSERT INTO RESTCM_CLSPRD_MST
+		  (CLASS_GB, CLASS_CD, CLASS_NM, PCLSS_CD, USE_YN, REG_ID, REG_DTIME, LAST_ID, LAST_DTIME)
+		VALUES
+		  (#pv_class_gb#, #eseq#, #class_nm#, #pv_pclass_cd#, #use_yn#, #pv_reg_id#, TO_CHAR(SYSDATE,'YYYYMMDDHH24MISS'), #pv_last_id#, TO_CHAR(SYSDATE,'YYYYMMDDHH24MISS'))
+		  ]]>
+	</insert>
+
+	<delete id="deleteProdClass2">
+		<![CDATA[
+		DELETE RESTCM_CLSPRD_MST
+		 WHERE CLASS_GB = 2
+		   AND CLASS_CD = #class_cd#
+		   AND (SELECT MAX(ROWNUM)
+		          FROM RESTCM_CLSPRD_MST
+		         WHERE CLASS_GB = 3
+		           AND PCLSS_CD = #class_cd#) IS NULL
+		]]>
+	</delete>
+	
+	<update id="updateProdClass3">
+		UPDATE RESTCM_CLSPRD_MST
+		   SET CLASS_GB    = #pv_class_gb#
+		     , CLASS_CD    = #class_cd#
+		     , CLASS_NM    = #class_nm#
+		     , PCLSS_CD    = #pv_pclass_cd#
+		     , USE_YN	   = #use_yn#
+		     , LAST_ID     = #pv_last_id#
+       		 , LAST_DTIME  = TO_CHAR(SYSDATE,'YYYYMMDDHH24MISS')
+		 WHERE CLASS_CD    = #class_cd#
+	</update>
+	
+	<insert id="insertProdClass3"> 
+		<selectKey keyProperty="eseq">
+		SELECT SUBSTR(#pv_pclass_cd#, 0, 4) ||
+		       DECODE(MAX(CLASS_CD), '', '01', SUBSTR(TRIM(TO_CHAR(MAX(CLASS_CD) + 1, '000000')), 5, 2))
+		  FROM RESTCM_CLSPRD_MST
+		 WHERE 1 = 1
+		   AND CLASS_GB = 3
+		   AND PCLSS_CD = #pv_pclass_cd#
+		</selectKey>
+		<![CDATA[
+		INSERT INTO RESTCM_CLSPRD_MST
+		  (CLASS_GB, CLASS_CD, CLASS_NM, PCLSS_CD, USE_YN, REG_ID, REG_DTIME, LAST_ID, LAST_DTIME)
+		VALUES
+		  (#pv_class_gb#, #eseq#, #class_nm#, #pv_pclass_cd#, #use_yn#, #pv_reg_id#, TO_CHAR(SYSDATE,'YYYYMMDDHH24MISS'), #pv_last_id#, TO_CHAR(SYSDATE,'YYYYMMDDHH24MISS'))
+		  ]]>
+	</insert>
+
+	<delete id="deleteProdClass3">
+		<![CDATA[
+		DELETE RESTCM_CLSPRD_MST
+		 WHERE CLASS_GB = 3
+		   AND CLASS_CD = #class_cd#
+		]]>
+	</delete>
+</sqlMap>

@@ -1,0 +1,81 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>Google Bar Chart Example</title>
+        <script type="text/javascript" src="./js/ajit.js"></script>        
+
+    </head>
+    <body>
+        <div id="chartContainer"></div>
+        <script type="text/javascript">
+            //수출입 데이터 측정월
+            var chkdate = ["2007.12","2008.01","2008.02","2008.03","2008.04","2008.05","2008.06","2008.07","2008.08","2008.09"];
+            
+            //수출 데이터
+            var export_data = [330,322,311,360,378,394,373,410,367,377];
+            
+            //수입 데이터
+            var import_data = [339,362,326,370,381,385,377,430,406,369];
+            
+            //전년 동월 대비 수출 증감률 
+            var export_before_ratio_data = [14.8,14.9,18.9,18.5,26.4,26.9,16.6,35.7,18.7,28.7];
+            
+            //전년 동월 대비 수입 증감률 
+            var import_before_ratio_data = [23.2,31.7,28.63,26.5,29,29.2,35.2,47.2,37,45.8];
+            
+            //그래프 수치 설명 텍스트 마커
+            var textMarker_data = [];
+            
+            //수출 증감율 라인 + DOT 마커 
+            var export_linedot_marker = [];
+            
+            //수입 증감율 라인 + DOT 마커 
+            var import_linedot_marker = [];
+            
+            //최고 수치를 기반으로 데이터의 백분율을 구함
+            for(var i=0;i<chkdate.length;i++){
+                //text,색상,0,데이터그룹 인덱스,데이터 인덱스,마커 사이즈
+                textMarker_data.push('t'+export_data[i]+',000000,0,'+i+',11');
+                textMarker_data.push('t'+import_data[i]+',000000,1,'+i+',11');                
+            }
+                        
+
+            var API_URL = "http://chart.apis.google.com/chart?";
+            var lineChart = $new("img");
+            var vars = new URLVariables();
+            vars.parameters = {
+                "cht" : "bvg",
+                "chs" : "600x300",
+                "chd" : "t2:"+export_data.join(",")
+                        + "|" 
+                        + import_data.join(",")
+                        + "|"+export_before_ratio_data.join(",")
+                        + "|"+import_before_ratio_data.join(",") ,
+                "chco" : "424242,FF0000,ffff00,9393ff",
+                "chxt" : "y,x,r",
+                "chf" : "c,lg,45,99CC00,1,FFFFFF,0",
+                "chxl" : "0:|0|300|600|1:|"+chkdate.join("|")+"|2:|0|25|50",
+                "chdl" : "수출액|수입액|전년 동월 대비 수출 증감율|전년 동월 대비 수입 증감율",
+                "chdlp" : "t",
+                "chtt" : "수출입 실적",
+                "chg" : "5,5,3,1",
+                "chma" : "50,30,30,30",
+                "chbh" : "r,0.2,1.5",
+                "chds" : "0,600,0,600,0,50",
+                "chm" : textMarker_data.join("|")+
+                        "|D,ffff00,2,-1,3,1|o,ffff00,2,-1,10,1"
+                       +"|D,9393ff,3,-1,3,1|o,9393ff,3,-1,10,1"
+                        
+            }
+
+            lineChart.setAttribute("src",API_URL + vars.toString());
+            $E("chartContainer").addChild(lineChart);
+			
+			
+
+        </script>
+    </body>
+</html>
+

@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="VanCard">
+	<typeAlias alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap" />
+	<typeAlias alias="egovMapNoCamel" type="egovframework.rte.psl.dataaccess.util.EgovMapNoCamel"/>
+	
+	<typeAlias alias="VanCardVo" type="egovframework.rte.com.bas.vo.VanCardVo" />
+
+	<resultMap id="Result" class="HashMap">
+		<result property="rsinfo" column="rsinfo"
+			typeHandler="egovframework.rte.cmmn.util.RsMetaData" />
+	</resultMap>
+	
+	<select id="selectVanCard" resultClass="egovMapNoCamel">
+		SELECT VAN_CD
+			 , VAN_NM
+			 , VAN_IP
+			 , VAN_PORT
+		  FROM RESTCM_VANIPO_MST
+		 WHERE 1=1
+		<isNotEmpty property="pv_van_Nm">
+		   AND UPPER(VAN_NM) LIKE '%' || UPPER(#pv_van_Nm#) || '%'
+	    </isNotEmpty>
+	</select>
+
+	<select id="selectVanCardOne" resultClass="egovMapNoCamel">
+		SELECT VAN_CD
+		     , VAN_NM
+		     , VAN_IP
+		     , VAN_PORT 
+		  FROM RESTCM_VANIPO_MST 
+		 WHERE 1=1 
+		   AND VAN_CD = #pv_van_cd#
+	</select>
+	
+	<select id="selectStdCardInVan" resultClass="egovMapNoCamel">
+		SELECT SC.STD_CARD_CD
+			 , SC.STD_CARD_NM
+			 , SC.CARD_GB
+			 , RTRIM(CA.CARD_CORP_CD) AS CARD_CORP_CD
+		  FROM RESTCM_STDCAD_MST SC, RESTCM_VANCAD_MST CA
+		 WHERE 1=1 
+		   AND SC.STD_CARD_CD = CA.STD_CARD_CORP_CD(+)
+		   AND CA.VAN_CD(+) = #pv_van_cd#
+	</select>
+	
+	<update id="updateVanCard">
+		<![CDATA[
+			UPDATE RESTCM_VANIPO_MST
+			   SET VAN_CD     = #van_cd#
+       		      ,VAN_NM     = #van_nm#
+          		  ,VAN_IP     = #van_ip#
+          		  ,VAN_PORT   = #van_port#
+          		  ,LAST_DTIME = TO_CHAR(SYSDATE,'YYYYMMDDHH24MISS')
+          		  ,LAST_ID    = #pv_last_id#
+     		 WHERE VAN_CD 	  = #van_cd#
+		]]>
+	</update>
+	
+	<insert id="insertVanCard"> 
+		<selectKey keyProperty="eseq">
+			SELECT MAX(VAN_CD) + 1 
+			  FROM RESTCM_VANIPO_MST
+		</selectKey>
+		<![CDATA[
+		INSERT INTO RESTCM_VANIPO_MST
+  			(VAN_CD, VAN_NM, VAN_IP, VAN_PORT, REG_ID, REG_DTIME, LAST_ID, LAST_DTIME)
+		VALUES
+		  (#eseq#, #van_nm#, #van_ip#, #van_port#, #pv_reg_id#, TO_CHAR(SYSDATE,'YYYYMMDDHH24MISS'), #pv_last_id#, TO_CHAR(SYSDATE,'YYYYMMDDHH24MISS'))
+	    ]]>
+	</insert>
+
+	<delete id="deleteVanCard">
+		<![CDATA[
+		DELETE RESTCM_VANIPO_MST 
+		 WHERE VAN_CD = #van_cd#
+		]]>
+	</delete>
+	
+	<update id="updateVanInfo">
+		<![CDATA[
+		  	MERGE INTO RESTCM_VANCAD_MST X
+			USING (SELECT #pv_van_cd# AS VAN_CD, #std_card_cd# AS STD_CARD_CD FROM DUAL) Y
+			ON (X.VAN_CD = Y.VAN_CD AND X.STD_CARD_CORP_CD = Y.STD_CARD_CD)
+			WHEN MATCHED THEN
+			  UPDATE SET CARD_CORP_CD     = #card_corp_cd#
+			            ,CARD_CORP_NM     = #std_card_nm#
+			            ,LAST_DTIME       = TO_CHAR(SYSDATE, 'YYYYMMDDHH24MISS')
+			            ,LAST_ID          = #pv_last_id# 
+			WHEN NOT MATCHED THEN
+			  INSERT
+			    (VAN_CD
+			    ,CARD_CORP_CD
+			    ,CARD_CORP_NM
+			    ,STD_CARD_CORP_CD
+			    ,REG_ID
+			    ,REG_DTIME
+			    ,LAST_ID
+			    ,LAST_DTIME)
+			  VALUES
+			    (#pv_van_cd#
+			    ,#card_corp_cd#
+			    ,#std_card_nm#
+			  	,#std_card_cd#
+			  	,#pv_reg_id#
+			  	,TO_CHAR(SYSDATE,'YYYYMMDDHH24MISS')
+			  	,#pv_last_id#
+			  	,TO_CHAR(SYSDATE,'YYYYMMDDHH24MISS'))
+		]]>
+	</update>
+	
+	<insert id="insertVanInfo"> 
+	<![CDATA[
+		INSERT INTO RESTCM_VANCAD_MST
+			  (VAN_CD
+			  ,CARD_CORP_CD
+			  ,CARD_CORP_NM
+			  ,STD_CARD_CORP_CD
+			  ,REG_ID
+			  ,REG_DTIME
+			  ,LAST_ID
+			  ,LAST_DTIME)
+		VALUES
+		  	(#pv_van_cd#
+		  	,#card_corp_cd#
+		  	,#std_card_nm#
+		  	,#std_card_cd#
+		  	,#pv_reg_id#
+		  	,TO_CHAR(SYSDATE,'YYYYMMDDHH24MISS')
+		  	,#pv_last_id#
+		  	,TO_CHAR(SYSDATE,'YYYYMMDDHH24MISS'))
+		  ]]>
+	</insert>
+
+	<delete id="deleteVanInfo">
+		<![CDATA[
+		DELETE RESTCM_VANCAD_MST
+		 WHERE VAN_CD = #pv_van_cd#
+		   AND CARD_CORP_CD = #card_corp_cd#
+		]]>
+	</delete>
+</sqlMap>

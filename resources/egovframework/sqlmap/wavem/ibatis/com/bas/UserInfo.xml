@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="UserInfo">
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias alias="egovMapNoCamel" type="egovframework.rte.psl.dataaccess.util.EgovMapNoCamel"/>
+	
+	<resultMap id="Result" class="HashMap">
+		<result property="rsinfo" column="rsinfo" typeHandler="egovframework.rte.cmmn.util.RsMetaData" />
+	</resultMap>
+	
+	<select id="getUserInfo" resultClass="egovMap">
+		SELECT A.USER_ID AS USER_ID /*g_user_id*/
+		      ,A.USER_NM AS USER_NM /*g_usr_nm*/
+		      ,A.ASSIGN_GB AS ASSIGN_GB /*g_assign_gb*/
+		      ,(CASE
+		         WHEN A.ASSIGN_GB = '5' THEN
+		          DECODE(B.ASSIGN_CD
+		                ,'100000'
+		                ,'100000'
+		                ,(SELECT RD_UP_DEPT_CD
+		                   FROM RDDEPTTB K
+		                  WHERE K.RD_DEPT_CD = B.ASSIGN_CD))
+		         WHEN A.ASSIGN_GB = '1' OR A.ASSIGN_GB = '2' THEN
+		          (SELECT K.ROAD_HQ_CD
+		             FROM RESTCM_STDEXR_MST K
+		            WHERE 1 = 1
+		              AND K.STD_REST_CD = SUBSTR(A.ASSIGN_CD, 2, 6))
+		         ELSE
+		          ''
+		       END) AS UP_DEPT_CD /*g_up_detp_cd*/
+		      ,(CASE
+		         WHEN A.ASSIGN_GB = '5' THEN
+		          B.ASSIGN_CD
+		         WHEN A.ASSIGN_GB = '1' OR A.ASSIGN_GB = '2' THEN
+		          (SELECT K.ROAD_BR_CD
+		             FROM RESTCM_STDEXR_MST K
+		            WHERE 1 = 1
+		              AND K.STD_REST_CD = SUBSTR(A.ASSIGN_CD, 2, 6))
+		         ELSE
+		          ''
+		       END) AS DEPT_CD /*g_dept_cd*/
+		      ,(CASE
+		         WHEN A.ASSIGN_GB = '4' THEN
+		          B.ASSIGN_CD
+		         WHEN A.ASSIGN_GB = '1' OR A.ASSIGN_GB = '2' THEN
+		          A.OPER_CD
+		         ELSE
+		          ''
+		       END) AS OPER_CD /*g_oper_cd*/
+		      ,(CASE
+		         WHEN A.ASSIGN_GB = '1' OR A.ASSIGN_GB = '2' THEN
+		          B.ASSIGN_CD
+		         ELSE
+		          ''
+		       END) AS REST_CD /*g_rest_cd*/
+		      ,(CASE
+		         WHEN A.ASSIGN_GB = '8' THEN
+		          B.ASSIGN_CD
+		         ELSE
+		          ''
+		       END) AS UNION_CD /*g_union_cd*/
+		      ,(CASE
+		         WHEN A.ASSIGN_GB = '6' THEN
+		          B.ASSIGN_CD
+		         ELSE
+		          ''
+		       END) AS CAR_CD /*g_car_cd*/
+		      ,(CASE
+		         WHEN A.ASSIGN_GB = '7' THEN
+		          B.ASSIGN_CD
+		         ELSE
+		          ''
+		       END) AS DEAL_CD /*g_deal_cd*/
+		      ,A.MANAGER_GB
+		      ,A.LEVEL_NM
+		      ,A.DUTY_NM
+		      ,A.AUTH_GB
+		      ,A.AUTH_DTIME
+		      ,A.AUTH_USER_ID
+		      ,A.USER_GB
+		      ,B.ASSIGN_NM
+		      ,B.ASSIGN_FULL_NM
+		      ,B.RUN_GB
+		      ,SYSDATE
+		  FROM RESTCM_USERCD_MST A
+		      ,RESTCM_ASSIGN_MST B
+		 WHERE 1 = 1
+		   AND A.ASSIGN_CD = B.ASSIGN_CD
+		   AND A.USER_ID = #arg_id#
+	</select>
+	<select id="getUserCheck" resultClass="egovMapNoCamel">
+		SELECT USER_ID
+			 , ASSIGN_GB
+			 , PASSWD
+		  FROM RESTCM_USERCD_MST 
+		 WHERE USER_ID = #arg_id#
+	</select>
+</sqlMap>

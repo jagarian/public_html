@@ -1,0 +1,107 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>Google Bar Chart Example</title>
+        <script type="text/javascript" src="http://static.asjs.net/js/ajit.js"></script>        
+    </head>
+    <style type="text/css">
+        ul{
+            margin:0px;
+            padding:0px;
+            width:700px;            
+        }
+        
+        li{
+            display:inline;
+        }
+    </style>
+    <body>
+        <ul id="chartContainer">
+            <li id="bhsLI"></li>
+            <li id="bhs2LI"></li>
+            <li id="bvsLI"></li>
+            <li id="bvs2LI"></li>
+            <li id="bhgLI"></li>
+            <li id="bvgLI"></li>
+        </ul>
+        <script type="text/javascript">
+            
+            var API_URL = "http://chart.apis.google.com/chart?";
+            
+            //가로막대형 스타일 1
+            var bhsChart = $new("img");
+            var vars = new URLVariables();
+            vars.parameters = {
+                    "cht" : "bhs",
+                    "chs" : "200x150",
+                    "chd" : "t:60,60,50,55,70"
+            };
+            bhsChart.setAttribute("src",API_URL + vars.toString());
+            $E("bhsLI").addChild(bhsChart);    
+            
+            //가로막대형 스타일 2
+            var bhs2Chart = $new("img");
+            var vars = new URLVariables();
+            vars.parameters = {
+                    "cht" : "bhs",
+                    "chs" : "200x150",
+                    "chd" : "t:10,20,30,10,40|20,60,10,30,20",
+                    "chco" : "FFCC00,FF0000"               
+            };
+            bhs2Chart.setAttribute("src",API_URL + vars.toString());
+            $E("bhs2LI").addChild(bhs2Chart);    
+                        
+            //세로막대형 스타일 1
+            var bvsChart = $new("img");
+            var vars = new URLVariables();
+            vars.parameters = {
+                    "cht" : "bvs",
+                    "chs" : "200x150",
+                    "chd" : "t:60,60,50,55,60,50,55"
+            };
+            bvsChart.setAttribute("src",API_URL + vars.toString());
+            $E("bvsLI").addChild(bvsChart);    
+            
+            
+            //세로막대형 스타일 2
+            var bvs2Chart = $new("img");
+            var vars = new URLVariables();
+            vars.parameters = {
+                    "cht" : "bvs",
+                    "chs" : "200x150",
+                    "chd" : "t:10,20,30,10,40,5,10|20,60,10,30,20,80,20",
+                    "chco" : "FFCC00,FF0000"               
+            };
+            bvs2Chart.setAttribute("src",API_URL + vars.toString());
+            $E("bvs2LI").addChild(bvs2Chart);
+            
+            //가로막대 그룹형 스타일
+            var bhgChart = $new("img");
+            var vars = new URLVariables();
+            vars.parameters = {
+                    "cht" : "bhg",
+                    "chs" : "200x150",
+                    "chd" : "t:30,20|50,60",
+                    "chco" : "FFCC00,FF0000"
+            };
+            bhgChart.setAttribute("src",API_URL + vars.toString());
+            $E("bhgLI").addChild(bhgChart);    
+            
+            //세로막대 그룹형 스타일
+            var bvgChart = $new("img");
+            var vars = new URLVariables();
+            vars.parameters = {
+                    "cht" : "bvg",
+                    "chs" : "200x150",
+                    "chd" : "t:30,20,50|50,60,20",
+                    "chco" : "FFCC00,FF0000"
+            };
+            bvgChart.setAttribute("src",API_URL + vars.toString());
+            $E("bvgLI").addChild(bvgChart);
+                    
+
+        </script>
+    </body>
+</html>

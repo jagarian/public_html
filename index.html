@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+<!-- meta http-equiv="Content-Type" content="text/html; charset=EUC-KR"-->
+<TITLE>MiPlatform</TITLE>
+
+<SCRIPT type="text/javascript" src="./js/checkBrowser.js"></SCRIPT>
+
+<SCRIPT LANGUAGE="JavaScript">
+
+    function fn_load() {
+        if ( checkBrowser.browser == "Explorer") {
+            window.location = "./EgovMainView_login.html";
+        } else {
+            window.location = "./index.html";
+        }
+
+        return;
+    }
+
+</SCRIPT>
+
+<BODY leftmargin=0 topmargin=0 scroll="no" onload="fn_load();">
+
+</BODY>
+</HTML>

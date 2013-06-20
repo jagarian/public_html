@@ -1,0 +1,202 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+    <head>
+     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+     <title>유튜브 탐색기</title>        
+     <style type="text/css">
+     body{
+       margin-top:5px;
+       margin-left:5px;
+       background:#000;
+	   overflow:hidden;
+     }
+      
+     #searchForm{
+       margin-bottom:8px;
+     }
+      
+     #searchQ{
+       height:20px;
+       font-family:Gulim,Dotum,Arial;
+       font-size:12px;
+       width:425px;
+     }
+      
+     input[type=button]{
+       border:1px solid #808080;
+       background:#808080;
+       color:#fff;
+       font-family:Gulim,Dotum,Arial;
+       font-size:12px;
+	   cursor:pointer;
+     }     
+
+     #videoList {
+       margin: 0px;
+       padding: 0px;
+       width : 640px;
+       height : 600px;
+       list-style: none;
+     }
+      
+     #videoList li{
+       float : left;
+       margin : 0px 5px 5px 0px;
+       width: 200px;
+       height: 200px;       
+	   border: 1px solid #727272;
+       overflow:hidden;
+	   padding-bottom:3px;
+     }
+	 
+	 #videoList li div{
+       color:#fff;
+	   font-size:11px;
+       overflow:hidden;
+	   text-align:center;	   
+     }	 
+   
+	 .title180{
+	 	overflow:hidden;
+		width:180px;
+		height:12px;
+		margin-bottom:3px;
+	 }
+	 
+	 .clear{
+	 	clear:both;
+	 }
+	 
+	 .center{
+	 	text-align:center;
+	 }
+	 
+	 .hide{
+	 	display:none;
+	 }
+    </style>
+    <script type="text/javascript" src="/js/ajit.js"></script>
+    <script type="text/javascript">
+      YOUTUBE_SEARCH_URL = "http://gdata.youtube.com/feeds/api/videos?";
+      
+      var json = null;
+      var startIdx = 1;
+      var totalResults = 0;
+      var itemPerPage = 9;      
+      
+      
+      function searchVideo(itemIdx){
+        $E("videoList").setHTML("<span style='color:#fff'>Loading...</span>");      
+        itemIdx = itemIdx || startIdx;
+        var q = $E("searchQ").value;
+        var params = new URLVariables();
+
+        params.parameters = {
+          "q" : q.split(" ").join("+"),
+          "orderby" : "published",
+          "start-index" : (itemIdx-1)*itemPerPage + 1,
+          "max-results" : itemPerPage,
+          "v" : 2,
+		  "safeSearch" : "strict",
+          "alt" : "json-in-script",
+		  "callback" : "onCompleteSearchHandler"
+        };
+        
+        startIdx = itemIdx;
+		
+		var script = $new("script");
+		script.setAttribute("src",YOUTUBE_SEARCH_URL + params.toString());
+		script.setAttribute("type","text/javascript");
+		$E(document.body).addChild(script);		
+      }
+      
+      
+      function onCompleteSearchHandler(response){
+        json = response;	
+        renderVideoList();      
+      }
+      
+      function renderVideoList(){        
+        $E("videoList").setHTML("");      
+        
+        var entry = json.feed.entry;
+        totalResults = json.feed.openSearch$totalResults.$t;        
+        if(totalResults > itemPerPage) $E("pageNavi").setStyle("display","block");
+		else $E("pageNavi").setStyle("display","none");
+        for(var i=0; i < entry.length; i++){
+          var li = $new("li");
+          var titleDiv = $new("div");
+		  var videoDiv = $new("div");
+		  var btnDiv = $new("div");
+		  var video_id = entry[i]["media$group"]["yt$videoid"].$t;
+		  var title = entry[i].title.$t;
+		  
+		  $E("videoList").addChild(li);
+		  li.addChild(titleDiv);
+		  li.addChild(videoDiv);
+		  li.addChild(btnDiv);
+		  
+		  titleDiv.setHTML(entry[i].title.$t);		  
+		  titleDiv.addClassName("title180");
+  		  videoDiv.id = video_id;
+		  showVideo(video_id);
+		  btnDiv.setHTML('<input type="button" value="동영상 첨부하기" onclick="insertVideo(\''+video_id+'\',\''+title+'\')">');		  
+		
+        }        
+      }
+      
+      function showVideo(video_id){
+	  	var video_url = "http://www.youtube.com/v/"+ video_id +"&f=gdata_videos&fs=1";
+	  	var params = { allowScriptAccess: "always" , wmode : "transparent"};
+		
+	    swfobject.embedSWF(video_url,video_id, "200", "160", "8", null, null, params);
+      }	  
+      
+      function getNext(){
+        if (totalResults < (itemPerPage * startIdx)) return;
+        startIdx++;
+        searchVideo();
+      }
+      
+      function getPrev(){
+	  	if(startIdx < 1) return;
+        startIdx--;
+        searchVideo();
+      }
+      
+      function keyUpEventHandler(evt){
+        evt = evt ||window.event;
+        if(evt.keyCode == 13){
+          searchVideo(1);
+        }
+      }	  
+      
+	  function insertVideo(id,title){
+	  	//문자열 생성		  	
+		var sb = new StringBuffer();
+		sb.append('<br />제목 : '+title+'<br /><object width="480" height="360">');
+		sb.append('<param name="movie" value="http://www.youtube.com/v/'+ id +'&fs=1"></param>');
+		sb.append('<param name="allowFullScreen" value="true"></param>');
+		sb.append('<embed src="http://www.youtube.com/v/'+ id +'&fs=1"');
+		sb.append(' type="application/x-shockwave-flash"');
+		sb.append(' width="480" height="360" ');
+		sb.append(' allowfullscreen="true"></embed>');
+		sb.append('</object><br /><br />');
+		opener.YouTubeExplorerPlugin.insertVideo(sb.toString());
+	  }
+    </script>
+    </head>          
+    <body>
+    <div id="searchForm">
+      <input type="text" id="searchQ" onkeyup="keyUpEventHandler();" value="검색어를 입력하세요" onclick="this.value=''"/>
+      <input type="button" value="검색" onclick="searchVideo(1)" /></div>
+    <div class="clear">
+        <ul id="videoList"></ul>    
+    </div>
+	<div id="pageNavi" class="clear center hide">		
+		<input type="button" value="이전" onclick="getPrev()">
+        <input type="button" value="다음" onclick="getNext()">
+	</div>
+    </body>  
+</html>

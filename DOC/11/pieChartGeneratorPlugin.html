@@ -1,0 +1,291 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>BarChart Generator</title>       
+         <script type="text/javascript" src="./js/ajit.js"></script>
+    </head>
+    <style>
+        body{
+            font-size:12px;
+			margin:5px;
+			padding:0px;
+        }
+        ul{
+            margin:0px;
+            padding:0px;
+            width:320px;
+            list-style-type:none;
+        }
+        li{
+            display:inline;
+            float:left;
+        }
+        select{
+            font-size:12px;
+        }
+        td{
+            font-size:12px;
+            padding:5px;
+        }    
+        
+        #preview{
+            margin-left:10px;
+        }
+        
+        .width50{
+            width:50px;
+            height:17px;
+            font-size:12px;
+            border:1px solid #ccc;
+        }
+        
+        .width180{
+            width:180px;
+            height:17px;
+            font-size:12px;
+            border:1px solid #ccc;
+        }
+        
+        .margin5{
+            margin-top : 5px;
+            margin-bottom : 5px;
+        }
+        
+        .bottomLine{
+            padding-bottom:5px;
+            margin-bottom:10px;
+            border-bottom:3px solid #ccc;
+        }
+        
+        .guidement{
+            font-family:돋움,Dotum,Gulim,Arial;
+            font-size:11px;
+            color:#4fae00;
+        }
+        
+        
+    </style>
+    <script type="text/javascript">
+    
+    var PieChart = {
+        API_URL : "http://chart.apis.google.com/chart?",
+        private_cht : "p",
+        private_chma : "10,10,10,10",		
+        private_chf : "",
+        private_chtt : "",
+        private_chs : "",
+        private_chd : "",
+        private_chds : "",
+        private_chco : "",
+        private_chdl : "",
+        private_chdlp : "t",
+		private_chl : "",
+		setChartType : function(type){
+			this.private_cht = type;
+		},
+        //차트 원형 조각 색상 설정
+        setChartColor : function(color){
+            this.private_chco = color;
+        },
+        //차트 배경 색상 지정
+        setChartBgColor : function(color){
+            this.private_chf = "bg,s," + color;
+        },
+        //차트 데이터 범위  설정
+        setChartDataRange : function(datarange){
+            this.private_chds = datarange;
+        },
+        //차트 제목 설정
+        setChartTitle : function(title){
+            this.private_chtt = title;
+        },
+        //차트 범례 설정
+        setChartLegend : function(legend){
+            this.private_chdl = legend.replaceAll(",","|");
+        },
+        //차트 범례 위치 설정
+        setChartLegendPosition : function(position){
+            this.private_chdlp = position;
+        },
+		setChartLabel : function(label){
+			this.private_chl = label.replaceAll(",","|");
+		},
+        //차트 사이즈 설정
+        setChartSize : function(w,h){
+            this.private_chs = w+"x"+h;
+        },
+        //차트 데이터 설정
+        setChartData : function(data){            
+            this.private_chd = this.encoding(data);
+        },
+        //차트 데이터 인코딩
+        encoding : function(chartData){
+            
+            chartData = chartData.split(",");
+			
+            var simpleEncodingStr = 
+                'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';            
+                
+            var groupIdx = 0;
+            var textmarkerTmp = [];            
+            var sb = new StringBuffer();
+            sb.append("s:");
+            var result = 0;
+            var k = 0;			
+            var maxValue = 0;			
+			for (i = 0; i < chartData.length; i++) maxValue += parseInt(chartData[i],10);
+			
+            for (i = 0; i < chartData.length; i++) {
+              
+              //차트 데이터 값이 0보다 작거나 숫자가 아닐 경우
+              if (!isNaN(chartData[i]) && chartData[i] >= 0) {
+			  	 //차트 데이터의 전체 범위값을 기준으로 백분율을 구한다.
+				 sb.append(simpleEncodingStr.charAt(Math.round((simpleEncodingStr.length - 1) * chartData[i] / maxValue)));
+			   }else {
+				 sb.append('_');
+				}
+              }
+            //인코딩된 배열을 문자열로 반환한다.
+            return sb.toString();
+        },
+        //차트 객체 생성
+        generate : function(){
+            var lineChart = $new("img");
+            var vars = new URLVariables();
+            vars.parameters = {
+                "cht" : this.private_cht,
+                "chs" : this.private_chs,
+                "chd" : this.private_chd,
+                "chco" : this.private_chco,                
+                "chf" : this.private_chf,
+				"chl" : this.private_chl,
+                "chdl" : this.private_chdl,
+                "chdlp" : this.private_chdlp,
+                "chtt" : this.private_chtt,                
+                "chma" : this.private_chma
+            };
+            
+            lineChart.setAttribute("src",this.API_URL + vars.toString());
+            return lineChart;
+        }
+    }
+    
+    function drawPieChart(){
+        
+        PieChart.setChartTitle($E("chartTitleTxt").value);
+        PieChart.setChartSize($E("chartWidthTxt").value,$E("chartHeightTxt").value);		
+		PieChart.setChartType($E("chartType").value);
+        PieChart.setChartColor(($E("chartColorTxt").value || -1));
+        PieChart.setChartData($E("chartDataTxt").value);
+		PieChart.setChartLabel($E("chartLabelTxt").value);
+        PieChart.setChartLegend($E("chartLegendTxt").value);
+        PieChart.setChartLegendPosition($E("chartLegendPosition").value);    
+        PieChart.setChartBgColor($E("chartBgColorTxt").value);
+        
+        opener.PieChartPlugin.insertChart(PieChart.generate().src);
+    }    
+
+    
+    </script>
+     <body>
+         <div>
+            <ul>
+                <li>
+                    <table width="320" cellpadding=0 cellspacing=0 bordercolorlight="#CCCCCC" bordercolordark="#FFFFFF" border="1">
+                        <colgroup>
+                        <col width="120"></col>
+                        <col width="200"></col>
+                        </colgroup>
+						<tr>
+                            <td>차트 유형</td>
+                            <td >
+                                <select id="chartType">
+	                                <option value="p">원형차트</option>
+                                    <option value="p3">3D 원형차트</option>
+                           		</select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>차트 제목</td>
+                            <td >
+                                <input class="width180" type="text" value="" id="chartTitleTxt" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>차트 크기</td>
+                            <td >
+                                <input type="text" value="200" class="width50" id="chartWidthTxt" />
+                                X
+                                <input type="text" value="125" class="width50" id="chartHeightTxt" />
+                            </td>
+                        </tr>                        
+						<tr>
+                            <td>차트 데이터</td>
+                            <td >
+                                 <input type="text" class="width180" id="chartDataTxt" value="" /><br />
+                                <span class="guidement">,(콤마)단위로 작성합니다.</span>
+                            </td>
+                        </tr> 
+						<tr>
+                            <td>차트 라벨</td>
+                            <td >
+                                <input type="text" class="width180" id="chartLabelTxt" value="" /><br />
+                                <span class="guidement">,(콤마)단위로 작성합니다.</span>
+                            </td>
+                        </tr> 
+						<tr>
+                            <td>차트 조각 색상</td>
+                            <td >
+                                <input type="text" class="width180" id="chartColorTxt" value="" /><br />
+                                <span class="guidement">,(콤마)단위로 작성합니다.</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>차트 범례</td>
+                            <td>
+                                <input type="text" class="width180" id="chartLegendTxt"/> <br />
+                                <span class="guidement">,(콤마)단위로 작성합니다.</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>차트 범례 위치</td>
+                            <td>
+                                <select id="chartLegendPosition">
+                                    <option value="t">차트 상단</option>
+                                    <option value="b">차트 하단</option>
+                                    <option value="l">차트 좌측</option>
+                                    <option value="r">차트 우측</option>
+                                </select>
+                            </td>
+                        </tr>                        
+                        <tr>
+                            <td>차트 배경색</td>
+                            <td>
+                                <input type="text" class="width50" maxlength=6 id="chartBgColorTxt" value="FFFFFF" /> 
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>차트 데이터 표시</td>
+                            <td>
+                                <input type="checkbox" id="showChartData" checked="checked" /> 
+                            </td>
+                        </tr>
+                        <tr>
+                        <td colspan="2" align="center">
+                            <input type="button" value="차트 생성하기" onclick="drawPieChart();" />
+                        </td>
+                        </tr>
+        
+                    </table>
+                </li>
+                <li>
+                    <div id="preview">
+                        
+                    </div>
+                </li>
+            </ul>
+          </div>
+    </body>
+</html>

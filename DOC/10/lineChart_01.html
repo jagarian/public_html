@@ -1,0 +1,115 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>Google Line Chart Example</title>
+        <script type="text/javascript" src="./js/ajit.js"></script>        
+    </head>
+    
+     <style type="text/css">
+        ul{
+            margin:0px;
+            padding:0px;            
+        }
+        
+        li{
+            display:inline;
+        }
+    </style>
+    
+    <body>        
+        <ul id="chartContainer">
+            <li id="lcLI"></li>
+            <li id="lsLI"></li>
+            <li id="lxyLI"></li>
+        </ul>
+        
+        <script type="text/javascript">
+            //차트 API 기본 URL
+            var API_URL = "http://chart.apis.google.com/chart?";
+            
+            
+            //이미지 객체 생성            
+            var lcChart = $new("img");
+            //파라미터 정의
+            var vars = new URLVariables();
+            vars.parameters = {
+                //일반 선 차트 
+                "cht" : "lc",
+                
+                //차트 사이즈 
+                "chs" : "200x200",
+                
+                //차트 라벨 정의 
+                "chl" : "|일반 선차트|",
+                
+                //차트 데이터 정의
+                "chd" : "t:60,60,50,55,50,45,60,60,50,55,50,45",
+				
+				//차트 데이터의 최소/최대 범위
+                "chds" : "0,70"
+            };
+            lcChart.setAttribute("src",API_URL + vars.toString());
+            $E("lcLI").addChild(lcChart);
+            
+            
+            //이미지 객체 생성
+            var lsChart = $new("img");
+            
+            //URL 파라미터 객체 생성
+            var vars = new URLVariables();
+            
+            //파라미터 정의
+            vars.parameters = {
+                //축이 없는  선 차트
+                "cht" : "ls",
+                
+                //차트 사이즈
+                "chs" : "200x200",
+                
+                //차트 라벨 설정
+                "chl" : "|축이 없는 선차트|",
+                
+                //차트 데이터 정의
+                "chd" : "t:60,60,50,55,50,45,60,60,50,55,50,45",
+				
+				//차트 데이터의 최소/최대 범위
+                "chds" : "0,70"
+                
+            };
+            lsChart.setAttribute("src",API_URL + vars.toString());
+            $E("lsLI").addChild(lsChart);
+            
+            //이미지 객체 생성 
+            var lxyChart = $new("img");            
+            
+            //URL 파라미터 객체 생성
+            var vars = new URLVariables();
+            
+            //파라미터 정의 
+            vars.parameters = {
+                //x,y축 좌표를 정의한 선 차트
+                "cht" : "lxy",
+                
+                //차트 사이즈
+                "chs" : "200x200",
+                
+                //차트 라벨 정의 
+                "chl" : "|X,Y 좌표를 정의한 선차트|",
+                
+                //차트 데이터 X|Y쌍을 이루어 정의
+                "chd" : "t:10,25,40,60,70,100|20,30,10,140,50,60",
+				
+				//차트 데이터의 최소/최대 범위로 X축최대값,최소값 ,Y축최대값,최소값
+                "chds" : "0,100,0,150"
+				
+				
+
+            };
+            lxyChart.setAttribute("src",API_URL + vars.toString());
+            $E("lxyLI").addChild(lxyChart);
+            
+        </script>
+    </body>
+</html>

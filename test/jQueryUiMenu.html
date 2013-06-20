@@ -1,0 +1,67 @@
+<!doctype html>
+ 
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>jQuery UI Menu - Default functionality</title>
+  <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+  <!-- <link rel="stylesheet" href="./jquery-ui.css" /> -->
+<!--   <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+  <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script> -->
+  <script src="./jquery-1.9.1.js"></script>
+  <script src="./jquery-ui.js"></script>
+
+  <link rel="stylesheet" href="/resources/demos/style.css" />
+  <script>
+  $(function() {
+    $( "#menu" ).menu();
+  });
+  </script>
+  <style>
+  .ui-menu { width: 150px; }
+  </style>
+</head>
+<body>
+ 
+<ul id="menu">
+  <li class="ui-state-disabled"><a href="#">disabledMenu</a></li>
+  <li><a href="#">jQuery</a></li>
+  <li><a href="#">jQuery-UI</a></li>
+  <li><a href="#">jQuery-CSS</a></li>
+  <li>
+    <a href="#">jQueryMenu1</a>
+    <ul>
+      <li class="ui-state-disabled"><a href="#">CSS1-disabled</a></li>
+      <li><a href="#">CSS1jQuery A</a></li>
+      <li><a href="#">CSS1jQuery B</a></li>
+    </ul>
+  </li>
+  <li><a href="#">jQueryMenu2</a></li>
+  <li>
+    <a href="#">jQueryDEMO1</a>
+    <ul>
+      <li>
+        <a href="#">jQueryMenu3</a>
+        <ul>
+          <li><a href="#">Depth 2</a></li>
+          <li><a href="#">Depth 2</a></li>
+          <li><a href="#">Depth 2</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#">jQueryMenu4</a>
+        <ul>
+          <li><a href="#">MenuDepth2</a></li>
+          <li><a href="#">MenuDepth2</a></li>
+          <li><a href="#">MenuDepth2</a></li>
+        </ul>
+      </li>
+      <li><a href="#">jQueryMenu5</a></li>
+    </ul>
+  </li>
+  <li class="ui-state-disabled"><a href="#">jQueryMenudisabled</a></li>
+</ul>
+ 
+ 
+</body>
+</html>

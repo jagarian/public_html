@@ -1,0 +1,73 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>Google Pie Chart Example</title>
+        <script type="text/javascript" src="http://static.asjs.net/js/ajit.js"></script>        
+    </head>
+    <style type="text/css">
+        ul{
+            margin:0px;
+            padding:0px;         
+        }
+        
+        li{
+            display:inline;            
+        }
+    </style>
+    <body>
+        <ul id="container">
+            <li id="pLI"></li>
+            <li id="p3LI"></li>
+            <li id="pcLI"></li>
+        </ul>
+       <script type="text/javascript">
+            var API_URL = "http://chart.apis.google.com/chart?";
+            
+            //기본 원형 차트
+            var pChart = $new("img");
+            var vars = new URLVariables();
+            vars.parameters = {
+                    "cht" : "p",
+                    "chs" : "250x140",
+                    "chl" : "1학년|2학년|3학년|4학년|5학년|6학년",
+                    "chd" : "t:60,60,50,80,40,20",
+                    "chco" : "804000"
+            };                        
+            pChart.setAttribute("src",API_URL + vars.toString());
+            $E("pLI").addChild(pChart); 
+            
+            //3D 원형 차트
+            var p3Chart = $new("img");
+            var vars = new URLVariables();
+            vars.parameters = {
+                    "cht" : "p3",
+                    "chs" : "220x90",
+                    "chl" : "1학년|2학년|3학년|4학년|5학년|6학년",
+                    "chd" : "t:60,60,50,80,40,20",
+                    "chco" : "424242"
+            };
+                        
+            p3Chart.setAttribute("src",API_URL + vars.toString());
+            $E("p3LI").addChild(p3Chart); 
+            
+            
+            //비교형 원형 차트
+            var pcChart = $new("img");
+            var vars = new URLVariables();
+            vars.parameters = {
+                    "cht" : "pc",
+                    "chs" : "220x140",
+                    "chl" : "1학년|2학년|3학년|4학년|5학년|6학년|학원|TV|교과서",
+                    "chd" : "t:60,60,50|30,50,40|30,50,10",
+                    "chco" : "FF0000"
+					
+            };
+                        
+            pcChart.setAttribute("src",API_URL + vars.toString());
+            $E("pcLI").addChild(pcChart); 
+            
+       </script>
+    </body>
+</html>

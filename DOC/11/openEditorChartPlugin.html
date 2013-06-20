@@ -1,0 +1,137 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>OpenEditor Chart Plugin</title>       
+        <script type="text/javascript" src="./js/ajit.js"></script>
+        <script type="text/javascript">$include("./js/open_editor/OpenEditor.js");</script>
+    </head>
+
+    <script type="text/javascript">    
+        var LineChartPlugin = {
+            info : "라인 차트 플러그인",
+            group:"B",
+            pop : "",
+            selectedEditor : "",
+            getInstance : function(){
+                var obj = $new("IMG");
+                obj.setAttribute("src",OPEN_EDITOR_SKIN+"lineChartBtn.gif");
+                obj.setStyle('cursor',"pointer");
+                obj.setStyle("margin-right","3px");
+                return obj;
+            },
+            insertChart : function(src){
+                //차트를 에디터에 삽입한다.
+                LineChartPlugin.selectedEditor.insertImage(src);
+                
+                //생성기를 종료한다.
+                LineChartPlugin.hide();
+            },
+            eventListener : function(evt,obj,oEditor){
+                //버튼 클릭시 라인 차트 생성기를 팝업으로 띄움
+                LineChartPlugin.pop = window.open("lineChartGeneratorPluigin.html"
+                    ,"chart","width=345,height=500,scrollbars=yes");
+                LineChartPlugin.selectedEditor = oEditor;                
+            },
+            hide : function(){
+                //띄워진 라인 차트 생성기 팝업 있다면
+                if(LineChartPlugin.pop){
+                    
+                    //띄워진 팝업을 닫는다.
+                    LineChartPlugin.pop.close();
+                    
+                    //값을 초기화 한다.
+                    LineChartPlugin.pop = null;
+                }
+            }
+        }        
+		
+		var BarChartPlugin = {
+            info : "막대 차트 플러그인",
+            group:"B",
+            pop : "",
+            selectedEditor : "",
+            getInstance : function(){
+                var obj = $new("IMG");
+                obj.setAttribute("src",OPEN_EDITOR_SKIN+"barChartBtn.gif");
+                obj.setStyle('cursor',"pointer");
+                obj.setStyle("margin-right","3px");
+                return obj;
+            },
+            insertChart : function(src){
+                //차트를 에디터에 삽입한다.
+                BarChartPlugin.selectedEditor.insertImage(src);
+                
+                //생성기를 종료한다.
+                BarChartPlugin.hide();
+            },
+            eventListener : function(evt,obj,oEditor){
+                //버튼 클릭시 라인 차트 생성기를 팝업으로 띄움
+                BarChartPlugin.pop = window.open("barChartGeneratorPlugin.html"
+                    ,"chart","width=345,height=500,scrollbars=yes");
+                BarChartPlugin.selectedEditor = oEditor;                
+            },
+            hide : function(){
+                //띄워진 라인 차트 생성기 팝업 있다면
+                if(BarChartPlugin.pop){
+                    
+                    //띄워진 팝업을 닫는다.
+                    BarChartPlugin.pop.close();
+                    
+                    //값을 초기화 한다.
+                    BarChartPlugin.pop = null;
+                }
+            }
+        }
+		
+		var PieChartPlugin = {
+            info : "원형 차트 플러그인",
+            group:"B",
+            pop : "",
+            selectedEditor : "",
+            getInstance : function(){
+                var obj = $new("IMG");
+                obj.setAttribute("src",OPEN_EDITOR_SKIN+"pieChartBtn.gif");
+                obj.setStyle('cursor',"pointer");
+                obj.setStyle("margin-right","3px");
+                return obj;
+            },
+            insertChart : function(src){
+                //차트를 에디터에 삽입한다.
+                PieChartPlugin.selectedEditor.insertImage(src);
+                
+                //생성기를 종료한다.
+                PieChartPlugin.hide();
+            },
+            eventListener : function(evt,obj,oEditor){
+                //버튼 클릭시 라인 차트 생성기를 팝업으로 띄움
+                PieChartPlugin.pop = window.open("pieChartGeneratorPlugin.html"
+                    ,"chart","width=345,height=500,scrollbars=yes");
+                PieChartPlugin.selectedEditor = oEditor;                
+            },
+            hide : function(){
+                //띄워진 라인 차트 생성기 팝업 있다면
+                if(PieChartPlugin.pop){
+                    
+                    //띄워진 팝업을 닫는다.
+                    PieChartPlugin.pop.close();
+                    
+                    //값을 초기화 한다.
+                    PieChartPlugin.pop = null;
+                }
+            }
+        }
+        
+        var editor = new OpenEditor();
+        
+        //오픈에디터 플러그인으로 등록 
+        editor.registPlugin(LineChartPlugin);                
+		editor.registPlugin(BarChartPlugin);  
+		editor.registPlugin(PieChartPlugin);  
+    </script>
+     <body>
+        <textarea id="openeditor"></textarea>
+        <script type="text/javascript">editor.write("openeditor");</script>
+    </body>
+</html>

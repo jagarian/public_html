@@ -1,0 +1,215 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title>Google Map Plugin</title>
+    <script type="text/javascript" src="/js/ajit.js"></script>
+    <script src="http://maps.google.co.kr/maps?file=api&amp;v=2&amp;key=ABQIAAAALDvK_h9DIq6BbXYZ3vy7rhTEXeQTXT679J0mHx2-Z2C5QWjyshTIksO9oWjUgNBTtgdrwb01ZBNZQg" type="text/javascript"></script>    
+  </head>
+  <style type="text/css">
+    body{
+        margin:0px;
+        padding:0px;
+        font-size:12px;
+    }
+      ul{
+          margin:0px;
+        padding:0px;
+        list-style-type:none;
+      }
+    
+    #container{
+        width:770px;
+    }
+    #mapCotainer{
+        width:530px;
+        float:left;
+    }
+    #searchForm{
+        float:left;
+        width:220px;
+        height:420px;
+        margin-left:10px;
+        overflow:auto;
+    }
+    #searchForm input[type=text]{
+        width:130px;
+        height:15px;        
+        font-size:12px;
+    }
+    #searchForm input[type=button]{
+        border:1px solid #ccc;
+        cursor:pointer;
+    }
+    #locationResults li{
+        clear:both;
+        padding:3px; 0px 0px 0px;
+        border-bottom:2px dotted #94b20c;
+        cursor:pointer;
+    }
+    #insertMapDiv{
+        position:absolute;
+        top:380px;
+        left:315px;
+    }
+    #insertMapDiv input[type=button]{
+        border:3px solid #000;
+        font-size:12px;
+        height:30px;
+        background:#FF9900;
+        cursor:pointer;
+    }
+    .clear{
+        clear:both;
+    }
+  </style>
+  <body onunload="GUnload()">
+      <ul id="container">
+          <li id="mapCotainer">
+              <div id="mapDiv" style="width: 530px; height: 430px"></div>
+          </li>
+        <li id="searchForm">
+            <div>
+                    <input type="text" id="locationTxt" />
+                    <input type="button" value="주소검색" onclick="getLocation()"/>
+            </div>
+            <div id="locationResultsContainer">
+                <ul id="locationResults">
+                
+                </ul>
+            </div>
+        </li>
+        <div id="insertMapDiv">
+            <input type="button" value="마커 초기화하기" onclick="initMarker()" />
+            <input type="button" value="지도 삽입하기" onclick="insertMap()" />
+        </div>
+      </ul>  
+    <div class="clear"></div>
+    <div>블로그에 구글의 지도 라이브러리가 설치된 경우에만 사용가능합니다.</div>
+    <script type="text/javascript">    
+
+     if (GBrowserIsCompatible()) {
+       var google_map = new GMap2(document.getElementById("mapDiv"));       
+       var markers = [];
+       point = new GLatLng(37.56647, 126.977963);         
+
+        google_map.addControl(new GMapTypeControl());
+        google_map.addControl(new GLargeMapControl());
+        google_map.setCenter(point, 17);
+        google_map.setMapType(G_NORMAL_MAP);
+        google_map.enableContinuousZoom();
+        google_map.enableScrollWheelZoom();    
+        var mm = new GMarkerManager(google_map, {borderPadding:1,maxZoom:20});
+        makeMarker(point,'여기는 서울 시청입니다.');
+      }
+
+      function getLocation(){
+        var name = document.getElementById("locationTxt").value;
+        var geoCoder = new GClientGeocoder();
+        geoCoder.getLocations(name,onCompleteGetLocationHandler);
+      }
+
+      function onCompleteGetLocationHandler(response){
+        drawResultList(response.Placemark);        
+      }
+
+      function initList(){
+        $E("locationResults").setHTML("");
+      }
+      
+      function initMarker(){
+        for(var i =0; i < markers.length; i++){
+            markers[i].remove();
+        }
+        markers = [];
+      }
+      
+      function drawResultList(data){
+        if(!data) return;
+        initList();
+
+        for(var i = 0; i < data.length; i ++){
+            var li = $new("li");
+            li.setHTML(data[i].address);
+            li.Point = new GLatLng(data[i].Point.coordinates[1],data[i].Point.coordinates[0]);
+            li.addEvent("click",moveMap);
+            $E("locationResults").addChild(li);
+        }
+      }
+
+      function moveMap(){
+        makeMarker(this.Point);
+        google_map.panTo(this.Point);
+      }
+
+      function makeMarker(point,msg){
+        //해당좌표에 해당하는 마커가 없다면 마커를 생성한다.    
+        for(var i =0; i < markers.length; i++){
+            if(point == markers[i].getLatLng()){
+                return;
+                break;
+            }
+        }
+    
+        var marker = new GMarker(point,{draggable:true});                        
+        marker.msg = msg || "";
+        marker.i = markers.length;
+        google_map.addOverlay(marker);
+        markers.push(marker);
+        GEvent.addListener(marker,"click", function(){
+                marker.openInfoWindow("위치 설명 <br/><textarea id="+marker.i
+                    + " onblur='saveMsg(this.id,this.value)'>"
+                    + marker.msg+"</textarea><br /><input type='button' value='설명 저장' onclick='closeMarkerInfoWindow("+marker.i+")' />");                                
+        });
+        GEvent.addListener(marker,"dragend",function(){marker.closeInfoWindow();});
+        GEvent.trigger(marker,"click");
+      }
+      
+      function closeMarkerInfoWindow(id){
+          markers[id].closeInfoWindow();
+      }
+
+      function saveMsg(id,msg){        
+        markers[id].msg = msg.replaceAll("\n","<br />");
+      }
+      
+      function insertMap(){
+          opener.GoogleMapPlugin.insertMap(getMapScript());
+      }
+
+      function getMapScript(){
+          var mapId = "map_"+Math.random();
+          var sb = new StringBuffer();
+          sb.append('<br /><div id="'+mapId+'" style="width:530px;height:430px" class="OpeneditorEmbed">')
+          sb.append('GoogleMap<br>블로그에 구글의 지도 라이브러리가 설치된 경우에만 사용가능합니다.</div>');
+          sb.append('<script type="text/javascript">');
+          sb.append('var google_map = new GMap2(document.getElementById("'+mapId+'"));');
+          sb.append('point = new GLatLng('+google_map.getCenter().lat()+', '+google_map.getCenter().lng()+');');
+          sb.append('google_map.addControl(new GMapTypeControl());');
+          sb.append('google_map.addControl(new GLargeMapControl());');
+          sb.append('google_map.setCenter(point, 17);');
+          sb.append('google_map.setMapType(G_NORMAL_MAP);');
+          sb.append('google_map.enableContinuousZoom();');
+          sb.append('google_map.enableScrollWheelZoom();');
+          sb.append('markers = [];');
+          sb.append('function mkm(point,msg){');
+          sb.append('var marker = new GMarker(point);');
+          sb.append('marker.msg = msg;');
+          sb.append('GEvent.addListener(marker,"click", function(){marker.openInfoWindow(msg);});');
+          sb.append('google_map.addOverlay(marker);');
+          sb.append('markers.push(marker);');
+          sb.append('}');
+
+          for(var i =0; i < markers.length; i++){
+            sb.append('mkm(new GLatLng('+markers[i].getLatLng().lat()+','+markers[i].getLatLng().lng()+'),"'+markers[i].msg+'");');
+            sb.append('markers[0].openInfoWindow(markers[0].msg);');
+          };
+        
+          sb.append('</').append('script><br /><br />');
+          return sb.toString();
+      }
+    
+   </script>      
+  </body>
+</html>

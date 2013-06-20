@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+ <head>
+  <meta http-equiv=Content-Type content="text/html;charset=utf-8">
+  <title> 이미지 통합 검색기 플러그인 만들기</title>
+ </head>
+ <script type="text/javascript" src="./js/ajit.js">
+</script>
+<script type="text/javascript" 
+	src="./js/open_editor/OpenEditor.js" charset="utf-8"></script>
+ <body>
+  <textarea id="openeditor"></textarea>
+	<script type="text/javascript">
+		var ImageSearchPlugin = {
+			info : "플러그인 설명",
+			main : function(oEditor){
+				//생성자				
+			},
+			getInstance : function(){
+				//$new -> document.createElement
+				var btn = $new("img");
+				btn.setAttribute("src",OPEN_EDITOR_SKIN+"imageSearchBtn.gif");
+				//스타일 정의
+				btn.setStyle("margin-left","3px");
+				btn.setStyle("cursor","pointer");
+				return btn;
+			},
+			eventListener : function(evt,obj,oEditor){
+				//에디터 메뉴 객체가 클릭되었을 때 이벤트 정의
+				//이미지 검색기 팝업 윈도우 띄우기
+				ImageSearchPlugin.editor = oEditor;
+				ImageSearchPlugin.pop = window.open("image_total.html","imageSearchWindow","width=350,height=400");
+			},
+			hide : function(){
+				//에디터의 다른 메뉴가 클릭되었거나 에디터의 편집 기능이 활성화된 경우 숨겨야 할 객체가 있다면 정의 
+				try{
+					if(ImageSearchPlugin.pop){
+						ImageSearchPlugin.pop.close();
+						ImageSearchPlugin.pop = null;
+						ImageSearchPlugin.editor = null;
+					}
+				}catch(e){}
+			}
+		};		
+
+		var editor= new OpenEditor();
+		//플러그인 등록
+		editor.registPlugin(ImageSearchPlugin);
+		//에디터 적용하기
+		editor.write("openeditor");
+	</script>
+ </body>
+</html>

@@ -1,0 +1,491 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="AppRestList">
+	<typeAlias alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap" />
+	<typeAlias alias="egovMapNoCamel" type="egovframework.rte.psl.dataaccess.util.EgovMapNoCamel"/>	
+	<typeAlias  alias="appRestListVo" type="egovframework.rte.man.spp.vo.AppRestListVo"/>
+	<resultMap id="Result" class="HashMap">
+		<result property="rsinfo" column="rsinfo" typeHandler="egovframework.rte.cmmn.util.RsMetaData" />
+	</resultMap>
+
+	<select id="selectAppRestRegInfo" resultClass="egovMapNoCamel">
+			SELECT REST_CD
+			      ,OPER_CD
+			      ,APPLY_NO
+			      ,APPLY_DT
+			      ,REG_ID
+			      ,APL_CAUSE
+			      ,RCV_DT
+			      ,(CASE
+					 WHEN REG_STATUS = '010' THEN '임시저장'
+					 WHEN REG_STATUS = '020' THEN '보완요청'
+					 WHEN REG_STATUS = '030' THEN '등록진행중'
+					 WHEN REG_STATUS = '040' THEN '등록완료'
+					 ELSE REG_STATUS
+				   END) AS REG_STATUS
+			  FROM RESTAP_APLCHG_MST
+			 WHERE 1=1
+			 <isNotEmpty property="pv_oper_cd">
+			 	AND OPER_CD = #pv_oper_cd#
+			 </isNotEmpty>
+			 <isNotEmpty property="pv_rest_cd">
+			 	AND REST_CD = #pv_rest_cd#
+			 </isNotEmpty>
+			 <isNotEmpty property="pv_apply_dt_fromdate">
+			 	<![CDATA[
+				 	AND APPLY_DT >= #pv_apply_dt_fromdate#
+				 ]]>
+			 </isNotEmpty>
+			 <isNotEmpty property="pv_apply_dt_todate">
+				 <![CDATA[
+				 	AND APPLY_DT <= #pv_apply_dt_todate#
+				 ]]> 
+			 </isNotEmpty>
+			 <isNotEmpty property="pv_reg_status">
+			 
+			 	AND (CASE
+					 WHEN REG_STATUS = '010' THEN '010'
+					 WHEN REG_STATUS = '020' THEN '010'
+					 WHEN REG_STATUS = '030' THEN '010'
+					 WHEN REG_STATUS = '040' THEN '040'
+					 ELSE REG_STATUS
+				   END) =  #pv_reg_status#
+			 </isNotEmpty>
+			 ORDER BY APPLY_DT DESC
+	</select>
+	
+	<select id="selectAppRestRegInfoDetail" resultClass="egovMapNoCamel">
+		SELECT APPLY_NO
+		      ,(CASE
+				 WHEN REG_STATUS = '010' THEN '임시저장'
+				 WHEN REG_STATUS = '020' THEN '보완요청'
+				 WHEN REG_STATUS = '030' THEN '등록진행중'
+				 WHEN REG_STATUS = '040' THEN '등록완료'
+				 ELSE REG_STATUS
+			   END) AS REG_STATUS
+		      ,APPLY_DT
+		      ,REG_ID
+		      ,APL_CAUSE
+		      ,RCV_DT
+		      ,RET_CAUSE
+		  FROM RESTAP_APLCHG_MST
+		 WHERE 1=1
+		 <isNotEmpty property="pv_apply_no">
+		   AND APPLY_NO = #pv_apply_no#
+		 </isNotEmpty>
+	</select>
+	
+	<select id="selectAppStdInfDetail" resultClass="egovMapNoCamel">
+		SELECT REST_INTRO
+			  ,IMAGE1
+		      ,IMAGE2
+		      ,IMAGE3
+		      ,IMAGE4
+		      ,IMAGE5
+		  FROM RESTAP_STDINF_MST
+		 WHERE 1=1
+		 <isNotEmpty property="pv_rest_cd">
+		 	AND REST_CD = #pv_rest_cd#
+		 </isNotEmpty>
+		 <isNotEmpty property="pv_oper_cd">
+		 	AND OPER_CD = #pv_oper_cd#
+		 </isNotEmpty>
+	</select>
+	
+	<select id="selectAppBstFodDetail" resultClass="egovMapNoCamel">
+		SELECT '0' AS CK
+			  ,SEQ
+			  ,FOOD_NM
+		      ,FOOD_COST
+		      ,WEIGHT
+		      ,KCAL
+		      ,SACCHARIDE
+		      ,PROTEIN
+		      ,SATURATEDFAT
+		      ,SODIUM
+		      ,IMAGE
+		  FROM RESTAP_BSTFOD_MST
+		 WHERE 1=1
+		 <isNotEmpty property="pv_rest_cd">
+		 	AND REST_CD = #pv_rest_cd#
+		 </isNotEmpty>
+		 <isNotEmpty property="pv_oper_cd">
+		 	AND OPER_CD = #pv_oper_cd#
+		 </isNotEmpty>
+	</select>
+	
+	<select id="selectAppComforDetail" resultClass="egovMapNoCamel">
+		SELECT '0' AS CK
+			  ,SEQ
+		  	  ,PSCODE
+		      ,STIME
+		      ,ETIME
+		      ,IMAGE
+		  FROM RESTAP_COMFOR_MST
+		 WHERE 1=1
+		 <isNotEmpty property="pv_rest_cd">
+		 	AND REST_CD = #pv_rest_cd#
+		 </isNotEmpty>
+		 <isNotEmpty property="pv_oper_cd">
+		 	AND OPER_CD = #pv_oper_cd#
+		 </isNotEmpty>
+	</select>
+	
+	<select id="selectAppBrandDetail" resultClass="egovMapNoCamel">
+		SELECT '0' AS CK
+			  ,SEQ
+			  ,BRDCODE
+		      ,STIME
+		      ,ETIME
+		      ,IMAGE
+		  FROM RESTAP_BRAND_MST
+		 WHERE 1=1
+		 <isNotEmpty property="pv_rest_cd">
+		 	AND REST_CD = #pv_rest_cd#
+		 </isNotEmpty>
+		 <isNotEmpty property="pv_oper_cd">
+		 	AND OPER_CD = #pv_oper_cd#
+		 </isNotEmpty>
+	</select>
+	
+	<select id="selectAppEventDetail" resultClass="egovMapNoCamel">
+		SELECT '0' AS CK
+			  ,SEQ
+			  ,EVENT_SDATE
+		      ,EVENT_EDATE
+		      ,EVENT_NAME
+		  FROM RESTAP_EVEINF_MST
+		 WHERE 1=1
+		 <isNotEmpty property="pv_rest_cd">
+		 	AND REST_CD = #pv_rest_cd#
+		 </isNotEmpty>
+		 <isNotEmpty property="pv_oper_cd">
+		 	AND OPER_CD = #pv_oper_cd#
+		 </isNotEmpty>
+	</select>
+	
+	<select id="selectAppFreeCkDetail" resultClass="egovMapNoCamel">
+		SELECT '0' AS CK
+			  ,SEQ
+			  ,SDATE
+		      ,EDATE
+		      ,CHECKSTORE
+		      ,CHECKTEL
+		  FROM RESTAP_FREECK_MST
+		 WHERE 1=1
+		 <isNotEmpty property="pv_rest_cd">
+		 	AND REST_CD = #pv_rest_cd#
+		 </isNotEmpty>
+		 <isNotEmpty property="pv_oper_cd">
+		 	AND OPER_CD = #pv_oper_cd#
+		 </isNotEmpty>
+	</select>
+	
+	<select id="selectAppComboComforDetail" resultClass="egovMapNoCamel">
+		SELECT NM_CD
+		      ,NM_REP
+		  FROM RESTCM_CODMST_MST
+		 WHERE 1=1
+	       AND NM_GB = 'C01'
+	</select>
+	
+	<select id="selectAppComboBrandDetail" resultClass="egovMapNoCamel">
+		SELECT NM_CD
+		      ,NM_REP
+		  FROM RESTCM_CODMST_MST
+		 WHERE 1=1
+	       AND NM_GB = 'B01'
+	</select>
+	
+	<update id="updateAplchgTemp">
+		UPDATE RESTAP_APLCHG_MST
+		   SET APPLY_NO   = #pv_apply_no#
+		      ,REST_CD    = #pv_rest_cd#
+		      ,OPER_CD    = #pv_oper_cd#
+		      ,APPLY_DT   = TO_CHAR(SYSDATE,'YYYYMMDD')
+		      ,APL_CAUSE  = #apl_cause#
+		      ,REG_STATUS = #reg_status#
+		      ,REG_DTIME  = TO_CHAR(SYSDATE,'YYYYMMDD')
+		      ,REG_ID     = #pv_reg_id#
+		      ,LAST_DTIME = TO_CHAR(SYSDATE,'YYYYMMDD')
+		      ,LAST_ID    = #pv_reg_id#
+		 WHERE APPLY_NO   = #pv_apply_no#
+	</update>
+	
+	<insert id="insertAplchgTemp">
+	
+		<selectKey keyProperty="eseq">
+			SELECT FN_GET_PRIMARY_KEY ('APP1','')
+	          FROM dual
+		</selectKey>
+		<![CDATA[
+		INSERT INTO RESTAP_APLCHG_MST
+  			(APPLY_NO ,REST_CD ,OPER_CD ,APPLY_DT ,APL_CAUSE ,RCVR_ID ,RCV_DT ,RET_CAUSE ,REG_STATUS ,WORK_GB ,REG_DTIME ,REG_ID ,LAST_DTIME ,LAST_ID)
+		VALUES
+  			(#eseq# ,#pv_rest_cd# ,#pv_oper_cd# ,TO_CHAR(SYSDATE,'YYYYMMDD') ,#apl_cause# ,'' ,'' ,'' ,#reg_status# ,'' ,TO_CHAR(SYSDATE,'YYYYMMDD') ,#pv_reg_id# ,TO_CHAR(SYSDATE,'YYYYMMDD') ,#pv_reg_id#)
+	    ]]>
+	</insert>
+	
+	<delete id="deleteAplchgTemp">
+		<![CDATA[
+		DELETE RESTAP_APLCHG_MST
+		 WHERE APPLY_NO = #pv_apply_no#
+		]]>
+	</delete>
+	
+	<update id="updateStdinf">
+		UPDATE RESTAP_STDINF_MST
+		   SET OPER_CD      = #pv_oper_cd#
+		      ,REST_CD      = #pv_rest_cd#
+		      ,REST_INTRO   = #rest_intro#
+		      ,IMAGE1       = #image1#
+		      ,IMAGE2       = #image2#
+		      ,IMAGE3       = #image3#
+		      ,IMAGE4       = #image4#
+		      ,IMAGE5       = #image5#
+		      ,REG_DTIME    = TO_CHAR(SYSDATE,'YYYYMMDD')
+		      ,REG_ID       = #pv_reg_id#
+		      ,LAST_DTIME   = TO_CHAR(SYSDATE,'YYYYMMDD')
+		      ,LAST_ID      = #pv_reg_id#
+		 WHERE OPER_CD = #pv_oper_cd#
+		   AND REST_CD = #pv_rest_cd#
+	</update>
+	
+	<insert id="insertStdinf">	
+		<selectKey keyProperty="rest_oil_cd">
+			SELECT replace(#pv_rest_cd#, 'S', 'O') 
+			  FROM dual
+		</selectKey>
+		<![CDATA[
+		INSERT INTO RESTAP_STDINF_MST
+		  (OPER_CD, REST_CD, WGS84X, WGS84Y, REST_OIL_CD, REST_OIL_CD2, REST_INTRO, IMAGE1, IMAGE2, IMAGE3, IMAGE4, IMAGE5, OIL_SELF, REG_DTIME, REG_ID, LAST_DTIME, LAST_ID)
+		VALUES
+		  (#pv_oper_cd#, #pv_rest_cd#, '', '', #rest_oil_cd#, '', #rest_intro#, #image1#, #image2#, #image3#, #image4#, #image5#, '', TO_CHAR(SYSDATE,'YYYYMMDD'), #pv_reg_id#, TO_CHAR(SYSDATE,'YYYYMMDD'), #pv_reg_id#)
+	    ]]>
+	</insert>
+	
+	<delete id="deleteStdinf">
+		<![CDATA[
+		DELETE RESTAP_STDINF_MST
+		 WHERE OPER_CD = #pv_oper_cd#
+		   AND REST_CD = #pv_rest_cd#
+
+		]]>
+	</delete>
+	
+	<update id="updateBstfod">
+		UPDATE RESTAP_BSTFOD_MST
+		   SET OPER_CD      = #pv_oper_cd#
+		      ,REST_CD      = #pv_rest_cd#
+		      ,SEQ          = #seq#
+		      ,FOOD_NM      = #food_nm#
+		      ,FOOD_COST    = #food_cost#
+		      ,WEIGHT       = #weight#
+		      ,KCAL         = #kcal#
+		      ,SACCHARIDE   = #saccharide#
+		      ,PROTEIN      = #protein#
+		      ,SATURATEDFAT = #saturatedfat#
+		      ,SODIUM       = #sodium#
+		      ,IMAGE        = #image#
+		      ,REG_ID       = #pv_reg_id#
+		      ,REG_DTIME    = TO_CHAR(SYSDATE,'YYYYMMDD')
+		      ,LAST_ID      = #pv_reg_id#
+		      ,LAST_DTIME   = TO_CHAR(SYSDATE,'YYYYMMDD')
+		 WHERE OPER_CD = #pv_oper_cd#
+		   AND REST_CD = #pv_rest_cd#
+		   AND SEQ = #seq#
+	</update>
+	
+	<insert id="insertBstfod">	
+		<selectKey keyProperty="seq">
+			SELECT TO_NUMBER(NVL(MAX(SEQ), '0')) + 1
+			  FROM RESTAP_BSTFOD_MST
+		</selectKey>
+		<![CDATA[
+		INSERT INTO RESTAP_BSTFOD_MST
+		  (OPER_CD, REST_CD, SEQ, FOOD_NM, FOOD_COST, WEIGHT, KCAL, SACCHARIDE, PROTEIN, SATURATEDFAT, SODIUM, IMAGE, ETC, REG_ID, REG_DTIME, LAST_ID, LAST_DTIME)
+		VALUES
+		  (#pv_oper_cd#, #pv_rest_cd#, #seq#, #food_nm#, #food_cost#, #weight#, #kcal#, #saccharide#, #protein#, #saturatedfat#, #sodium#, #image#, '', #pv_reg_id#, TO_CHAR(SYSDATE,'YYYYMMDD'), #pv_reg_id#, TO_CHAR(SYSDATE,'YYYYMMDD'))
+	    ]]>
+	</insert>
+	
+	<delete id="deleteBstfod">
+		<![CDATA[
+		DELETE RESTAP_BSTFOD_MST
+		 WHERE OPER_CD = #pv_oper_cd#
+		   AND REST_CD = #pv_rest_cd#
+		]]>
+	</delete>
+	
+	<update id="updateComfor">
+		UPDATE RESTAP_COMFOR_MST
+		   SET OPER_CD    = #pv_oper_cd#
+		      ,REST_CD    = #pv_rest_cd#
+		      ,SEQ        = #seq#
+		      ,PSCODE     = #pscode#
+		      ,PS_NM      = #ps_nm#
+		      ,STIME      = #stime#
+		      ,ETIME      = #etime#
+		      ,IMAGE      = #image#
+		      ,REG_ID     = #pv_reg_id#
+		      ,REG_DTIME  = TO_CHAR(SYSDATE,'YYYYMMDD')
+		      ,LAST_ID    = #pv_reg_id#
+		      ,LAST_DTIME = TO_CHAR(SYSDATE,'YYYYMMDD')
+		 WHERE OPER_CD = #pv_oper_cd#
+		   AND REST_CD = #pv_rest_cd#
+		   AND SEQ = #seq#
+	</update>
+	
+	<insert id="insertComfor">	
+		<selectKey keyProperty="seq">
+			SELECT TO_NUMBER(NVL(MAX(SEQ), '0')) + 1
+			  FROM RESTAP_COMFOR_MST
+		</selectKey>
+		<![CDATA[
+		INSERT INTO RESTAP_COMFOR_MST
+		  (OPER_CD, REST_CD, SEQ, PSCODE, PS_NM, STIME, ETIME, IMAGE, ETC, GUBUN, REG_ID, REG_DTIME, LAST_ID, LAST_DTIME)
+		VALUES
+		  (#pv_oper_cd#, #pv_rest_cd#, #seq#, #pscode#, (SELECT NM_REP
+													 	   FROM RESTCM_CODMST_MST
+													 	  WHERE 1=1
+													 	    AND NM_GB = 'C01'
+													        AND NM_CD = #pscode#)
+			, #stime#, #etime#, #image#, '', '', #pv_reg_id#, TO_CHAR(SYSDATE,'YYYYMMDD'), #pv_reg_id#, TO_CHAR(SYSDATE,'YYYYMMDD'))
+	    ]]>
+	</insert>
+	
+	<delete id="deleteComfor">
+		<![CDATA[
+		DELETE RESTAP_COMFOR_MST
+		 WHERE OPER_CD = #pv_oper_cd#
+		   AND REST_CD = #pv_rest_cd#
+		   AND SEQ = #seq#
+		]]>
+	</delete>
+	
+	<update id="updateBrand">
+		UPDATE RESTAP_BRAND_MST
+		   SET OPER_CD    = #pv_oper_cd#
+		      ,REST_CD    = #pv_rest_cd#
+		      ,SEQ        = #seq#
+		      ,BRDCODE    = #brdcode#
+		      ,BRD_NM     = #brd_nm#
+		      ,STIME      = #stime#
+		      ,ETIME      = #etime#
+		      ,IMAGE      = #image#
+		      ,REG_ID     = #pv_reg_id#
+		      ,REG_DTIME  = TO_CHAR(SYSDATE,'YYYYMMDD')
+		      ,LAST_ID    = #pv_reg_id#
+		      ,LAST_DTIME = TO_CHAR(SYSDATE,'YYYYMMDD')
+		 WHERE OPER_CD = #pv_oper_cd#
+		   AND REST_CD = #pv_rest_cd#
+		   AND SEQ = #seq#
+	</update>
+	
+	<insert id="insertBrand">	
+		<selectKey keyProperty="seq">
+			SELECT TO_NUMBER(NVL(MAX(SEQ), '0')) + 1
+			  FROM RESTAP_BRAND_MST
+		</selectKey>
+		<![CDATA[		
+		INSERT INTO RESTAP_BRAND_MST
+		  (OPER_CD, REST_CD, SEQ, BRDCODE, BRD_NM, STIME, ETIME, IMAGE, ETC, BRDGUBUN, REG_ID, REG_DTIME, LAST_ID, LAST_DTIME)
+		VALUES
+		  (#pv_oper_cd#, #pv_rest_cd#, #seq#, #brdcode#, (SELECT NM_REP
+													 	   FROM RESTCM_CODMST_MST
+													 	  WHERE 1=1
+													 	    AND NM_GB = 'B01'
+													        AND NM_CD = #brdcode#)
+			, #stime#, #etime#, #image#, '', '', #pv_reg_id#, TO_CHAR(SYSDATE,'YYYYMMDD'), #pv_reg_id#, TO_CHAR(SYSDATE,'YYYYMMDD'))
+	    ]]>
+	</insert>
+	
+	<delete id="deleteBrand">
+		<![CDATA[
+		DELETE RESTAP_BRAND_MST
+		 WHERE OPER_CD = #pv_oper_cd#
+		   AND REST_CD = #pv_rest_cd#
+		   AND SEQ = #seq#
+		]]>
+	</delete>
+	
+	<update id="updateEveinf">
+		UPDATE RESTAP_EVEINF_MST
+		   SET OPER_CD     = #pv_oper_cd#
+		      ,REST_CD     = #pv_rest_cd#
+		      ,SEQ         = #seq#
+		      ,EVENT_SDATE = #event_sdate#
+		      ,EVENT_EDATE = #event_edate#
+		      ,EVENT_NAME  = #event_name#
+		      ,REG_ID      = #pv_reg_id#
+		      ,REG_DTIME   = TO_CHAR(SYSDATE,'YYYYMMDD')
+		      ,LAST_ID     = #pv_reg_id#
+		      ,LAST_DTIME  = TO_CHAR(SYSDATE,'YYYYMMDD')
+		 WHERE OPER_CD = #pv_oper_cd#
+		   AND REST_CD = #pv_rest_cd#
+		   AND SEQ = #seq#
+	</update>
+	
+	<insert id="insertEveinf">	
+		<selectKey keyProperty="seq">
+			SELECT TO_NUMBER(NVL(MAX(SEQ), '0')) + 1
+			  FROM RESTAP_EVEINF_MST
+		</selectKey>
+		<![CDATA[		
+		INSERT INTO RESTAP_EVEINF_MST
+		  (OPER_CD, REST_CD, SEQ, EVENT_SDATE, EVENT_EDATE, EVENT_NAME, REG_ID, REG_DTIME, LAST_ID, LAST_DTIME)
+		VALUES
+		  (#pv_oper_cd#, #pv_rest_cd#, #seq#, #event_sdate#, #event_edate#, #event_name#, #pv_reg_id#, TO_CHAR(SYSDATE,'YYYYMMDD'), #pv_reg_id#, TO_CHAR(SYSDATE,'YYYYMMDD'))
+	    ]]>
+	</insert>
+	
+	<delete id="deleteEveinf">
+		<![CDATA[
+		DELETE RESTAP_EVEINF_MST
+		 WHERE OPER_CD = #pv_oper_cd#
+		   AND REST_CD = #pv_rest_cd#
+		   AND SEQ = #seq#
+		]]>
+	</delete>
+	
+	<update id="updateFreeck">
+		UPDATE RESTAP_FREECK_MST
+	   SET OPER_CD    = #pv_oper_cd#
+	      ,REST_CD    = #pv_rest_cd#
+	      ,SEQ        = #seq#
+	      ,SDATE      = #sdate#
+	      ,EDATE      = #edate#
+	      ,CHECKSTORE = #checkstore#
+	      ,CHECKTEL   = #checktel#
+	      ,REG_ID     = #pv_reg_id#
+	      ,REG_DTIME  = TO_CHAR(SYSDATE,'YYYYMMDD')
+	      ,LAST_ID    = #pv_reg_id#
+	      ,LAST_DTIME = TO_CHAR(SYSDATE,'YYYYMMDD')
+	 WHERE OPER_CD = #pv_oper_cd#
+	   AND REST_CD = #pv_rest_cd#
+	   AND SEQ = #seq#
+	</update>
+	
+	<insert id="insertFreeck">	
+		<selectKey keyProperty="seq">
+			SELECT TO_NUMBER(NVL(MAX(SEQ), '0')) + 1
+			  FROM RESTAP_FREECK_MST
+		</selectKey>
+		<![CDATA[
+		INSERT INTO RESTAP_FREECK_MST
+		  (OPER_CD, REST_CD, SEQ, SDATE, EDATE, CHECKSTORE, CHECKTEL, REG_ID, REG_DTIME, LAST_ID, LAST_DTIME)
+		VALUES
+		  (#pv_oper_cd#, #pv_rest_cd#, #seq#, #sdate#, #edate#, #checkstore#, #checktel#, #pv_reg_id#, TO_CHAR(SYSDATE,'YYYYMMDD'), #pv_reg_id#, TO_CHAR(SYSDATE,'YYYYMMDD'))
+	    ]]>
+	</insert>
+	
+	<delete id="deleteFreeck">
+		<![CDATA[
+		DELETE RESTAP_FREECK_MST
+		 WHERE OPER_CD = #pv_oper_cd#
+		   AND REST_CD = #pv_rest_cd#
+		   AND SEQ = #seq#
+		]]>
+	</delete>
+</sqlMap>

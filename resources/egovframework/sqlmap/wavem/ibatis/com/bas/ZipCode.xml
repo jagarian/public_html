@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="ZipCode">
+	<typeAlias alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap" />
+	<typeAlias alias="egovMapNoCamel" type="egovframework.rte.psl.dataaccess.util.EgovMapNoCamel"/>
+	<typeAlias alias="stdCardVo" type="egovframework.rte.com.bas.vo.StdCardVo" />
+	
+
+	<resultMap id="Result" class="HashMap">
+		<result property="rsinfo" column="rsinfo"
+			typeHandler="egovframework.rte.cmmn.util.RsMetaData" />
+	</resultMap>
+
+	<select id="select_ZipCodeCode" resultClass="egovMapNoCamel">
+		SELECT SD_NM CODE, SD_NM CODENM
+		  FROM RESTCM_ZIPCOD_MST
+		 WHERE 1 = 1
+		   AND 'A' = #index#
+		 GROUP BY SD_NM
+		 UNION ALL
+		SELECT SGG_NM CODE, SGG_NM CODENM
+		  FROM RESTCM_ZIPCOD_MST
+		 WHERE 1 = 1
+		   AND SD_NM = #sido#
+		   AND 'B' = #index#
+		 GROUP BY SGG_NM
+		 ORDER BY CODE
+	</select>
+	
+	<select id="select_ZipCodeAll" resultClass="egovMapNoCamel">
+		SELECT ZIP_NO
+		     , SD_NM
+		     , SGG_NM
+		     , EMD_NM
+		     , TRIM(RI_NM || DOSO_NM || BNJI_ADDR || APT_NM) AS BNJI_ADDR
+		  FROM RESTCM_ZIPCOD_MST
+		 WHERE 1=1
+		 <isNotEmpty property="sd_nm">
+		   AND SD_NM = #sd_nm#
+		 </isNotEmpty>
+		 <isNotEmpty property="sgg_nm">
+		   AND SGG_NM = #sgg_nm#
+         </isNotEmpty>
+		 <isNotEmpty property="emd_nm">
+		   AND EMD_NM LIKE '%' || #emd_nm# || '%'
+		 </isNotEmpty>
+	</select>
+</sqlMap>

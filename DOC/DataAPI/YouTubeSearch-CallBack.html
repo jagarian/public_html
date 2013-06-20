@@ -1,0 +1,34 @@
+<html>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+   <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+<title>My Videos</title>
+   <script src="http://www.google.com/jsapi" type="text/javascript"></script>
+<script type="text/javascript">
+function showMyVideos(data) {
+  var feed = data.feed;
+  var entries = feed.entry || [];
+  var html = ['<ul>'];
+  for (var i = 0; i < entries.length; i++) {
+    var entry = entries[i];
+    var title = entry.title.$t;
+    html.push('<li>', title, '</li>');
+  }
+  html.push('</ul>');
+  document.getElementById('videos').innerHTML = html.join('');
+}
+</script>
+</head>
+<body>
+<div id="videos" />
+<script 
+    type="text/javascript" 
+    src="http://gdata.youtube.com/feeds/users/GoogleDevelopers/uploads?
+		alt=json-in-script&format=5&callback=showMyVideos">
+</script>
+</body>
+</html>

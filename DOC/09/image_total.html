@@ -1,0 +1,141 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+ <head>
+ <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+  <title> 통합 이미지 검색기 </title>
+ </head>
+<script type="text/javascript"
+	src="./js/ajit.js">
+</script>
+<script type="text/javascript"
+	src="./js/NaverImageService.js">
+</script>
+<script type="text/javascript"
+	src="./js/DaumImageService.js">
+</script>
+<script type="text/javascript"
+	src="./js/FlickrImageService.js">
+</script>
+<script type="text/javascript"
+	src="./js/PhotobucketImageService.js">
+</script>
+ <body>
+	<style type="text/css">
+
+	#searchQ {
+		border:1px solid #aaa;
+		height:1.2em;
+	}
+
+	#searchBtn {
+		border:1px solid #aaa;
+		font-size:11px;
+		font-family:dotum,gulim;
+		padding-top:3px;
+	}
+
+	#resultList {
+		margin: 0px;
+		padding: 5px 0px 0px 5px;
+		list-style: none;
+		border:1px solid #aaa;
+		width:328px;
+		height:328px;
+	}
+
+	#resultList li{
+		float : left;
+		margin : 0px 5px 5px 0px;
+		width: 75px;
+		height: 75px;
+		border: 1px solid #ddd;
+		overflow: hidden;
+	}
+
+	#searchMemuTab{
+		margin: 10px 0px 0px 0px;
+		padding: 0px;
+		list-style: none;
+	}
+
+	#searchMemuTab li{
+		display : inline;
+		margin: 0px;
+		padding : 5px 5px 0px 5px;
+		font-family : dotum,gulim;
+		font-size : 11px;
+		background-color : #eee;
+		border-top : 1px solid #aaa;
+		border-left : 1px solid #aaa;
+		cursor:pointer;
+	}
+
+	.rightLine {
+		border-right : 1px solid #aaa;
+	}
+	
+	</style>
+
+	<script type="text/javascript">
+		//기본 서비스
+		var selectedService = "naver";
+		
+		function searchImage(q){
+			
+			switch(selectedService){
+				case "naver" :
+					NaverImageService.search(q);
+				break
+				case "daum" :
+					DaumImageService.search(q);
+				break
+				case "flickr" :
+					FlickrImageService.search(q);
+				break
+				case "photobucket" :
+					PhotobucketImageService.search(q);
+				break
+			}
+		}
+
+		function setService(service){			
+			try{
+				$E(selectedService+"Btn").setStyle("background-color","#eee");		
+				$E(service+"Btn").setStyle("background-color","#fff");
+				selectedService = service;
+
+				if($E('searchQ').value != ""){
+					searchImage($E('searchQ').value);
+				}
+			}catch(e){
+				alert(e);
+			}
+		}
+	</script>
+
+	<div>
+		<input type="text" id="searchQ" />
+		<input type="button" 
+			id="searchBtn"
+			onclick="searchImage($E('searchQ').value)" 
+			value="검색" />
+	</div>
+	
+
+	<ul id="searchMemuTab">
+		<li id="naverBtn" 
+			onclick="setService('naver')" 
+			style="background-color:#fff">Naver</li><li
+			id="daumBtn" 
+			onclick="setService('daum')">Daum</li><li
+			id="flickrBtn" 
+			onclick="setService('flickr')">Flickr</li><li
+			id="photobucketBtn" 
+			onclick="setService('photobucket')"
+			class="rightLine">Photobucket</li>
+	</ul>
+
+	<ul id="resultList"></ul>
+
+ </body>
+</html>

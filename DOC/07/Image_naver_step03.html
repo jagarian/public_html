@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+ <head>
+ <meta http-equiv="content-type" content="text/html;  charset=utf-8"/>
+  <title> naver image 검색기 </title>
+ </head>
+ <body>
+	<script src="./js/ajit.js"> </script>
+	<script type="text/javascript">
+		//XML Parser 불러오기
+		$import("asjs.utils.XmlParser");
+		
+		//전역변수 선언
+		NAVER_API_KEY = "c483ef6a2bf19601b486c7642e7146e4";  //"5e0c2424e5ab3b1894d38d2aa5eead3f"; //
+		NAVER_API_URL = "http://openapi.naver.com/search?";
+		
+		function search(q){
+			//URL로 Request를 보내는 객체 선언
+			var loader = new URLLoader();
+			//Request 객체 선언
+			var req = new URLRequest();
+			//URL Parameter 객체 선언
+			var params = new URLVariables();		
+			
+			//파라미터 값을 Object로 정의
+			params.parameters = {
+				"key" : NAVER_API_KEY,
+				"target" : "image",
+				"query" : q,
+				"display" : "10",
+				"sort" : "sim",
+				"filter" : "all"
+			};
+
+			req.url = NAVER_API_URL + params.toString();
+			//Request 보내기 
+			loader.load(req);
+			//Load완료시 실행할 이벤트 정의
+			loader.addEvent(URLLoaderEvent.COMPLETE,onSearchCompleteHandler);
+		}
+
+		//Load완료 이벤트 핸들러로 Response를 인자로 받는다.
+		function onSearchCompleteHandler(response){
+			//XML을 Javascript 객체로 파싱
+			var xml = new asjs.utils.XmlParser(response.xml).toJson();
+
+			if(xml.rss.channel.item){
+				//RSS결과로 이미지 목록 만들기
+				renderImage(xml.rss.channel.item);
+			}
+		}
+		
+		//검색 결과 이미지 배치
+		function renderImage(items){ 
+			$E("resultList").setHTML("");
+
+			for(var i=0; i < items.length; i++){
+				//IMG 객체 생성
+				var img = $new("img");
+				//LI 객체 생성
+				var li = $new("li");
+				//$E = document.getElementById
+				$E("resultList").addChild(li);
+				li.addChild(img);
+				//img 객체에 src속성 정의
+				img.setAttribute("src",items[i].thumbnail.text);
+				img.setAttribute("src",items[i].link.text);
+			}
+		}
+		
+	</script>
+
+	<div>
+		<input type="text" id="searchQ" />
+		<input type="button" onclick="search($E('searchQ').value)" value="검색" />
+	</div>
+	<ul id="resultList"></ul>
+
+ </body>
+</html>

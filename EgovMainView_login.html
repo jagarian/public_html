@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=euc-kr">
+  <title>MAIN PAGE jQuery UI Menu - Default functionality</title>
+  <link rel="stylesheet" href="./css/css.css" type="text/css">
+  <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+  <!-- <link rel="stylesheet" href="./jquery-ui.css" /> -->
+<!--   <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+  <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script> -->
+  <script src="./jquery-1.9.1.js"></script>
+  <script src="./jquery-ui.js"></script>
+
+  <link rel="stylesheet" href="/resources/demos/style.css" />
+  <script>
+  $(function() {
+    $( "#menu" ).menu();
+  });
+  </script>
+  <style>
+  .ui-menu { width: 150px; }
+  </style>
+
+<!--   <script>
+  $(function() {
+    $( "input[type=submit], a, button" )
+      .button()
+      .click(function( event ) {
+        event.preventDefault();
+      });
+  });
+  </script> -->
+ </head>
+
+<body>
+
+<table width="900" border="0" cellspacing="0" cellpadding="0">
+<tr>
+<!-- logo -->
+<td width="147" height="88"><img src="./images/javalogo.gif" width="47" height="88"></td>
+<td width="724">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+        <td width="560" height="68" class="t_strong">테스트 사이트</td>
+        <td width="164">
+            <div>
+                <select name="select">
+                <option value="./jqia.source/index.html">jqia.source</option>
+                <option value="./default.php">default.php</option>
+                <option value=""> Quick View 3</option>
+                <option value=""> Quick View 4</option>
+                <option value=""> Quick View 5 </option>
+                <option value=""> Quick View 6</option>
+                </select>
+            </div>
+        </td>
+    </tr>
+    <!-- top menu background -->
+    <tr class="TopMenuBg">
+    <td height="44" colspan="2">
+        <!-- top menu start -->
+<!-- 		
+        <button>A button element</button>
+		<input type="submit" value="A submit button" />
+		<a href="#">An anchor</a> -->
+        <table width="700px" border="0" cellspacing="0" cellpadding="0" style="padding-top:6px;">
+			<tr>
+				<td align="right" width="76"><a href="EgovMainView_login.html">HOME</a></td>
+                <td align="center" width="100"><a href="board.html">BOARD PAGE</a></td>
+                <td align="center" width="88"><a href="Hangok.html">구글맵test</a></td>
+                <td align="center" width="86"><a href="./DOC/DataAPI/YouTubeSearch-MostViewed.html">유튜브test</a></td>
+                <td align="center" width="66"><a href="./OPENAPI/bubbleChart.html">CHARTtest</a></td>
+                <td align="center" width="94"><a href="image_naver_step02.html">이미지검색test</a></td>
+                <td align="center" width="105"><a href="#">저수지검색</a></td>
+				<td align="center" width="85"><a href="#">사용자</a></td>
+			</tr>
+        </table>
+       <!-- top menu end -->
+    </td>
+    </tr>
+    </table>
+</td>
+</tr>
+</table>
+
+<table width="900" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+    <!-- left menu start http://jqueryui.com/menu/ -->
+    <td width="181" valign="top">
+		<ul id="menu">
+		  <li class="ui-state-disabled"><a href="#">LeftMenuTitle</a></li>
+		  <li><a href="#">관리자 님 어서오세요</a></li>
+		  <li><a href="#">공사중</a></li>
+		  <li><a href="#">관리자</a></li>
+		  <li>
+			<a href="#">저수지 리스트</a>
+			<ul>
+			  <li class="ui-state-disabled"><a href="#">저수지 리스트</a></li>
+			  <li><a href="image_naver_step02.html">낚시터 이미지</a></li>
+			  <li><a href="#">낚시터 정보</a></li>
+			</ul>
+		  </li>
+		  <li><a href="board.html">BoardList</a></li>
+		  <li><a href="#">채비강좌</a></li>
+		  <li>
+			<a href="#">LinkSite</a>
+			<ul>
+			  <li><a href="www.fishnet.co.kr" target="_blank">fishnet</a></li>
+			  <li><a href="http://www.ilhak.co.kr" target="_blank">군계ilhak</a></li>
+			  <li><a href="http://www.eftv.co.kr" target="_blank">eftv.co.kr</a></li>
+			  <li><a href="http://www.fs-tv.co.kr" target="_blank">fs-tv.co.kr</a></li>
+			  <li><a href="http://www.nssr.co.kr/mall" target="_blank">nssr mall</a></li>
+			  <li><a href="http://www.stfshop.co.kr target="_blank">심통낚시점</a></li>
+			</ul>
+		  </li>
+		  <li><a href="http://dev.naver.com/openapi">NAVER OPEN API</a></li>
+		  <li><a href="#">googleMap Link</a>
+			<ul>
+			  <li>
+				<a href="#">Google.Maps API</a>
+				<ul>
+				  <li><a href="http://code.google.com/intl/ko-KR/apis/maps/" target="_blank">google.maps</a></li>
+				  <li><a href="http://code.google.com/intl/ko-KR/apis/maps/documentation/javascript/" target="_blank">documentation</a></li>
+				  <li><a href="http://code.google.com/intl/ko-KR/apis/maps/documentation/javascript/basics.html" target="_blank">basics</a></li>
+				  <li><a href="http://code.google.com/intl/ko-KR/apis/maps/documentation/javascript/tutorial.html" target="_blank">tutorial</a></li>
+				  <li><a href="http://code.google.com/intl/ko-KR/apis/maps/documentation/javascript/reference.html" target="_blank">reference</a></li>
+				  <li><a href="http://code.google.com/intl/ko-KR/apis/maps/documentation/javascript/controls.html" target="_blank">controls</a></li>
+				  <li><a href="https://developers.google.com/kml/documentation/?hl=ko" target="_blank">Developers documentation</a></li>
+				</ul>
+			  </li>
+			</ul>
+		  </li>
+		  <li class="ui-state-disabled"><a href="#">MyPhoto</a></li>
+		</ul>
+         <table width="181" height="194" border="0" align="center" cellpadding="0" cellspacing="0">
+<!--        <tr>
+                <td valign="bottom" style="background-image:url('./images/left_menu_top.gif'); background-repeat:no-repeat;">
+                <div class="LeftMenuTitle">LeftMenuTitle</div>
+                <div class="LeftMenuWelcome">관리자 님 어서오세요</div>
+                <div class="LeftMenuBtn"><a href="#"><img src="./images/btn_logout.gif"></a>
+				                         <a href="#"><img src="./images/btn_kne.gif"></a>
+				</div>
+				</td>
+            </tr>
+            <tr>
+                <td><div class="LeftMenuBg"><a href="#">공사중</a></div></td>
+            </tr>
+
+            <tr>
+                <td><div class="LeftMenuBgList">
+						<a href="http://code.google.com/intl/ko-KR/apis/maps/">maps</a></div>
+				    <div class="LeftMenuBgList">
+						<a href="http://code.google.com/intl/ko-KR/apis/maps/documentation/javascript/">documentation</a></div></td>			
+           </tr>
+            <tr>
+                <td><div class="LeftMenuBg">
+					<a href="http://code.google.com/intl/ko-KR/apis/maps/documentation/javascript/basics.html">basics.html </a></div></td>
+            </tr>
+            <tr>
+                <td><div class="LeftMenuBgList">
+						<a href="http://code.google.com/intl/ko-KR/apis/maps/documentation/javascript/tutorial.html">tutorial.html</a></div>
+				    <div class="LeftMenuBgList">
+						<a href="http://code.google.com/intl/ko-KR/apis/maps/documentation/javascript/reference.html">reference.html</a></div></td>
+            </tr>
+            <tr>
+                <td><div class="LeftMenuBg">
+				<a href="http://code.google.com/intl/ko-KR/apis/maps/documentation/javascript/controls.html">controls.html</a></div></td>
+            </tr>
+            <tr>
+                <td><div class="LeftMenuBgList"><a href="#/">http://jagarian2013.tistory.com</a></div>
+				    <div class="LeftMenuBgList">
+					<a href="https://developers.google.com/kml/documentation/?hl=ko">Developers documentation</a></div></td>
+            </tr>
+            <tr>
+                <td><img src="./images/left_menu_btm.gif"></td>
+            </tr>-->
+        </table> 
+    </td>
+<!-- 본문시작 -->
+    <td valign="top">
+<!-- Login -->
+        <table width="100%" border="0" cellpadding="0" cellspacing="0">
+        <tr>
+<!--        
+          <td background="./images/index_login.gif" width="717" height="448">
+            <div class="LoginIdText">
+                <table width="100%" border="0" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td width="64%"><input name="id" type="text" value="" size="20" maxlength="20"></td>
+                        <td width="36%"><input type="checkbox" value="" class="checkbox"><img src="./images/login_id_save.gif">
+						</td>
+                  </tr>
+                </table>
+          </div>
+          <div class="LoginPassText">
+                <table width="100%" border="0" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td>
+							<input name="pass" type="submit" value="" size="20" maxlength="20"></td>
+                        <td><a href="#"><img src="./images/login_btn.gif"></a></td>
+                    </tr>
+                </table>
+            </div>
+			<div class="LoginJoinBtn">
+                <table width="100%" border="0" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td><a href="#"><img src="./images/join_btn.gif"></a></td>
+                    </tr>
+                </table>
+			</div>
+            </td> 
+-->
+        </tr>
+        </table>
+ <!-- //login -->           
+      </td>
+        </tr>
+        </table>
+<!-- bottom -->
+<table width="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="#f4f4f4" class="BottomStyle">
+    <tr>
+        <td width="900px" height="80px"align="center">Copyright 2013 All rights reserved.</td>
+        <td></td>
+    </tr>
+</table>
+</body>
+</html>

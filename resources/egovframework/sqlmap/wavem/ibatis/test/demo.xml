@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Demo">
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="egovMapNoCamel" type="egovframework.rte.psl.dataaccess.util.EgovMapNoCamel"/>
+	<typeAlias  alias="testVo" type="egovframework.rte.Test.vo.TestVo"/>
+
+	<resultMap id="Result" class="HashMap">
+		<result property="rsinfo" column="rsinfo" typeHandler="egovframework.rte.cmmn.util.RsMetaData" />
+	</resultMap>
+
+	<select id="testEmpInfo" resultMap="Result">
+		SELECT EMPNO, ENAME, JOB, MGR, HIREDATE, SAL, COMM, DEPTNO FROM EMP WHERE ROWNUM = 1
+	</select>
+	
+	<select id="selectSampleInfo" resultMap="Result">
+	     SELECT A.ID, A.NAME, A.DESCRIPTION, A.USE_YN, A.REG_USER
+	       FROM
+            (
+				SELECT
+					ID, NAME, DESCRIPTION, USE_YN, REG_USER, ROWNUM
+				FROM SAMPLE
+				WHERE 1=1
+				ORDER BY ID DESC
+			) A
+		where rownum = 1
+	</select>
+	
+	<select id="selectSample" resultClass="egovMapNoCamel">
+		 SELECT A.ID, A.NAME, A.DESCRIPTION, A.USE_YN, A.REG_USER
+	       FROM
+            (
+				SELECT
+					ID, NAME, DESCRIPTION, USE_YN, REG_USER, ROWNUM
+				FROM SAMPLE
+				WHERE 1=1
+				ORDER BY ID DESC
+			) A
+	</select>
+	
+	<select id="testEmp" resultClass="egovMapNoCamel">
+		SELECT EMPNO, ENAME, JOB, MGR, HIREDATE, SAL, COMM, DEPTNO 
+		  FROM EMP
+		ORDER BY EMPNO DESC
+	</select>
+	
+	<select id="selectEmpMulti" resultClass="egovMapNoCamel">
+		SELECT EMPNO, ENAME, JOB, MGR, HIREDATE, SAL, COMM, DEPTNO FROM EMP
+		where rownum &lt; 2000		
+	</select>
+	
+	<select id="detailSample" resultClass="testVo">
+		<![CDATA[
+		SELECT
+			ID, NAME, DESCRIPTION, USE_YN, REG_USER
+		FROM SAMPLE 
+		WHERE id = #id#
+		]]>
+	</select>
+	
+	<update id="updateSampleMulti">
+		<![CDATA[
+			UPDATE SAMPLE
+			   SET NAME        = #name#
+			      ,DESCRIPTION = #description#
+			      ,USE_YN      = #use_yn#
+			      ,REG_USER    = #reg_user#
+			 WHERE ID = #id#
+		]]>
+	</update>
+	
+	<update id="updateSample">
+		<![CDATA[
+			UPDATE SAMPLE 
+			SET ID=#id#
+				, NAME=#name#
+				, DESCRIPTION=#description#
+				, USE_YN=#useYn#
+			WHERE ID=#id#
+		]]>
+	</update>
+	
+	<insert id="insertSample">
+		<![CDATA[
+			INSERT INTO SAMPLE 
+				(  ID
+				  , NAME
+				  , DESCRIPTION
+				  , USE_YN
+				  , REG_USER )
+			VALUES ( #id# 
+				  , #name#
+				  , #description#
+				  , #useYn#
+				  , #regUser# )
+		]]>
+	</insert>
+	
+	<insert id="insertSampleMulti">
+		<![CDATA[
+			INSERT INTO SAMPLE 
+				(  ID
+				  , NAME
+				  , DESCRIPTION
+				  , USE_YN
+				  , REG_USER )
+			VALUES ( #id# 
+				  , #name#
+				  , #description#
+				  , #useYn#
+				  , #regUser# )
+		]]>
+	</insert>
+	
+	<update id="updateEmpMulti">
+		UPDATE EMP
+		   SET EMPNO    = #empno#
+		      ,ENAME    = #ename#
+		      ,JOB      = #job#
+		      ,MGR      = #mgr#
+		      ,SAL      = #sal#
+		      ,COMM     = #comm#
+		      ,DEPTNO   = #deptno#
+		 WHERE EMPNO = #org_empno#
+	</update>
+
+	<insert id="insertEmpMulti">
+	
+		<selectKey keyProperty="eseq">
+		select max(empno)+1 from emp
+		</selectKey>
+		INSERT INTO EMP (EMPNO,ENAME) VALUES (#eseq# ,#ename#)
+		<selectKey>
+		select nextval(#eseq#) from dual
+		</selectKey>
+	
+	</insert>
+	
+	<insert id="insertEmpMulti22">
+		INSERT INTO EMP aa (EMPNO,ENAME) VALUES (#empno# ,#ename#)		
+	</insert>
+	
+
+	<delete id="deleteEmpMulti">
+		<![CDATA[
+		DELETE EMP WHERE EMPNO = #empno#
+		]]>
+	</delete>
+	<delete id="deleteSampleMulti">
+		<![CDATA[
+		]]>
+			DELETE FROM SAMPLE 
+			WHERE 1=1 
+			  AND ID=#id#
+			 /* property 는  name 과 동일하게 대소문자 구별함  */
+			<isNotEmpty property="name" prepend="">
+			  AND NAME = #name#
+			</isNotEmpty>
+			  
+	</delete>
+	<delete id="deleteSample">
+		<![CDATA[
+			DELETE FROM SAMPLE 
+			WHERE ID=#id#
+		]]>
+	</delete>
+	
+	
+
+</sqlMap>

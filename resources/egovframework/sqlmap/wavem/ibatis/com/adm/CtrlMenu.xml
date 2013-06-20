@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="CtrlMenu">
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias alias="egovMapNoCamel" type="egovframework.rte.psl.dataaccess.util.EgovMapNoCamel"/>
+	
+	<select id="selectctrlmenudlist" resultClass="egovMapNoCamel">
+		SELECT MN_MENU_ID
+		      ,MN_MENU_NM
+		      ,LOC_NO
+		      ,BIGO
+		  FROM RESTME_MENUMA_MST		
+	</select>
+	
+	<select id="selectctrlmenujlist" resultClass="egovMapNoCamel">
+		SELECT MN_MENU_ID
+		      ,GR_MENU_ID
+		      ,GR_MENU_NM
+		      ,LOC_NO
+		      ,BIGO
+		  FROM RESTME_MENUGR_MST
+		 WHERE 1 = 1
+		<isNotEmpty property="pv_mn_menu_id" prepend="">
+			AND MN_MENU_ID LIKE #pv_mn_menu_id# || '%'
+		</isNotEmpty>
+		 ORDER BY MN_MENU_ID
+		         ,GR_MENU_ID
+	</select>
+	
+	<select id="selectctrlmenurlist" resultClass="egovMapNoCamel">
+		SELECT MENU_SEQ
+		      ,MN_MENU_ID
+		      ,GR_MENU_ID
+		      ,SB_MENU_ID
+		      ,SB_MENU_NM
+		      ,LOC_NO
+		      ,PATH_NM
+		      ,FILE_NM
+		      ,RPT_GB
+		      ,RPT_NO
+		      ,RPT_GR_CD
+		      ,REST_USE_GB
+		      ,OIL_USE_GB
+		      ,CAR_USE_GB
+		      ,OPER_USE_GB
+		      ,ROAD_USE_GB
+		      ,CLUB_USE_GB
+		      ,DEAL_USE_GB
+		      ,UNION_USE_GB
+		      ,BIGO
+		      ,TOP_MARGIN
+		      ,BOTTOM_MARGIN
+		      ,LEFT_MARGIN
+		      ,RIGHT_MARGIN
+		      ,PORTRAIT_GB
+		      ,REG_ID
+		      ,REG_DTIME
+		      ,LAST_ID
+		      ,LAST_DTIME
+		      ,USE_YN
+		  FROM RESTME_MENUSU_MST
+		 WHERE 1 = 1
+		<isNotEmpty property="pv_mn_menu_id" prepend="">
+			AND MN_MENU_ID LIKE #pv_mn_menu_id# || '%'
+		</isNotEmpty>
+		<isNotEmpty property="pv_gr_menu_id" prepend="">
+		    AND GR_MENU_ID LIKE #pv_gr_menu_id# || '%'
+		</isNotEmpty>
+		 ORDER BY MN_MENU_ID
+		         ,GR_MENU_ID
+		         ,SB_MENU_ID
+	</select>
+	
+	
+	<insert id="insertctrlmenudlist">
+		INSERT INTO RESTME_MENUMA_MST
+		  (MN_MENU_ID, MN_MENU_NM, LOC_NO)
+		VALUES
+		  (#mn_menu_id#, #mn_menu_nm#, #loc_no#)
+	</insert>
+	
+	<update id="updatectrlmenudlist">
+		UPDATE RESTME_MENUMA_MST
+		   SET MN_MENU_ID = #mn_menu_id#
+		      ,MN_MENU_NM = #mn_menu_nm#
+		      ,LOC_NO     = #loc_no#
+		 WHERE MN_MENU_ID = #org_mn_menu_id#
+	</update>
+	
+	<delete id="deletectrlmenudlist">
+		DELETE FROM RESTME_MENUMA_MST 
+		 WHERE MN_MENU_ID = #mn_menu_id#		
+	</delete>
+	
+	<insert id="insertctrlmenujlist">
+		INSERT INTO RESTME_MENUGR_MST
+		  (MN_MENU_ID, GR_MENU_ID, GR_MENU_NM, LOC_NO, BIGO)
+		VALUES
+		  (#mn_menu_id#, #gr_menu_id#, #gr_menu_nm#, #loc_no#, #bigo#)
+	</insert>
+	
+	<update id="updatectrlmenujlist">
+		UPDATE RESTME_MENUGR_MST
+		   SET MN_MENU_ID = #mn_menu_id#
+		      ,GR_MENU_ID = #gr_menu_id#
+		      ,GR_MENU_NM = #gr_menu_nm#
+		      ,LOC_NO     = #loc_no#
+		      ,BIGO       = #bigo#
+		 WHERE MN_MENU_ID = #org_mn_menu_id#
+		   AND GR_MENU_ID = #org_gr_menu_id#
+	</update>
+	
+	<delete id="deletectrlmenujlist">
+		DELETE FROM RESTME_MENUGR_MST
+		 WHERE MN_MENU_ID = #mn_menu_id#
+		   AND GR_MENU_ID = #gr_menu_id#
+	</delete>
+	
+	<insert id="insertctrlmenurlist">
+		<selectKey keyProperty="sb_menu_id_key">
+			SELECT LPAD(TO_NUMBER(NVL(MAX(SB_MENU_ID), '00')) + 1, 2, '0') AS sb_menu_id_key
+			  FROM RESTME_MENUSU_MST
+			 WHERE 1 = 1
+			   AND MN_MENU_ID = #mn_menu_id#
+			   AND GR_MENU_ID = #gr_menu_id#
+		</selectKey>
+		
+		INSERT INTO RESTME_MENUSU_MST
+		  (MENU_SEQ
+		  ,MN_MENU_ID
+		  ,GR_MENU_ID
+		  ,SB_MENU_ID
+		  ,SB_MENU_NM
+		  ,LOC_NO
+		  ,PATH_NM
+		  ,FILE_NM
+		  ,RPT_GB
+		  ,RPT_NO
+		  ,RPT_GR_CD
+		  ,REST_USE_GB
+		  ,OIL_USE_GB
+		  ,CAR_USE_GB
+		  ,OPER_USE_GB
+		  ,ROAD_USE_GB
+		  ,CLUB_USE_GB
+		  ,DEAL_USE_GB
+		  ,UNION_USE_GB
+		  ,BIGO
+		  ,TOP_MARGIN
+		  ,BOTTOM_MARGIN
+		  ,LEFT_MARGIN
+		  ,RIGHT_MARGIN
+		  ,PORTRAIT_GB
+		  ,REG_ID
+		  ,REG_DTIME
+		  ,USE_YN)
+		VALUES
+		  (#mn_menu_id#||#gr_menu_id#||#sb_menu_id_key#
+		  ,#mn_menu_id#
+		  ,#gr_menu_id#
+		  ,#sb_menu_id_key#
+		  ,#sb_menu_nm#
+		  ,#sb_menu_id_key#
+		  ,#path_nm#
+		  ,#file_nm#
+		  ,#rpt_gb#
+		  ,#rpt_no#
+		  ,#rpt_gr_cd#
+		  ,#rest_use_gb#
+		  ,#oil_use_gb#
+		  ,#car_use_gb#
+		  ,#oper_use_gb#
+		  ,#road_use_gb#
+		  ,#club_use_gb#
+		  ,#deal_use_gb#
+		  ,#union_use_gb#
+		  ,#bigo#
+		  ,#top_margin#
+		  ,#bottom_margin#
+		  ,#left_margin#
+		  ,#right_margin#
+		  ,#portrait_gb#
+		  ,#pv_user_id#
+		  ,TO_CHAR(SYSDATE, 'YYYYMMDDHH24MISS')
+		  ,#use_yn#)
+	</insert>
+	
+	<update id="updatectrlmenurlist">
+		UPDATE RESTME_MENUSU_MST
+		   SET SB_MENU_NM    = #sb_menu_nm#
+		      ,PATH_NM       = #path_nm#
+		      ,FILE_NM       = #file_nm#
+		      ,REST_USE_GB   = #rest_use_gb#
+		      ,OIL_USE_GB    = #oil_use_gb#
+		      ,CAR_USE_GB    = #car_use_gb#
+		      ,OPER_USE_GB   = #oper_use_gb#
+		      ,ROAD_USE_GB   = #road_use_gb#
+		      ,CLUB_USE_GB   = #club_use_gb#
+		      ,DEAL_USE_GB   = #deal_use_gb#
+		      ,UNION_USE_GB  = #union_use_gb#
+		      ,BIGO          = #bigo#
+		      ,LAST_ID       = #pv_user_id#
+		      ,LAST_DTIME    = TO_CHAR(SYSDATE, 'YYYYMMDDHH24MISS')
+		      ,USE_YN        = #use_yn#
+		 WHERE MENU_SEQ = #menu_seq#
+	</update>
+	
+	<delete id="deletectrlmenurlist">
+		DELETE FROM RESTME_MENUSU_MST 
+		 WHERE MENU_SEQ = #menu_seq#
+	</delete>
+</sqlMap>

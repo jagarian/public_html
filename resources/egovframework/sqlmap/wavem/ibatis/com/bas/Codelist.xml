@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Codelist">
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias alias="egovMapNoCamel" type="egovframework.rte.psl.dataaccess.util.EgovMapNoCamel"/>
+	
+	<select id="selectmasterlist" resultClass="egovMapNoCamel">
+		SELECT NM_CD
+		      ,NM_REP
+		  FROM RESTCM_CODMST_MST
+		 WHERE 1 = 1
+		   AND NM_GB = #pv_nm_gb#
+		   AND USE_YN = 'Y'
+		 ORDER BY NM_CD
+	</select>
+	
+	<select id="selectdetaillist" resultClass="egovMapNoCamel">
+		SELECT NM_GB
+		      ,NM_CD
+		      ,NM_REP
+		      ,NM_SUB
+		      ,NM_ETC1
+		      ,NM_ETC2
+		      ,NM_SEQ
+		      ,DECODE(USE_YN,'Y',1,'N',0) AS USE_YN
+		  FROM RESTCM_CODMST_MST
+		 where nm_gb = #pv_nm_gb#
+		 ORDER BY NM_CD
+	</select>
+	
+	<insert id="insertdetaillist">
+		INSERT INTO RESTCM_CODMST_MST
+		  (NM_GB
+		  ,NM_CD
+		  ,NM_REP
+		  ,NM_SUB
+		  ,NM_ETC1
+		  ,NM_SEQ
+		  ,USE_YN
+		  ,REG_ID
+		  ,REG_DTIME)
+		VALUES
+		  (#nm_gb#
+		  ,#nm_cd#
+		  ,#nm_rep#
+		  ,#nm_sub#
+		  ,#nm_etc1#
+		  ,#nm_seq#
+		<isEqual property="use_yn" compareValue="1" prepend="">
+		  , 'Y'
+		</isEqual>
+		<isEqual property="use_yn" compareValue="0" prepend="">
+		  , 'N'
+		</isEqual>
+		  ,#pv_user_id#
+		  ,TO_CHAR(SYSDATE, 'YYYYMMDDHH24MISS'))
+		  
+	</insert>
+	
+	<update id="updatedetaillist">
+		UPDATE RESTCM_CODMST_MST
+		   SET NM_REP     = #nm_rep#
+		      ,NM_SUB     = #nm_sub#
+		      ,NM_ETC1    = #nm_etc1#
+		      ,NM_SEQ     = #nm_seq#
+		<isEqual property="use_yn" compareValue="1" prepend="">
+		  	  ,USE_YN     = 'Y'
+		</isEqual>
+		<isEqual property="use_yn" compareValue="0" prepend="">
+		  	  ,USE_YN     = 'N'
+		</isEqual>
+		      ,LAST_ID    = #pv_user_id#
+		      ,LAST_DTIME = TO_CHAR(SYSDATE, 'YYYYMMDDHH24MISS')
+		 WHERE NM_GB = #nm_gb#
+		   AND NM_CD = #nm_cd#
+	</update>
+</sqlMap>

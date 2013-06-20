@@ -1,0 +1,6 @@
+http://code.google.com/intl/ko-KR/apis/maps/
+http://code.google.com/intl/ko-KR/apis/maps/documentation/javascript/ http://code.google.com/intl/ko-KR/apis/maps/documentation/javascript/basics.html http://code.google.com/intl/ko-KR/apis/maps/documentation/javascript/tutorial.html http://code.google.com/intl/ko-KR/apis/maps/documentation/javascript/reference.html http://code.google.com/intl/ko-KR/apis/maps/documentation/javascript/controls.html
+http://www.nsdi.go.kr/.
+https://developers.google.com/kml/documentation/?hl=ko
+
+object.hasOwnProperty()

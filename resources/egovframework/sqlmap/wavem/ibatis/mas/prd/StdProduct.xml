@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="StdProduct">
+	<typeAlias alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap" />
+	<typeAlias alias="egovMapNoCamel" type="egovframework.rte.psl.dataaccess.util.EgovMapNoCamel"/>
+	<!-- <typeAlias alias="stdCardVo" type="egovframework.rte.com.bas.vo.StdCardVo" />-->
+
+	<resultMap id="Result" class="HashMap">
+		<result property="rsinfo" column="rsinfo"
+			typeHandler="egovframework.rte.cmmn.util.RsMetaData" />
+	</resultMap>
+	
+	<select id="selectStdProduct" resultClass="egovMapNoCamel">
+		SELECT REG_SEQ
+		      ,OPER_CD
+		      ,REST_CD
+		      ,APPR_GB
+		      ,PROD_CD
+		      ,PROD_NM
+		      ,LCLASS_CD
+		      ,MCLASS_CD
+		      ,SCLASS_CD
+		      ,PROD_GB
+		      ,SALE_COST
+		      ,IN_COST
+		      ,RENT_RATE_GB
+		      ,TAX_GB
+		      ,SPEC_NM
+		      ,PROD_FORM
+		      ,SALE_PLACE_NM
+		      ,MAKER_NM
+		      ,REG_CAUSE
+		      ,CIRCLE_LINE
+		      ,BIGO
+		      ,REG_DT
+		      ,CHAG_DT
+		      ,CANCEL_DAY
+		      ,RCVR_ID
+		      ,RCV_DT
+		      --,DECODE(REG_STATUS, 010, '대기', 020, '보완', 030, '요청', 040, '등록', '오류') AS REG_STATUS
+		      ,DECODE(REG_STATUS, 010, '대기', 020, '보완', 030, '요청', 040, '등록', '오류') AS REG_STATUS
+		      ,RET_CAUSE
+		      ,OLD_PROD_CD
+		      ,REG_ID
+		      ,REG_DTIME
+		      ,LAST_ID
+		      ,LAST_DTIME
+		  FROM RESTCM_REQPRD_MST
+		  WHERE 1 = 1
+		  <isNotEmpty property="pv_reg_seq">
+		  AND REG_SEQ = #pv_reg_seq#
+		  </isNotEmpty>
+		  <isNotEmpty property="pv_reg_dt">
+		  <![CDATA[
+		  AND RCV_DT >= #pv_reg_dt#
+		  ]]>
+		  </isNotEmpty>
+		  <isNotEmpty property="pv_rcv_dt">
+		  <![CDATA[
+		  AND RCV_DT <= #pv_rcv_dt#
+		  ]]>
+		  </isNotEmpty>
+		  <isNotEmpty property="pv_prod_gb">
+		  AND PROD_GB = #pv_prod_gb#
+		  </isNotEmpty>
+		  <isNotEmpty property="pv_lclass_cd">
+		  AND LCLASS_CD = #pv_lclass_cd#
+		  </isNotEmpty>
+		  <isNotEmpty property="pv_mclass_cd">
+		  AND MCLASS_CD = #pv_mclass_cd#
+		  </isNotEmpty>
+		  <isNotEmpty property="pv_sclass_cd">
+		  AND SCLASS_CD = #pv_sclass_cd#
+		  </isNotEmpty>
+		  <isNotEmpty property="pv_prod_cd">
+		  AND PROD_CD = #pv_prod_cd#
+		  </isNotEmpty>
+		  <isNotEmpty property="pv_prod_nm">
+		  AND PROD_NM LIKE '%' || #pv_prod_nm# || '%'
+		  </isNotEmpty>
+		  <isNotEmpty property="pv_reg_status">
+		  AND REG_STATUS = #pv_reg_status#
+		  </isNotEmpty>
+	</select>
+
+	<select id="selectStdProductGb" resultClass="egovMapNoCamel">
+	  SELECT NM_CD AS CODE
+	       ,NM_REP AS CODENM
+	    FROM RESTCM_CODMST_MST
+	   WHERE NM_GB = '010'
+	   ORDER BY NM_CD
+	</select>
+	
+	<select id="selectProdClassGb" resultClass="egovMapNoCamel">
+		SELECT CLASS_CD AS CODE
+		      ,CLASS_NM AS CODENM
+		  FROM RESTCM_CLSPRD_MST
+	     WHERE 1 = 1
+	       AND CLASS_GB = #pv_class_gb#
+	       <isNotEmpty property="pv_class_cd">
+	       AND CLASS_CD LIKE #pv_class_cd# || '%'
+	       </isNotEmpty>
+	       AND USE_YN = 1
+	</select>
+	
+	<!-- 팝업 쿼리 -->
+	<select id="selectStdUnitGb" resultClass="egovMapNoCamel">
+		SELECT UNIT_CD AS CODE, 
+               UNIT_NM AS CODENM
+	      FROM RESTCM_UNITCD_MST
+	     WHERE USE_GB = 1
+	</select>
+	
+	<update id="updateStdProduct">
+		UPDATE RESTCM_REQPRD_MST
+		   SET REG_SEQ       = #reg_seq#
+		      ,OPER_CD       = #oper_cd#
+		      ,REST_CD       = #rest_cd#
+		      ,APPR_GB       = #appr_gb#
+		      ,PROD_CD       = #prod_cd#
+		      ,PROD_NM       = #prod_nm#
+		      ,LCLASS_CD     = #lclass_cd#
+		      ,MCLASS_CD     = #mclass_cd#
+		      ,SCLASS_CD     = #sclass_cd#
+		      ,PROD_GB       = #prod_gb#
+		      ,SALE_COST     = #sale_cost#
+		      ,IN_COST       = #in_cose#
+		      ,RENT_RATE_GB  = #rent_rate_gb#
+		      ,TAX_GB        = #tax_gb#
+		      ,SPEC_NM       = #spec_nm#
+		      ,PROD_FORM     = #prod_from#
+		      ,SALE_PLACE_NM = #sale_place_nm#
+		      ,MAKER_NM      = #maker_nm#
+		      ,REG_CAUSE     = #reg_cause#
+		      ,CIRCLE_LINE   = #circle_line#
+		      ,BIGO          = #bigo#
+		      ,REG_DT        = #reg_dt#
+		      ,CHAG_DT       = #chag_dt#
+		      ,CANCEL_DAY    = #cancel_day#
+		      ,RCVR_ID       = #rcvr_id#
+		      ,RCV_DT        = #rcv_dt#
+		      ,REG_STATUS    = #reg_status#
+		      ,RET_CAUSE     = #ret_cause#
+		      ,OLD_PROD_CD   = #old_prod_cd#
+		      ,LAST_ID       = #last_id#
+		      ,LAST_DTIME    = #last_dtime#
+		 WHERE REG_SEQ = #reg_seq#
+	</update>
+	
+	<insert id="insertStdProduct"> 
+		<![CDATA[
+		INSERT INTO RESTCM_REQPRD_MST
+		  (REG_SEQ, OPER_CD, REST_CD, APPR_GB, PROD_CD, PROD_NM, LCLASS_CD, MCLASS_CD, SCLASS_CD
+		  ,PROD_GB, SALE_COST, IN_COST, RENT_RATE_GB, TAX_GB, SPEC_NM, PROD_FORM, SALE_PLACE_NM
+		  ,MAKER_NM, REG_CAUSE, CIRCLE_LINE, BIGO, REG_DT, CHAG_DT, CANCEL_DAY, RCVR_ID, RCV_DT
+	      ,REG_STATUS, RET_CAUSE, OLD_PROD_CD, REG_ID, REG_DTIME, LAST_ID, LAST_DTIME)
+		VALUES
+		  (#reg_seq#, #oper_cd#, #rest_cd#, #appr_gb#, #prod_cd#, #prod_nm#, #lclass_cd#, #mclass_cd#, #sclass_cd#
+		  ,#prod_gb#, #sale_cost#, #in_cose#, #rent_rate_gb#, #tax_gb#, #spec_nm#, #prod_from#, #sale_place_nm#
+		  ,#maker_nm#, #reg_cause#, #circle_line#, #bigo#, #reg_dt#, #chag_dt#, #cancel_day#, #rcvr_id#, #rcv_dt#
+		  ,#reg_status#, #ret_cause#, #old_prod_cd#, #reg_id#, #reg_dtime#, #last_id#, #last_dtime#)
+		  ]]>
+	</insert>
+
+	<delete id="deleteStdProduct">
+		<![CDATA[
+		DELETE RESTCM_REQPRD_MST 
+		WHERE REG_SEQ = #reg_seq#
+		]]>
+	</delete>
+</sqlMap>

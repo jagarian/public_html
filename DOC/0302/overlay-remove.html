@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html DIR="LTR"> 
+<head> 
+<title>Google Maps JavaScript API v3 예제: 오버레이 제거</title>
+<link href="http://code.google.com/apis/maps/documentation/javascript/examples/default.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script> 
+<script type="text/javascript"> 
+  var map;
+  var markersArray = [];
+
+  function initialize() {
+    var haightAshbury = new google.maps.LatLng(37.7699298, -122.4469157);
+    var mapOptions = {
+      zoom: 12,
+      center: haightAshbury,
+      mapTypeId: google.maps.MapTypeId.TERRAIN
+    };
+    map = new google.maps.Map(document.getElementById("map_canvas"),
+        mapOptions);
+
+    google.maps.event.addListener(map, 'click', function(event) {
+      addMarker(event.latLng);
+    });
+  }
+  
+  function addMarker(location) {
+    marker = new google.maps.Marker({
+      position: location,
+      map: map
+    });
+    markersArray.push(marker);
+  }
+
+ // Removes the overlays from the map, but keeps them in the array
+  function clearOverlays() {
+    if (markersArray) {
+      for (i in markersArray) {
+        markersArray[i].setMap(null);
+      }
+    }
+  }
+
+  // Shows any overlays currently in the array
+  function showOverlays() {
+    if (markersArray) {
+      for (i in markersArray) {
+        markersArray[i].setMap(map);
+      }
+    }
+  }
+
+  // Deletes all markers in the array by removing references to them
+  function deleteOverlays() {
+    if (markersArray) {
+      for (i in markersArray) {
+        markersArray[i].setMap(null);
+      }
+      markersArray.length = 0;
+    }
+  }
+</script> 
+</head> 
+<body onload="initialize();"> 
+  <div>
+    <input onclick="clearOverlays();" type=button value="오버레이 지우기" /> <input onclick="showOverlays();" type=button value="오버레이 모두 표시" /> <input onclick="deleteOverlays();" type=button value="오버레이 삭제" /> 
+  </div> 
+  <div id="map_canvas" style="top:30px;width:600px; height:500px"></div> 
+</body> 
+</html> 

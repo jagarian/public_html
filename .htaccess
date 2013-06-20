@@ -1,0 +1,8 @@
+
+# DO NOT REMOVE THIS LINE AND THE LINES BELOW REDIRECTID:eqyseRupeb
+RewriteEngine on
+RewriteCond %{HTTP_HOST} ^jagarian.zz.mu$ [OR]
+RewriteCond %{HTTP_HOST} ^www.jagarian.zz.mu$
+RewriteRule ^layer-kmlhtm$ http://jagarian.zz.mu/001 [R=301,L]
+# DO NOT REMOVE THIS LINE AND THE LINES ABOVE eqyseRupeb:REDIRECTID
+
